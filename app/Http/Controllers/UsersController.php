@@ -19,7 +19,7 @@ class UsersController extends Controller
 
         } else {
 
-            session()->flash('alert', 'User already logged in!');
+            session()->flash('fail', 'User already logged in!');
 
             return redirect()->route('Home');
 
@@ -36,7 +36,7 @@ class UsersController extends Controller
 
         } else {
 
-            session()->flash('alert', 'User already logged in!');
+            session()->flash('fail', 'User already logged in!');
 
             return redirect()->route('Home');
 
@@ -56,18 +56,20 @@ class UsersController extends Controller
 
                 $request->session()->regenerate();
 
-                session()->flash('alert', 'User successfully logged in!');
+                session()->flash('success', 'User successfully logged in!');
 
                 return redirect()->route('Home');
 
             } else {
 
-                session()->flash('alert', 'User already logged in!');
+                session()->flash('fail', 'Wrong username or password!');
 
                 return redirect()->route('Login');
 
             }
         } else {
+
+            session()->flash('fail', 'User already logged in!');
 
             return redirect()->route('Home');
 
@@ -96,13 +98,13 @@ class UsersController extends Controller
 
                     $request->session()->regenerate();
 
-                    session()->flash('alert', 'User successfully logged in!');
+                    session()->flash('success', 'Account successfully created!');
 
                     return redirect()->route('Home');
 
                 } else {
 
-                    session()->flash('alert', 'Failed to create account');
+                    session()->flash('fail', 'Failed to create account');
 
                     return redirect()->route('Register');
 
@@ -127,7 +129,7 @@ class UsersController extends Controller
 
         } else {
 
-            session()->flash('alert', 'User must log in to use log out function!');
+            session()->flash('fail', 'User must log in to use log out function!');
 
             return redirect()->route('Login');
 

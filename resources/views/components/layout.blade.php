@@ -56,7 +56,17 @@
         </div>
     </nav>
 
-    <div class="container-fluid">
+    @if (Session::has('success'))
+        <div id="msg" class="bg-success text-center text-white">
+            <span> {{ Session::get('success') }} </span>
+        </div>
+    @elseif (Session::has('fail'))
+        <div id="msg" class="bg-danger text-center text-white">
+            <span> {{ Session::get('fail') }} </span>
+        </div>
+    @endif
+
+    <div class="container-fluid" style="margin-top: 2rem">
         {{ $content }}
     </div>
 

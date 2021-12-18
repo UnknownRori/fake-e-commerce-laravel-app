@@ -8,3 +8,10 @@
 .popout {
   position: absolute !important;
 }
+
+#msg.hidden {
+  transition: 1s;
+  opacity: 0;
+  transform: translateY(-200px);
+  pointer-events: none;
+}

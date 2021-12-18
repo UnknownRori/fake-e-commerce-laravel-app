@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\UsersController;
+use App\Models\Product;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,7 +17,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+
+    $product = Cache::remember('product', 5, function () {
+        return Product::all()
+            ->take(6);
+    });
+
+    return view('welcome', [
+        'product' => $product
+    ]);
+
 })->name("Home");
 
 Route::get('/productlist', function () {

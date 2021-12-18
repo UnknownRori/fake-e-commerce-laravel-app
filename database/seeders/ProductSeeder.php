@@ -49,5 +49,19 @@ class ProductSeeder extends Seeder
             'price' => 20,
             'stock' => 50
         ]);
+        DB::table('product')->insert([
+            'id' => 6,
+            'users_id' => 1,
+            'productname' => 'nophone',
+            'price' => 20,
+            'stock' => 50
+        ]);
+        DB::table('product')->insert([
+            'id' => 7,
+            'users_id' => 1,
+            'productname' => 'nophone2',
+            'price' => 20,
+            'stock' => 50
+        ]);
     }
 }

@@ -2062,6 +2062,11 @@ module.exports = {
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
+setTimeout(function () {
+  $('#msg').addClass('hidden');
+  document.getElementById('msg').innerContent = '';
+}, 7000);
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":
