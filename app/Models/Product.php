@@ -10,6 +10,12 @@ class Product extends Model
     use HasFactory;
     protected $table = 'product';
 
+    protected $fillable = [
+        'productname',
+        'price',
+        'stock'
+    ];
+
     public function Users () {
         return $this->hasMany(Users::class, 'users_id');
     }

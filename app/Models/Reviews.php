@@ -11,6 +11,11 @@ class Reviews extends Model
 
     protected $table = 'reviews';
 
+    protected $fillable = [
+        'star',
+        'comment'
+    ];
+
     public function Product () {
         return $this->belongsTo(Product::class, 'product_id');
     }
