@@ -17,8 +17,9 @@ class CreateReviewsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('users_id');
             $table->foreign('users_id')->references('id')->on('users');
-            $table->unsignedBigInteger('product_id')->references('id')->on('product');
-            $table->enum('start', [1, 2, 3 , 4, 5]);
+            $table->unsignedBigInteger('product_id');
+            $table->foreign('product_id')->references('id')->on('product');
+            $table->enum('star', [1, 2, 3 , 4, 5]);
             $table->string('comment');
             $table->timestamps();
         });

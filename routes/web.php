@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,3 +21,6 @@ Route::get('/', function () {
 Route::get('/productlist', function () {
 
 })->name("ProductList");
+
+Route::get('/auth/login', [UsersController::class, 'LoginView'])->name("Login");
+Route::get('/auth/register', [UsersController::class, 'RegisterView'])->name("Register");

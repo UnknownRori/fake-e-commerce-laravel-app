@@ -13,7 +13,7 @@
 <body>
     <nav class="navbar navbar-expand-sm sticky-top bg-light navbar-light">
         <div class="container">
-            <button class="navbar-toggler" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
@@ -29,15 +29,18 @@
             </div>
 
             <ul class="navbar-nav">
+                <div class="row">
                 @if (!Auth::check())
-                <li class="nav-item">
-                    <a href="" class="nav-link {{ $title == "Login" ? "active" : "" }}">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a href="" class="nav-link {{ $title == "Register" ? "active" : "" }}">Register</a>
-                </li>
+                    <li class="nav-item mr-2">
+                        <a href="{{ route("Login") }}" class="nav-link {{ $title == "Login" ? "active" : "" }}">Login</a>
+                    </li>
+                    <li class="nav-item ml-2 mr-2">
+                        <a href="{{ route("Register") }}" class="nav-link {{ $title == "Register" ? "active" : "" }}">Register</a>
+                    </li>
                 @else
+                    {{ Auth::users()->name }}
                 @endif
+                </div>
             </ul>
         </div>
     </nav>
