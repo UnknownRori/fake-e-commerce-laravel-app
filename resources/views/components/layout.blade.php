@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="{{ asset("css/bootstrap.css") }}">
     <link rel="stylesheet" href="{{ asset("css/app.css") }}">
     <script defer src="{{ asset("js/jquery-3.5.1.js") }}"></script>
+    <script defer src="{{ asset("js/bootstrap.bundle.js") }}"></script>
     <script defer src="{{ asset("js/app.js") }}"></script>
     <title>{{ $title }}</title>
 </head>
@@ -29,18 +30,27 @@
             </div>
 
             <ul class="navbar-nav">
-                <div class="row">
                 @if (!Auth::check())
-                    <li class="nav-item mr-2">
-                        <a href="{{ route("Login") }}" class="nav-link {{ $title == "Login" ? "active" : "" }}">Login</a>
-                    </li>
-                    <li class="nav-item ml-2 mr-2">
-                        <a href="{{ route("Register") }}" class="nav-link {{ $title == "Register" ? "active" : "" }}">Register</a>
-                    </li>
+                    <div class="row">
+                        <li class="nav-item mr-2">
+                            <a href="{{ route("Login") }}" class="nav-link {{ $title == "Login" ? "active" : "" }}">Login</a>
+                        </li>
+                        <li class="nav-item ml-2 mr-2">
+                            <a href="{{ route("Register") }}" class="nav-link {{ $title == "Register" ? "active" : "" }}">Register</a>
+                        </li>
+                    </div>
                 @else
-                    {{ Auth::users()->name }}
+                    <li class="nav-item dropdown mr-5">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                            {{ Auth::user()->username }}
+                        </a>
+                        <div class="dropdown-menu popout">
+                            <a href="" class="dropdown-item">Dashboard</a>
+                            <a href="" class="dropdown-item">User Setting</a>
+                        </div>
+                    </li>
                 @endif
-                </div>
+
             </ul>
         </div>
     </nav>

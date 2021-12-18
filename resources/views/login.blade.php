@@ -4,7 +4,7 @@
     <x-slot name="content">
 
         <div class="container text-center" style="margin-top: 8rem;">
-            <form action="">
+            <form action="{{ route("PostLogin") }}" method="POST">
                 @csrf
                 <h2 class="text-center">Login Form</h2>
                 <div class="form-group">

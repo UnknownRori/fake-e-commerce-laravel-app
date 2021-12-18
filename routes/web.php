@@ -24,3 +24,4 @@ Route::get('/productlist', function () {
 
 Route::get('/auth/login', [UsersController::class, 'LoginView'])->name("Login");
 Route::get('/auth/register', [UsersController::class, 'RegisterView'])->name("Register");
+Route::post('/auth/login/post', [UsersController::class, 'Login'])->name("PostLogin");
