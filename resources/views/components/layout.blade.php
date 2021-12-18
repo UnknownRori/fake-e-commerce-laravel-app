@@ -47,6 +47,7 @@
                         <div class="dropdown-menu popout">
                             <a href="" class="dropdown-item">Dashboard</a>
                             <a href="" class="dropdown-item">User Setting</a>
+                            <a href="{{ route("Logout") }}" class="dropdown-item">Log out</a>
                         </div>
                     </li>
                 @endif
