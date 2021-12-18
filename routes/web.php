@@ -22,6 +22,10 @@ Route::get('/productlist', function () {
 
 })->name("ProductList");
 
+Route::get('/auth/logout', [UsersController::class, 'Logout'])->name("Logout");
+
 Route::get('/auth/login', [UsersController::class, 'LoginView'])->name("Login");
 Route::get('/auth/register', [UsersController::class, 'RegisterView'])->name("Register");
+
 Route::post('/auth/login/post', [UsersController::class, 'Login'])->name("PostLogin");
+Route::post('/auth/register/post', [UsersController::class, 'Register'])->name("PostRegister");
