@@ -3,10 +3,16 @@
 
     <x-slot name="content">
 
-        <div class="container text-center" style="margin-top: 8rem;">
+        <div id="register">
             <form action="{{ route("PostRegister") }}" method="POST">
                 @csrf
                 <h2 class="text-center">Register Form</h2>
+                <x-input>
+                    <x-slot name="label">Username</x-slot>
+                    <x-slot name="class">text-danger</x-slot>
+                    <x-slot name="type">name</x-slot>
+                    <x-slot name="name">Username</x-slot>
+                </x-input>
                 <div class="form-group">
                     <input class="form-control" type="text" name="username" placeholder="Username" required>
                 </div>

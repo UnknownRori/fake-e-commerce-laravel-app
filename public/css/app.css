@@ -2,11 +2,15 @@
   margin: 0;
   padding: 0;
   scroll-behavior: smooth;
-  transition: 100ms;
+  transition: 250ms;
 }
 
 .popout {
   position: absolute !important;
+}
+
+#page-content {
+  margin: 2.5rem 0px 2.5rem 0px;
 }
 
 #msg.hidden {
@@ -14,4 +18,23 @@
   opacity: 0;
   transform: translateY(-200px);
   pointer-events: none;
+  height: 0;
+}
+
+#register, #login {
+  margin-top: 4rem !important;
+  margin: auto;
+}
+@media screen and (min-width: 600px) {
+  #register, #login {
+    width: 50%;
+  }
+}
+
+.img {
+  width: 300px;
+  height: 300px;
+}
+.img img {
+  margin: auto;
 }

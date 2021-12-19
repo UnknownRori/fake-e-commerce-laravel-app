@@ -6,7 +6,8 @@
         <div class="container">
 
             <main>
-                <header>
+
+                <header id="header">
                     <h2 id="title" class="text-center">Featured Product</h2>
                 </header>
 
@@ -16,16 +17,19 @@
 
                         @foreach ($product as $row)
 
-                            <div class="col-4 text-center">
+                            <div id="{{ $row->productname }}" class="col-4 text-center">
 
-                                <a href="">
-                                    <img class="img-fluid" src="./image/product/{{ $row->productname }}.png"
-                                        alt="{{ $row->productname }}">
-                                </a>
+                                <div class="img">
+                                    <a href="">
+                                        <img class="img-fluid" src="./image/product/{{ $row->productname }}.png"
+                                            alt="{{ $row->productname }}">
+                                    </a>
+                                </div>
 
                                 <h4> {{ $row->productname }} </h4>
 
-                                <h5> {{ $row->price }} </h5>
+                                <h5 class="text-danger"> $ {{ $row->price }} </h5>
+
                             </div>
 
                         @endforeach
@@ -35,6 +39,19 @@
                 </section>
 
             </main>
+
+            <div id="footer">
+                <div class="m-auto">
+                    <form action="" method="post">
+
+                        <x-input>
+                            <x-slot name="type">email</x-slot>
+                            <x-slot name="name">email</x-slot>
+                        </x-input>
+
+                    </form>
+                </div>
+            </div>
 
         </div>
 

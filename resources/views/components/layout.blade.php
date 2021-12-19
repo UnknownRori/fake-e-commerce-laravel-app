@@ -45,7 +45,7 @@
                             {{ Auth::user()->username }}
                         </a>
                         <div class="dropdown-menu popout">
-                            <a href="" class="dropdown-item">Dashboard</a>
+                            <a href="{{ route("Dashboard") }}" class="dropdown-item {{ $title == "Dashboard" ? "active" : "" }}">Dashboard</a>
                             <a href="" class="dropdown-item">User Setting</a>
                             <a href="{{ route("Logout") }}" class="dropdown-item">Log out</a>
                         </div>
@@ -56,21 +56,13 @@
         </div>
     </nav>
 
-    @if (Session::has('success'))
-        <div id="msg" class="bg-success text-center text-white">
-            <span> {{ Session::get('success') }} </span>
-        </div>
-    @elseif (Session::has('fail'))
-        <div id="msg" class="bg-danger text-center text-white">
-            <span> {{ Session::get('fail') }} </span>
-        </div>
-    @endif
+    <x-alert></x-alert>
 
-    <div class="container-fluid" style="margin-top: 2rem">
+    <div id="page-content" class="container-fluid">
         {{ $content }}
     </div>
 
-    <div class="footer bg-light fixed-bottom">
+    <footer class="footer bg-light fixed-bottom">
         <div class="container">
             <div class="text-center">
             <p class="text-muted">
@@ -82,7 +74,7 @@
             </p>
             </div>
         </div>
-    </div>
+    </fo>
 
 </body>
 </html>

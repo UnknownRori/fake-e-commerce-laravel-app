@@ -20,7 +20,7 @@ Route::get('/', function () {
 
     $product = Cache::remember('product', 5, function () {
         return Product::all()
-            ->take(6);
+            ->random(6);
     });
 
     return view('welcome', [
@@ -32,6 +32,10 @@ Route::get('/', function () {
 Route::get('/productlist', function () {
 
 })->name("ProductList");
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->name("Dashboard")->middleware('auth');
 
 Route::get('/auth/logout', [UsersController::class, 'Logout'])->name("Logout");
 
