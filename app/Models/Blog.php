@@ -11,6 +11,11 @@ class Blog extends Model
 
     protected $table = "blog";
 
+    protected $fillable = [
+        'title',
+        'content'
+    ];
+
     public function User () {
         return $this->belongsTo(User::class, 'users_id');
     }
