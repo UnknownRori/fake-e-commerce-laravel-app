@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\UsersController;
+use App\Models\Blog;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Support\Facades\Cache;
@@ -22,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
 
-    $product = Cache::remember('product', 5, function () {
+    $product = Cache::remember('product', 30, function () {
         return Product::all()->random(6);
     });
 
@@ -41,7 +42,14 @@ Route::get('/dashboard', function () {
 })->name("Dashboard")->middleware('auth');
 
 Route::get('/blog', function () {
-    return view('blog');
+
+    $blog = Cache::remember('blog', 2, function () {
+        return Blog::paginate(4);
+    });
+
+    return view('blog', [
+        'blog' => $blog
+    ]);
 })->name("Blog");
 
 // Login Route
