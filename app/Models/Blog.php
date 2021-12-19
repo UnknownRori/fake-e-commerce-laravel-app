@@ -5,17 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Subscribe extends Model
+class Blog extends Model
 {
     use HasFactory;
 
-    protected $table = 'subscribe';
-
-    protected $fillable = [
-        'email'
-    ];
+    protected $table = "blog";
 
     public function User () {
         return $this->belongsTo(User::class, 'users_id');
     }
+
 }

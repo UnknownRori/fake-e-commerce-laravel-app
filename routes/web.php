@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\UsersController;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
 
@@ -19,8 +20,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
 
     $product = Cache::remember('product', 5, function () {
-        return Product::all()
-            ->random(6);
+        return Product::all();
+        // ->random(6);
     });
 
     return view('welcome', [

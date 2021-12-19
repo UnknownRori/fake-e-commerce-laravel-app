@@ -44,7 +44,7 @@ class User extends Authenticatable
 
 
     public function Product () {
-        return $this->belongsTo(Product::class, "users_id");
+        return $this->hasMany(Product::class, "users_id");
     }
 
     public function Reviews () {
@@ -52,6 +52,10 @@ class User extends Authenticatable
     }
 
     public function Subscribe () {
-        return $this->belongsTo(Subscribe::class, "users_id");
+        return $this->hasOne(Subscribe::class, "users_id");
+    }
+
+    public function Blog () {
+        return $this->hasMany(Blog::class, "users_id");
     }
 }

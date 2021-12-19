@@ -80,11 +80,14 @@ class UsersController extends Controller
     {
         if (!Auth::check()) {
 
-            $credentials = $request->validate([
-                'username' => 'required|string|unique:users|max:255',
-                'email' => 'required|string',
+            if ($credentials = $request->validate([
+                'username' => 'required|string|unique:users,username|max:255',
+                'email' => 'required|string|unique:users,email',
                 'password' => 'required|string'
-            ]);
+                ])
+            ) {
+                session()->flash('fail', 'Account already taken!');
+            }
 
             $users = new User();
             $users->username = $credentials['username'];

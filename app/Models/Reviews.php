@@ -20,7 +20,7 @@ class Reviews extends Model
         return $this->belongsTo(Product::class, 'product_id');
     }
 
-    public function Users () {
+    public function User () {
         return $this->belongsTo(Users::class, 'users_id');
     }
 
