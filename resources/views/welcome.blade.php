@@ -19,16 +19,23 @@
 
                             <div id="{{ $row->productname }}" class="col-4 text-center">
 
-                                <div class="img">
-                                    <a href="">
-                                        <img class="img-fluid" src="./image/product/{{ $row->productname }}.png"
-                                            alt="{{ $row->productname }}">
-                                    </a>
-                                </div>
+                                <table>
+                                    <tr>
+                                        <td style="width: 300px; height: 300px;">
+                                            <a href="" style="">
+                                                <img class="img-fluid" src="./image/product/{{ $row->productname }}.png"
+                                                    alt="{{ $row->productname }}">
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h4> {{ $row->productname }} </h4>
 
-                                <h4> {{ $row->productname }} </h4>
-
-                                <h5 class="text-danger"> $ {{ $row->price }} </h5>
+                                            <h5 class="text-danger"> $ {{ $row->price }} </h5>
+                                        </td>
+                                    </tr>
+                                </table>
 
                             </div>
 
@@ -41,13 +48,26 @@
             </main>
 
             <div id="footer">
-                <div class="m-auto">
-                    <form action="" method="post">
+                <div id="register">
+                    <header class="text-center">
+                        <h5>Subscribe to our newsletter to let us give relevant news just for you!</h5>
+                    </header>
+                    <form action="" method="post" class="row">
 
-                        <x-input>
-                            <x-slot name="type">email</x-slot>
-                            <x-slot name="name">email</x-slot>
-                        </x-input>
+                        <div class="col-10">
+                            <x-input>
+                                <x-slot name="type">email</x-slot>
+                                <x-slot name="name">email</x-slot>
+                            </x-input>
+                        </div>
+
+                        <div class="col-2 p-0 m-0">
+                            <x-input>
+                                <x-slot name="type">submit</x-slot>
+                                <x-slot name="inputcss">btn btn-primary ml-2</x-slot>
+                                <x-slot name="name">Subscribe</x-slot>
+                            </x-input>
+                        </div>
 
                     </form>
                 </div>

@@ -17,11 +17,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+// Main Route
+
 Route::get('/', function () {
 
     $product = Cache::remember('product', 5, function () {
-        return Product::all();
-        // ->random(6);
+        return Product::all()->random(6);
     });
 
     return view('welcome', [
@@ -37,6 +39,12 @@ Route::get('/productlist', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->name("Dashboard")->middleware('auth');
+
+Route::get('/blog', function () {
+    return view('blog');
+})->name("Blog");
+
+// Login Route
 
 Route::get('/auth/logout', [UsersController::class, 'Logout'])->name("Logout");
 
