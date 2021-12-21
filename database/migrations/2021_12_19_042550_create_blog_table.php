@@ -18,7 +18,7 @@ class CreateBlogTable extends Migration
             $table->unsignedBigInteger('users_id');
             $table->foreign('users_id')->references('id')->on('users');
             $table->string('title', 128);
-            $table->string('content', 4048);
+            $table->string('content', 8192);
             $table->timestamps();
         });
     }
