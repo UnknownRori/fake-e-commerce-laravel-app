@@ -1,9 +1,9 @@
 <?php
 
+use App\Http\Controllers\BlogController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UsersController;
-use App\Models\Blog;
 use App\Models\Product;
-use App\Models\User;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
 
@@ -31,57 +31,21 @@ Route::get('/', function () {
     ]);
 })->name("Home");
 
-
-Route::get('/product', function () {
-    $product = Cache::remember('product-list', 2, function() {
-        return Product::paginate(6);
-    });
-
-    return view('productlist', [
-        'product' => $product
-    ]);
-})->name("ProductList");
-
-
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->name("Dashboard")->middleware('auth');
 
+// Product Route
 
-Route::get('/blog', function () {
-    $blog = Cache::remember('blog-list', 2, function () {
-        return Blog::paginate(2);
-    });
+Route::get('/product', [ProductController::class, 'ProductList'])->name("ProductList");
 
-    return view('bloglist', [
-        'blog' => $blog
-    ]);
-})->name("BlogList");
+Route::get('/product/{id}', [ProductController::class, "Product"])->name('Product')->whereNumber('id');
 
-Route::get('/blog/{id}', function ($id) {
-    $key = "blog-" . strval($id);
+// Blog Route
 
-    $Blog = Cache::remember($key, 180, function () use ($id) {
-        return Blog::find($id);
-    });
+Route::get('/blog', [BlogController::class, 'BlogList'])->name("BlogList");
 
-    return view('blog', [
-        'Blog' => $Blog
-    ]);
-})->name('Blog')->whereNumber('id');
-
-Route::get('/product/{id}', function ($id) {
-    $key = "product-" . strval($id);
-
-    $product = Cache::remember($key, 180, function () use ($id) {
-        return Product::find($id);
-    });
-
-    return view('product', [
-        'product' => $product
-    ]);
-})->name('Product')->whereNumber('id');
-
+Route::get('/blog/{id}', [BlogController::class, 'Blog'])->name('Blog')->whereNumber('id');
 
 // Login Route
 
