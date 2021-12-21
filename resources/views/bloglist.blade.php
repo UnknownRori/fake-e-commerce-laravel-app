@@ -29,6 +29,14 @@
                         @endforeach
                     </table>
                 </article>
+                <x-paginatebutton>
+                    <x-slot name="prev">
+                        {{ $blog->previousPageUrl() }}
+                    </x-slot>
+                    <x-slot name="next">
+                        {{ $blog->nextPageUrl() }}
+                    </x-slot>
+                </x-paginatebutton>
             </div>
         </main>
     </x-slot>
