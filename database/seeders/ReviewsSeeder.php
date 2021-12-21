@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -19,7 +20,9 @@ class ReviewsSeeder extends Seeder
             'users_id' => 2,
             'product_id' => 1,
             'star' => 3,
-            'comment' => "This is comment"
+            'comment' => "This is comment",
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
     }
 }
