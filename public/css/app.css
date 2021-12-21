@@ -49,3 +49,7 @@
   margin: 0;
   padding: 0;
 }
+
+#page-content {
+  padding-bottom: 20px;
+}
