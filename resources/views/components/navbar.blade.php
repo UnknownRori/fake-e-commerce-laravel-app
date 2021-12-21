@@ -17,7 +17,7 @@
                     <a href="{{ route("ProductList") }}" class="nav-link {{ $title == "Product List" ? "active" : "" }} ">Product</a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route("Blog") }}" class="nav-link {{ $title == "Blog" ? "active" : "" }} ">Blog</a>
+                    <a href="{{ route("BlogList") }}" class="nav-link {{ $title == "Blog" ? "active" : "" }} ">Blog</a>
                 </li>
                 {{ isset($navbar) ? $navbar : "" }}
             </ul>
