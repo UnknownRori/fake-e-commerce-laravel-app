@@ -3,10 +3,10 @@
 
     <x-slot name="navbar">
         <li class="nav-item">
-            <a href="" class="nav-link">Featured</a>
+            <a href="#featured" class="nav-link">Featured</a>
         </li>
         <li class="nav-item">
-            <a href="" class="nav-link">About</a>
+            <a href="#about" class="nav-link">About</a>
         </li>
     </x-slot>
 
@@ -19,11 +19,11 @@
         </section>
         <div class="container">
 
-            <main>
-                <header id="header">
+            <main id="featured">
+                <header>
                     <h2 id="title" class="text-center">Current Featured Product</h2>
                 </header>
-                <section id="content">
+                <section>
                     <div class="row">
                         @foreach ($product as $row)
                             <div id="{{ $row->productname }}" class="col-4 text-center">
@@ -49,7 +49,8 @@
                     </div>
                 </section>
             </main>
-            <div id="footer">
+
+            <div id="subscribe">
                 <div id="register">
                     <header class="text-center">
                         <h5>Subscribe to our newsletter to let us give relevant news just for you!</h5>
@@ -73,7 +74,7 @@
             </div>
         </div>
 
-        <footer class="bg-dark row text-center text-white">
+        <footer id="about" class="bg-dark row text-center text-white">
             <div class="col-6">
                 <header>
                     <h3>
