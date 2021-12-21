@@ -1,13 +1,20 @@
 <x-layout>
     <x-slot name="title">Home</x-slot>
 
+    <x-slot name="navbar">
+        <li class="nav-item">
+            <a href="" class="nav-link">Featured</a>
+        </li>
+        <li class="nav-item">
+            <a href="" class="nav-link">About</a>
+        </li>
+    </x-slot>
+
     <x-slot name="content">
         <section id="company-logo" class="blog-welcome text-center">
             <header style="padding-top: 100px;">
                 <img class="" style="width: 150px;" src="{{ asset("image/Apple.png") }}" alt="">
-                <h2 id="company_introduction">
-
-                </h2>
+                <h2 id="company_introduction"></h2>
             </header>
         </section>
         <div class="container">
@@ -65,5 +72,33 @@
                 </div>
             </div>
         </div>
+
+        <footer class="bg-dark row text-center text-white">
+            <div class="col-6">
+                <header>
+                    <h3>
+                        Lorem ipsum dolor
+                    </h3>
+                </header>
+                <article>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro quibusdam corrupti eos quasi voluptate ea provident quae corporis laudantium,
+                    eaque quas nesciunt ratione possimus nulla magnam dignissimos! Natus, saepe doloremque?
+                </article>
+            </div>
+            <div class="col-6">
+                <header>
+                    <h3>
+                        Lorem ipsum dolor
+                    </h3>
+                </header>
+                <article>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro quibusdam corrupti eos quasi voluptate ea provident quae corporis laudantium,
+                    eaque quas nesciunt ratione possimus nulla magnam dignissimos! Natus, saepe doloremque?
+                </article>
+            </div>
+            <div class="m-auto pt-3">
+                <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit</h2>
+            </div>
+        </footer>
     </x-slot>
 </x-layout>

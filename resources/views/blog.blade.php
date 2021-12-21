@@ -16,12 +16,12 @@
                                 <img class="img-fluid" src="{{ asset("image/blog/" . $row->title) . ".png" }}" alt="{{ $row->title }}">
                             </td>
                             <td>
-                                <h3 style="margin-left: 5px;">{{ $row->title }}</h3>
+                                <h3 class="ml-1">{{ $row->title }}</h3>
                             </td>
                         </tr>
                         <tr>
-                            <td style="margin-left: 5px;">
-                                <p style="margin-left: 5px;">
+                            <td>
+                                <p class="ml-1">
                                     {{ $row->content }}
                                 </p>
                             </td>
