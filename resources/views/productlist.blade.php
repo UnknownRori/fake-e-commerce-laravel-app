@@ -27,6 +27,14 @@
                         </div>
                     @endforeach
                 </div>
+                <x-paginatebutton>
+                    <x-slot name="prev">
+                        {{ $product->previousPageUrl() }}
+                    </x-slot>
+                    <x-slot name="next">
+                        {{ $product->nextPageUrl() }}
+                    </x-slot>
+                </x-paginatebutton>
             </div>
         </main>
     </x-slot>
