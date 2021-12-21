@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
 
-    $product = Cache::remember('product', 30, function () {
+    $product = Cache::remember('product-welcome', 30, function () {
         return Product::all()->random(6);
     });
 
@@ -35,6 +35,14 @@ Route::get('/', function () {
 
 Route::get('/productlist', function () {
 
+    $product = Cache::remember('product-list', 10, function() {
+        return Product::paginate(6);
+    });
+
+    return view('productlist', [
+        'product' => $product
+    ]);
+
 })->name("ProductList");
 
 Route::get('/dashboard', function () {
@@ -43,13 +51,14 @@ Route::get('/dashboard', function () {
 
 Route::get('/blog', function () {
 
-    $blog = Cache::remember('blog', 2, function () {
-        return Blog::paginate(4);
+    $blog = Cache::remember('blog-list', 2, function () {
+        return Blog::paginate(2);
     });
 
-    return view('blog', [
+    return view('bloglist', [
         'blog' => $blog
     ]);
+
 })->name("Blog");
 
 // Login Route
