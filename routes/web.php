@@ -35,7 +35,7 @@ Route::get('/', function () {
 
 Route::get('/productlist', function () {
 
-    $product = Cache::remember('product-list', 10, function() {
+    $product = Cache::remember('product-list', 2, function() {
         return Product::paginate(6);
     });
 
