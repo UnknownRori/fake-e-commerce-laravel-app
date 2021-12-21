@@ -2064,6 +2064,10 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 $(function () {
   printcharbychar('company_introduction', "Fake E-Commerce Web Application", 100);
+  hideMessage();
+});
+
+var hideMessage = function hideMessage() {
   setTimeout(function () {
     try {
       $('#msg').addClass('hidden');
@@ -2072,13 +2076,13 @@ $(function () {
       console.log('There is no error message to hide');
     }
   }, 7000);
-});
+};
 
-function printcharbychar(id, content, time) {
+var printcharbychar = function printcharbychar(id, content, time) {
   var i = 0;
   interval = setInterval(function () {
     try {
-      document.getElementById(id).innerHTML += content.charAt(i);
+      document.getElementById(id).innerText += content.charAt(i);
     } catch (_unused2) {
       clearInterval(interval);
     }
@@ -2089,7 +2093,7 @@ function printcharbychar(id, content, time) {
       clearInterval(interval);
     }
   }, time);
-}
+};
 
 /***/ }),
 
