@@ -58,6 +58,17 @@ Route::get('/blog', function () {
     ]);
 })->name("BlogList");
 
+Route::get('/blog/{id}', function ($id) {
+    $key = "blog-" . strval($id);
+
+    $Blog = Cache::remember($key, 180, function () use ($id) {
+        return Blog::find($id);
+    });
+
+    return view('blog', [
+        'Blog' => $Blog
+    ]);
+})->name('Blog')->whereNumber('id');
 
 Route::get('/product/{id}', function ($id) {
     $key = "product-" . strval($id);
