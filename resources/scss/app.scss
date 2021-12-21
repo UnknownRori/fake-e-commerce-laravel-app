@@ -29,3 +29,26 @@
         width: 60%;
     }
 }
+
+.blog-welcome {
+    height: 400px;
+    transform:translateY(-50px);
+    background-image: url('/image/background.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.img-container {
+    width: 300px;
+    height: 300px;
+}
+
+.navbar-brand {
+
+    img {
+        width: 75px;
+        margin: 0;
+        padding: 0;
+    }
+
+}

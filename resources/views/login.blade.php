@@ -2,7 +2,6 @@
     <x-slot name="title">Login</x-slot>
 
     <x-slot name="content">
-
         <div id="login">
             <form action="{{ route("PostLogin") }}" method="POST">
                 @csrf
@@ -18,9 +17,7 @@
                 <div class="form-group float-right">
                     <input  class="btn btn-primary" type="submit" value="Log in" name="login">
                 </div>
-
             </form>
         </div>
-
     </x-slot>
 </x-layout>

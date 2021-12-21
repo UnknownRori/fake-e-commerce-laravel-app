@@ -2062,10 +2062,30 @@ module.exports = {
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
-setTimeout(function () {
-  $('#msg').addClass('hidden');
-  document.getElementById('msg').innerContent = '';
-}, 7000);
+$(function () {
+  printcharbychar('company_introduction', "Fake E-Commerce Web Application", 100);
+  setTimeout(function () {
+    try {
+      $('#msg').addClass('hidden');
+      document.getElementById('msg').innerText = '';
+    } catch (_unused) {
+      console.log('There is no error message to hide');
+    }
+  }, 7000);
+});
+
+function printcharbychar(id, content, time) {
+  var target = document.getElementById(id);
+  var i = 0;
+  interval = setInterval(function () {
+    target.innerHTML += content.charAt(i);
+    i++;
+
+    if (i > content.length) {
+      clearInterval(interval);
+    }
+  }, time);
+}
 
 /***/ }),
 
