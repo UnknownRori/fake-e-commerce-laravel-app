@@ -13,13 +13,16 @@ $(function() {
     }, 7000);
 });
 
-
-
 function printcharbychar (id, content, time) {
-    const target = document.getElementById(id);
     let i = 0;
     interval = setInterval(function () {
-        target.innerHTML += content.charAt(i);
+
+        try {
+            document.getElementById(id).innerHTML += content.charAt(i);
+        } catch {
+            clearInterval(interval);
+        }
+
         i++;
         if(i > content.length) {
             clearInterval(interval);
