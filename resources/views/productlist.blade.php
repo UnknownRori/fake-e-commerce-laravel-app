@@ -10,7 +10,7 @@
                             <table>
                                 <tr>
                                     <td class="img-container">
-                                        <a href="" style="">
+                                        <a href="{{ route("Product", $row->id) }}">
                                             <img class="img-fluid" src="./image/product/{{ $row->productname }}.png"
                                                 alt="{{ $row->productname }}">
                                         </a>

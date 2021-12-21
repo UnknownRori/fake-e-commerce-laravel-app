@@ -13,10 +13,14 @@
                         @foreach ($blog as $row)
                         <tr>
                             <td rowspan="2" class="img-container">
-                                <img class="img-fluid" src="{{ asset("image/blog/" . $row->title) . ".png" }}" alt="{{ $row->title }}">
+                                <a href="{{ route("Blog", $row->id) }}">
+                                    <img class="img-fluid" src="{{ asset("image/blog/" . $row->title) . ".png" }}" alt="{{ $row->title }}">
+                                </a>
                             </td>
                             <td>
-                                <h3 class="ml-1">{{ $row->title }}</h3>
+                                <a href="{{ route("Product", $row->id) }}">
+                                    <h3 class="ml-1 text-black">{{ $row->title }}</h3>
+                                </a>
                             </td>
                         </tr>
                         <tr>
