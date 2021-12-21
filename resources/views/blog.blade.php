@@ -1,5 +1,29 @@
 <x-layout>
     <x-slot name="title">{{ $Blog->title }}</x-slot>
 
-    <x-slot name="content">Dummy Text</x-slot>
+    <x-slot name="content">
+        <main>
+            <header class="text-center">
+                <img class="img-fluid" src="{{ asset("./image/blog/" . $Blog->title . ".png") }}" alt="{{ $Blog->title }}">
+                <h2>
+                    {{ $Blog->title }}
+                </h2>
+            </header>
+            <article>
+                <p>
+                    {{ $Blog->content }}
+                </p>
+
+                <div class="mt-5">
+                    <p>
+                        Last Update : <b>{{ $Blog->updated_at }}</b>
+                    </p>
+
+                    <p>
+                        Author : <b>{{ $Blog->user->username }}</b>
+                    </p>
+                </div>
+            </article>
+        </main>
+    </x-slot>
 </x-layout>
