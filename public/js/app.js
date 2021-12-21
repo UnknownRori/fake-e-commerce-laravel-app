@@ -2075,10 +2075,14 @@ $(function () {
 });
 
 function printcharbychar(id, content, time) {
-  var target = document.getElementById(id);
   var i = 0;
   interval = setInterval(function () {
-    target.innerHTML += content.charAt(i);
+    try {
+      document.getElementById(id).innerHTML += content.charAt(i);
+    } catch (_unused2) {
+      clearInterval(interval);
+    }
+
     i++;
 
     if (i > content.length) {
