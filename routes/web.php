@@ -22,19 +22,17 @@ use Illuminate\Support\Facades\Route;
 // Main Route
 
 Route::get('/', function () {
-
-    $product = Cache::remember('product-welcome', 30, function () {
+    $product = Cache::remember('product-welcome', 60, function () {
         return Product::all()->random(6);
     });
 
     return view('welcome', [
         'product' => $product
     ]);
-
 })->name("Home");
 
-Route::get('/productlist', function () {
 
+Route::get('/product', function () {
     $product = Cache::remember('product-list', 2, function() {
         return Product::paginate(6);
     });
@@ -42,15 +40,15 @@ Route::get('/productlist', function () {
     return view('productlist', [
         'product' => $product
     ]);
-
 })->name("ProductList");
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->name("Dashboard")->middleware('auth');
 
-Route::get('/blog', function () {
 
+Route::get('/blog', function () {
     $blog = Cache::remember('blog-list', 2, function () {
         return Blog::paginate(2);
     });
@@ -58,8 +56,21 @@ Route::get('/blog', function () {
     return view('bloglist', [
         'blog' => $blog
     ]);
+})->name("BlogList");
 
-})->name("Blog");
+
+Route::get('/product/{id}', function ($id) {
+    $key = "product-" . strval($id);
+
+    $product = Cache::remember($key, 180, function () use ($id) {
+        return Product::find($id);
+    });
+
+    return view('product', [
+        'product' => $product
+    ]);
+})->name('Product')->whereNumber('id');
+
 
 // Login Route
 
