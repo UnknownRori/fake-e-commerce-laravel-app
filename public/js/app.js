@@ -2087,7 +2087,7 @@ var hiddenobject = function hiddenobject() {
         if (state > 10) {
           clearInterval(show);
         }
-      }, 50);
+      }, 80);
     } else {
       var _state = 1;
       var hide = setInterval(function () {
@@ -2103,7 +2103,7 @@ var hiddenobject = function hiddenobject() {
         if (_state > 10) {
           clearInterval(hide);
         }
-      }, 50);
+      }, 80);
     }
   });
 };

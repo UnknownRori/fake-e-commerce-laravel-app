@@ -25,7 +25,7 @@ let hiddenobject = () => {
                 if (state > 10) {
                     clearInterval(show);
                 }
-            }, 50);
+            }, 80);
         } else {
             let state = 1;
             const hide = setInterval(() => {
@@ -40,7 +40,7 @@ let hiddenobject = () => {
                 if (state > 10) {
                     clearInterval(hide);
                 }
-            }, 50);
+            }, 80);
         }
     })
 }
