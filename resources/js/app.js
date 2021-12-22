@@ -13,32 +13,32 @@ let hiddenobject = () => {
         hScroll = $(this).scrollTop();
         if (hScroll > 325) {
             let state = 1;
-            interval = setInterval(() => {
+            const show = setInterval(() => {
                 try {
                     $('#' + state.toString()).removeClass('hidden');
                 } catch {
                     console.error("Cannot Display the hidden object");
-                    clearInterval(interval);
+                    clearInterval(show);
                 }
                 state++;
 
                 if (state > 10) {
-                    clearInterval(interval);
+                    clearInterval(show);
                 }
             }, 50);
         }else {
             let state = 1;
-            interval = setInterval(() => {
+            const hide = setInterval(() => {
                 try {
                     $('#' + state.toString()).addClass('hidden');
                 } catch {
                     console.error("Cannot Display the hidden object");
-                    clearInterval(interval);
+                    clearInterval(hide);
                 }
                 state++;
 
                 if (state > 10) {
-                    clearInterval(interval);
+                    clearInterval(hide);
                 }
             }, 50);
         }
@@ -58,7 +58,7 @@ let hideMessage = () => {
 
 let printcharbychar = (id, content, time) => {
     let i = 0;
-    interval = setInterval(() => {
+    const interval = setInterval(() => {
 
         try {
             document.getElementById(id).innerHTML += content.charAt(i);

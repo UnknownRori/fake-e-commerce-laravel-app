@@ -2074,34 +2074,36 @@ var hiddenobject = function hiddenobject() {
 
     if (hScroll > 325) {
       var state = 1;
-      interval = setInterval(function () {
+      var show = setInterval(function () {
         try {
           $('#' + state.toString()).removeClass('hidden');
         } catch (_unused) {
           console.error("Cannot Display the hidden object");
-          clearInterval(interval);
+          clearInterval(show);
         }
 
+        console.log(state);
         state++;
 
         if (state > 10) {
-          clearInterval(interval);
+          clearInterval(show);
         }
       }, 50);
     } else {
       var _state = 1;
-      interval = setInterval(function () {
+      var hide = setInterval(function () {
         try {
           $('#' + _state.toString()).addClass('hidden');
         } catch (_unused2) {
           console.error("Cannot Display the hidden object");
-          clearInterval(interval);
+          clearInterval(hide);
         }
 
+        console.log(_state);
         _state++;
 
         if (_state > 10) {
-          clearInterval(interval);
+          clearInterval(hide);
         }
       }, 50);
     }
