@@ -9,6 +9,7 @@
     <script defer src="{{ asset("js/jquery-3.5.1.js") }}"></script>
     <script defer src="{{ asset("js/bootstrap.bundle.js") }}"></script>
     <script defer src="{{ asset("js/app.js") }}"></script>
+    {{ isset($extension) ? $extension : "" }}
     <title>{{ $title }}</title>
 </head>
 <body>
@@ -36,7 +37,6 @@
             </p>
             </div>
         </div>
-    </fo>
-
+    </footer>
 </body>
 </html>
