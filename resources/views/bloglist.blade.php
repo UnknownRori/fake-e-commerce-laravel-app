@@ -9,9 +9,9 @@
 
             <div class="container">
                 <article>
-                    <table id="1" class="hidden">
+                    <table>
                         @foreach ($blog as $row)
-                        <tr>
+                        <tr data-hidden="{{ $row->id }}">
                             <td rowspan="2" class="img-container">
                                 <a href="{{ route("Blog", $row->id) }}">
                                     <img class="img-fluid" src="{{ asset("image/blog/" . $row->title) . ".png" }}" alt="{{ $row->title }}">
@@ -23,7 +23,7 @@
                                 </a>
                             </td>
                         </tr>
-                        <tr>
+                        <tr data-hidden="{{ $row->id }}">
                             <td>
                                 <p class="ml-1">
                                     {{ $row->content }}
