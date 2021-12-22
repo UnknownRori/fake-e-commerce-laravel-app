@@ -3,8 +3,47 @@ require('./bootstrap');
 $(() => {
     printcharbychar('company_introduction', "Fake E-Commerce Web Application", 100);
 
+    hiddenobject();
+
     hideMessage();
 });
+
+let hiddenobject = () => {
+    $(window).scroll(function () {
+        hScroll = $(this).scrollTop();
+        if (hScroll > 325) {
+            let state = 1;
+            interval = setInterval(() => {
+                try {
+                    $('#' + state.toString()).removeClass('hidden');
+                } catch {
+                    console.error("Cannot Display the hidden object");
+                    clearInterval(interval);
+                }
+                state++;
+
+                if (state > 10) {
+                    clearInterval(interval);
+                }
+            }, 50);
+        }else {
+            let state = 1;
+            interval = setInterval(() => {
+                try {
+                    $('#' + state.toString()).addClass('hidden');
+                } catch {
+                    console.error("Cannot Display the hidden object");
+                    clearInterval(interval);
+                }
+                state++;
+
+                if (state > 10) {
+                    clearInterval(interval);
+                }
+            }, 50);
+        }
+    })
+}
 
 let hideMessage = () => {
     setTimeout(() => {
@@ -22,7 +61,7 @@ let printcharbychar = (id, content, time) => {
     interval = setInterval(() => {
 
         try {
-            document.getElementById(id).innerText += content.charAt(i);
+            document.getElementById(id).innerHTML += content.charAt(i);
         } catch {
             clearInterval(interval);
         }

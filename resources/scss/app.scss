@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     scroll-behavior: smooth;
-    transition: 250ms;
+    transition: 350ms;
 }
 
 .popout {
@@ -10,7 +10,7 @@
 }
 
 #page-content{
-    margin: 2.5rem 0px 2.5rem 0px;
+    margin: 2.5rem 0px 1rem 0px;
 }
 
 #msg.hidden {
@@ -31,7 +31,7 @@
 }
 
 .blog-welcome {
-    height: 400px;
+    height: 85vh;
     transform:translateY(-50px);
     background-image: url('/image/background.jpg');
     background-repeat: no-repeat;
@@ -53,4 +53,10 @@
 
 #page-content {
     padding-bottom: 20px;
+}
+
+.hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(200px);
 }

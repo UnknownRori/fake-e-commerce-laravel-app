@@ -2064,15 +2064,56 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 $(function () {
   printcharbychar('company_introduction', "Fake E-Commerce Web Application", 100);
+  hiddenobject();
   hideMessage();
 });
+
+var hiddenobject = function hiddenobject() {
+  $(window).scroll(function () {
+    hScroll = $(this).scrollTop();
+
+    if (hScroll > 325) {
+      var state = 1;
+      interval = setInterval(function () {
+        try {
+          $('#' + state.toString()).removeClass('hidden');
+        } catch (_unused) {
+          console.error("Cannot Display the hidden object");
+          clearInterval(interval);
+        }
+
+        state++;
+
+        if (state > 10) {
+          clearInterval(interval);
+        }
+      }, 50);
+    } else {
+      var _state = 1;
+      interval = setInterval(function () {
+        try {
+          $('#' + _state.toString()).addClass('hidden');
+        } catch (_unused2) {
+          console.error("Cannot Display the hidden object");
+          clearInterval(interval);
+        }
+
+        _state++;
+
+        if (_state > 10) {
+          clearInterval(interval);
+        }
+      }, 50);
+    }
+  });
+};
 
 var hideMessage = function hideMessage() {
   setTimeout(function () {
     try {
       $('#msg').addClass('hidden');
       document.getElementById('msg').innerText = '';
-    } catch (_unused) {
+    } catch (_unused3) {
       console.log('There is no error message to hide');
     }
   }, 7000);
@@ -2082,8 +2123,8 @@ var printcharbychar = function printcharbychar(id, content, time) {
   var i = 0;
   interval = setInterval(function () {
     try {
-      document.getElementById(id).innerText += content.charAt(i);
-    } catch (_unused2) {
+      document.getElementById(id).innerHTML += content.charAt(i);
+    } catch (_unused4) {
       clearInterval(interval);
     }
 
