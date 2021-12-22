@@ -17,7 +17,8 @@ class CreateProductTable extends Migration
             $table->id();
             $table->unsignedBigInteger('users_id');
             $table->foreign('users_id')->references('id')->on('users');
-            $table->string('productname', 256);
+            $table->string('productname', 64);
+            $table->string('description', 128);
             $table->bigInteger('price');
             $table->bigInteger('stock');
             $table->timestamps();
