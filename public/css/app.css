@@ -13,6 +13,12 @@
   margin: 2.5rem 0px 1rem 0px;
 }
 
+#msg {
+  transition: 2s;
+  position: relative;
+  z-index: 1;
+}
+
 #msg.hidden {
   transition: 1s;
   opacity: 0;
