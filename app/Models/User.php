@@ -43,19 +43,33 @@ class User extends Authenticatable
     ];
 
 
-    public function Product () {
+    public function Product ()
+    {
         return $this->hasMany(Product::class, "users_id");
     }
 
-    public function Reviews () {
+    public function Reviews ()
+    {
         return $this->hasMany(Reviews::class, "users_id");
     }
 
-    public function Subscribe () {
+    public function Subscribe ()
+    {
         return $this->hasOne(Subscribe::class, "users_id");
     }
 
-    public function Blog () {
+    public function Blog ()
+     {
         return $this->hasMany(Blog::class, "users_id");
+    }
+
+    public function Cart()
+    {
+        return $this->hasMany(Cart::class, "users_id");
+    }
+
+    public function Purchase()
+    {
+        return $this->hasMany(Purchase::class, "users_id");
     }
 }
