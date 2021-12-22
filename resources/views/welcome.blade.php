@@ -12,7 +12,7 @@
 
     <x-slot name="content">
         <section id="company-logo" class="blog-welcome text-center">
-            <header style="padding-top: 100px;">
+            <header style="padding-top: 10rem;">
                 <img class="" style="width: 150px;" src="{{ asset("image/Apple.png") }}" alt="">
                 <h2 id="company_introduction"></h2>
             </header>
@@ -26,7 +26,7 @@
                 <section>
                     <div class="row">
                         @foreach ($product as $row)
-                            <div id="{{ $row->productname }}" class="col-4 text-center">
+                            <div id="{{ $row->id }}" class="col-4 text-center hidden">
                                 <table>
                                     <tr>
                                         <td class="img-container">
