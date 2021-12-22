@@ -9,7 +9,7 @@
 
             <div class="container">
                 <article>
-                    <table>
+                    <table id="1" class="hidden">
                         @foreach ($blog as $row)
                         <tr>
                             <td rowspan="2" class="img-container">
