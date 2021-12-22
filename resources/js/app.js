@@ -15,7 +15,7 @@ let hiddenobject = () => {
             let state = 1;
             const show = setInterval(() => {
                 try {
-                    $('#' + state.toString()).removeClass('hidden');
+                    $('[data-hidden=' + state.toString() + ']').removeClass('hidden');
                 } catch {
                     console.error("Cannot Display the hidden object");
                     clearInterval(show);
@@ -26,11 +26,11 @@ let hiddenobject = () => {
                     clearInterval(show);
                 }
             }, 50);
-        }else {
+        } else {
             let state = 1;
             const hide = setInterval(() => {
                 try {
-                    $('#' + state.toString()).addClass('hidden');
+                    $('[data-hidden=' + state.toString() + ']').addClass('hidden');
                 } catch {
                     console.error("Cannot Display the hidden object");
                     clearInterval(hide);

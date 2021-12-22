@@ -2076,13 +2076,12 @@ var hiddenobject = function hiddenobject() {
       var state = 1;
       var show = setInterval(function () {
         try {
-          $('#' + state.toString()).removeClass('hidden');
+          $('[data-hidden=' + state.toString() + ']').removeClass('hidden');
         } catch (_unused) {
           console.error("Cannot Display the hidden object");
           clearInterval(show);
         }
 
-        console.log(state);
         state++;
 
         if (state > 10) {
@@ -2093,13 +2092,12 @@ var hiddenobject = function hiddenobject() {
       var _state = 1;
       var hide = setInterval(function () {
         try {
-          $('#' + _state.toString()).addClass('hidden');
+          $('[data-hidden=' + _state.toString() + ']').addClass('hidden');
         } catch (_unused2) {
           console.error("Cannot Display the hidden object");
           clearInterval(hide);
         }
 
-        console.log(_state);
         _state++;
 
         if (_state > 10) {
@@ -2123,7 +2121,7 @@ var hideMessage = function hideMessage() {
 
 var printcharbychar = function printcharbychar(id, content, time) {
   var i = 0;
-  interval = setInterval(function () {
+  var interval = setInterval(function () {
     try {
       document.getElementById(id).innerHTML += content.charAt(i);
     } catch (_unused4) {
