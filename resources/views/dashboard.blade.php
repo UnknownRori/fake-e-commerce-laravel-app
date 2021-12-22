@@ -15,9 +15,18 @@
                     @endif
                 </div>
             </li>
-        @endif
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                    Admin
+                </a>
+                <div class="dropdown-menu popout">
+                    <a href="" class="dropdown-item">Users Management</a>
+                    <a href="" class="dropdown-item">Create Users</a>
+                </div>
+            </li>
+        @endif
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle {{ !Auth::user()->vendor ? "disabled" : "" }}" href="#" id="navbardrop" data-toggle="dropdown">
                     Manage Product
                 </a>
                 <div class="dropdown-menu popout">
