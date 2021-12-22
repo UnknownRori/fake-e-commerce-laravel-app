@@ -38,7 +38,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <h4> {{ $row->productname }} </h4>
+                                            <h4> {{ ucwords($row->productname) }} </h4>
 
                                             <h5 class="text-danger"> $ {{ $row->price }} </h5>
                                         </td>
