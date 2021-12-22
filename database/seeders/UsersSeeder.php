@@ -21,6 +21,7 @@ class UsersSeeder extends Seeder
             'email' => 'UnknownRori@mail.com',
             'password' => Hash::make('UnknownRori'),
             'admin' => 1,
+            'vendor' => 1,
         ]);
         DB::table('users')->insert([
             'id' => 2,
@@ -28,6 +29,15 @@ class UsersSeeder extends Seeder
             'email' => 'users@usersmail.com',
             'password' => Hash::make('users'),
             'admin' => 0,
+            'vendor' => 0,
+        ]);
+        DB::table('users')->insert([
+            'id' => 3,
+            'username' => 'vendor',
+            'email' => 'vendor@usersmail.com',
+            'password' => Hash::make('vendor'),
+            'admin' => 0,
+            'vendor' => 1,
         ]);
     }
 }
