@@ -55,7 +55,8 @@
                     <header class="text-center">
                         <h5>Subscribe to our newsletter to let us give relevant news just for you!</h5>
                     </header>
-                    <form action="" method="post" class="row">
+                    <form action="{{ route("Subscribe") }}" method="post" class="row">
+                        @csrf
                         <div class="col-10">
                             <x-input>
                                 <x-slot name="type">email</x-slot>

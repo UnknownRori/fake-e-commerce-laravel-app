@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SubscribeController;
 use App\Http\Controllers\UsersController;
 use App\Models\Product;
 use Illuminate\Support\Facades\Cache;
@@ -34,6 +35,10 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->name("Dashboard")->middleware('auth');
+
+// Subscribe Route
+
+Route::post('/subscribe/subs', [SubscribeController::class, 'Subscribe'])->name("Subscribe");
 
 // Product Route
 
