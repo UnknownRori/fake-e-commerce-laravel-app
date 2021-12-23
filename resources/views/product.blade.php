@@ -18,6 +18,7 @@
                     </article>
 
                     <div>
+                        @php ($stardisplay = floatval($star))
                         @for ($i = 0; $i < 5; $i++)
                             @if ($star >= 1)
                                 <img class="ml-1" src="{{ asset("image/star-gold-background.svg") }}" alt="star full" style="width: 30px!important">
@@ -35,6 +36,7 @@
                                 <img class="ml-1" src="{{ asset("image/star.svg") }}" alt="star" style="width: 30px!important">
                             @endif
                         @endfor
+                        {{ $stardisplay }}
                     </div>
 
                     <form action="" method="POST" class="mt-4">
