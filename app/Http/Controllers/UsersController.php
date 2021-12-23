@@ -94,6 +94,7 @@ class UsersController extends Controller
             $users->email = $credentials['email'];
             $users->password = Hash::make($credentials['password']);
             $users->admin = 0;
+            $users->vendor = 0;
 
             if ($users->save()) {
 
