@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Reviews;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 
@@ -19,14 +20,28 @@ class ProductController extends Controller
     }
 
     public function Product ($id) {
-        $key = "product-" . strval($id);
+        $productkey = "product-" . strval($id);
+        $reviewskey = "product-reviews-" . strval($id);
 
-        $product = Cache::remember($key, 180, function () use ($id) {
+        // $product = Cache::remember($key, 180, function () use ($id) {
+        //     return Product::find($id);
+        // });
+
+        $product = Cache::remember($productkey, 180, function () use ($id) {
             return Product::find($id);
         });
 
+        $reviews = Cache::remember($reviewskey, 2, function () use ($id) {
+            return Reviews::where('product_id', $id)->paginate(2);
+        });
+
         return view('product', [
-            'product' => $product
+            'product' => $product,
+            'reviews' => $reviews
         ]);
+
+        // return view('product', [
+        //     'product' => $product
+        // ]);
     }
 }

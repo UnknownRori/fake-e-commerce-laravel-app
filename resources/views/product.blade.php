@@ -32,7 +32,8 @@
                 </div>
             </div>
             <div class="mt-5">
-                @foreach ($product->reviews as $row)
+                {{-- @foreach ($product->reviews as $row) --}}
+                @foreach ($reviews as $row)
                     <h4 class="mb-3">{{ $row->user->username }}</h4>
                         <div class="row" style="">
                         @for ($i = 0; $i < $row->star; $i++)
@@ -50,6 +51,24 @@
                     <p class="mt-3">{{ $row->comment }}</p>
                     <hr>
                 @endforeach
+                {{-- <x-paginatebutton>
+                    <x-slot name="prev">
+                        {{ $product->reviews->previousPageUrl() }}
+                    </x-slot>
+                    <x-slot name="next">
+                        {{ $product->reviews->nextPageUrl() }}
+                    </x-slot>
+                </x-paginatebutton> --}}
+                @if ($reviews->nextPageUrl() || $reviews->previousPageUrl())
+                    <x-paginatebutton>
+                        <x-slot name="prev">
+                            {{ $reviews->previousPageUrl() }}
+                        </x-slot>
+                        <x-slot name="next">
+                            {{ $reviews->nextPageUrl() }}
+                        </x-slot>
+                    </x-paginatebutton>
+                @endif
             </div>
         </div>
     </x-slot>
