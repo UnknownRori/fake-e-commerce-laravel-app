@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-sm sticky-top bg-light navbar-light">
+<nav class="navbar navbar-expand-sm fixed-top bg-light navbar-light">
     <div class="container">
         <div class="float-left">
             <img class="brand" style="width: 75px;" src="{{ asset("image/Apple.png") }}" alt="">
