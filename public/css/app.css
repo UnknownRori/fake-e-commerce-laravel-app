@@ -14,21 +14,22 @@
 }
 
 #msg {
-  transition: 2s;
-  position: relative;
-  z-index: 1;
-}
-
-#msg.hidden {
-  transition: 1s;
+  margin-top: 0;
   opacity: 0;
-  transform: translateY(-200px);
-  pointer-events: none;
+  transition: 2s !important;
   height: 0;
 }
 
+#msg.show {
+  z-index: -1;
+  margin-top: 52px;
+  opacity: 1;
+  transition: 2s !important;
+  height: 5%;
+}
+
 #register, #login {
-  margin-top: 4rem !important;
+  margin-top: 12rem !important;
   margin: auto;
 }
 @media screen and (min-width: 700px) {

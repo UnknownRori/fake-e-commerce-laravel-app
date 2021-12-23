@@ -10,7 +10,9 @@ $(() => {
 
 let hiddenobject = () => {
     $(window).scroll(function () {
+
         hScroll = $(this).scrollTop();
+
         if (hScroll > 325) {
             let state = 1;
             const show = setInterval(() => {
@@ -26,7 +28,9 @@ let hiddenobject = () => {
                     clearInterval(show);
                 }
             }, 80);
-        } else {
+        }
+
+        if (hScroll < 325) {
             let state = 1;
             const hide = setInterval(() => {
                 try {
@@ -42,21 +46,25 @@ let hiddenobject = () => {
                 }
             }, 80);
         }
+
     })
 }
 
 let hideMessage = () => {
+
     setTimeout(() => {
         try {
-            $('#msg').addClass('hidden');
+            $('#msg').removeClass('show');
             document.getElementById('msg').innerText = '';
         } catch {
             console.log('There is no error message to hide');
         }
     }, 7000);
+
 }
 
 let printcharbychar = (id, content, time) => {
+
     let i = 0;
     const interval = setInterval(() => {
 
@@ -71,4 +79,5 @@ let printcharbychar = (id, content, time) => {
             clearInterval(interval);
         }
     }, time);
+
 }

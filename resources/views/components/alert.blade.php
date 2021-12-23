@@ -1,9 +1,9 @@
 @if (Session::has('success'))
-    <div id="msg" class="bg-success text-center text-white p-1 m-0 mb-5">
+    <div id="msg" class="bg-success text-center text-white fixed-top show">
         <span> {{ Session::get('success') }} </span>
     </div>
 @elseif (Session::has('fail'))
-    <div id="msg" class="bg-danger text-center text-white p-1 m-0 mb-5">
+    <div id="msg" class="bg-danger text-center text-white fixed-top show">
         <span> {{ Session::get('fail') }} </span>
     </div>
 @endif

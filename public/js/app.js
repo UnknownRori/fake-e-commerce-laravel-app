@@ -2088,7 +2088,9 @@ var hiddenobject = function hiddenobject() {
           clearInterval(show);
         }
       }, 80);
-    } else {
+    }
+
+    if (hScroll < 325) {
       var _state = 1;
       var hide = setInterval(function () {
         try {
@@ -2111,7 +2113,7 @@ var hiddenobject = function hiddenobject() {
 var hideMessage = function hideMessage() {
   setTimeout(function () {
     try {
-      $('#msg').addClass('hidden');
+      $('#msg').removeClass('show');
       document.getElementById('msg').innerText = '';
     } catch (_unused3) {
       console.log('There is no error message to hide');
