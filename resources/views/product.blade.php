@@ -8,6 +8,7 @@
                     <img class="img-fluid" alt="{{ $product->productname }}"
                      src="{{ asset("image/product/" . $product->productname . ".png") }}">
                 </header>
+
                 <div class="col-6">
                     <article>
                         <h3 class="text-center">{{ $product->productname }}</h3>
@@ -52,7 +53,6 @@
                 </div>
             </div>
             <div class="mt-5">
-                {{-- @foreach ($product->reviews as $row) --}}
                 @foreach ($reviews as $row)
                     <h4 class="mb-3">{{ $row->user->username }}</h4>
                         <div class="row" style="">
@@ -71,14 +71,7 @@
                     <p class="mt-3">{{ $row->comment }}</p>
                     <hr>
                 @endforeach
-                {{-- <x-paginatebutton>
-                    <x-slot name="prev">
-                        {{ $product->reviews->previousPageUrl() }}
-                    </x-slot>
-                    <x-slot name="next">
-                        {{ $product->reviews->nextPageUrl() }}
-                    </x-slot>
-                </x-paginatebutton> --}}
+
                 @if ($reviews->nextPageUrl() || $reviews->previousPageUrl())
                     <x-paginatebutton>
                         <x-slot name="prev">

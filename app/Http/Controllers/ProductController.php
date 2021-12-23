@@ -24,10 +24,6 @@ class ProductController extends Controller
         $reviewskey = "product-reviews-" . strval($id);
         $starkey = "product-star-" . strval($id);
 
-        // $product = Cache::remember($key, 180, function () use ($id) {
-        //     return Product::find($id);
-        // });
-
         $product = Cache::remember($productkey, 180, function () use ($id) {
             return Product::find($id);
         });
@@ -40,20 +36,10 @@ class ProductController extends Controller
             return Reviews::where('product_id', $id)->avg('star');
         });
 
-        // dd($reviews);
-
-        // foreach($reviews as $reviews){
-        //     dd($reviews->star);
-        // }
-
         return view('product', [
             'product' => $product,
             'reviews' => $reviews,
             'star' => $star
         ]);
-
-        // return view('product', [
-        //     'product' => $product
-        // ]);
     }
 }
