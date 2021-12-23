@@ -33,5 +33,32 @@ class ReviewsSeeder extends Seeder
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
+        DB::table('reviews')->insert([
+            'id' => 3,
+            'users_id' => 4,
+            'product_id' => 1,
+            'star' => 2,
+            'comment' => "This is comment 3",
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+        DB::table('reviews')->insert([
+            'id' => 4,
+            'users_id' => 5,
+            'product_id' => 1,
+            'star' => 1,
+            'comment' => "This is comment 4",
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+        DB::table('reviews')->insert([
+            'id' => 5,
+            'users_id' => 6,
+            'product_id' => 1,
+            'star' => 5,
+            'comment' => "This is comment 5",
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
     }
 }

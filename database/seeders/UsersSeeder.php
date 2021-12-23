@@ -39,5 +39,29 @@ class UsersSeeder extends Seeder
             'admin' => 0,
             'vendor' => 1,
         ]);
+        DB::table('users')->insert([
+            'id' => 4,
+            'username' => 'users1',
+            'email' => 'users1@usersmail.com',
+            'password' => Hash::make('users1'),
+            'admin' => 0,
+            'vendor' => 0,
+        ]);
+        DB::table('users')->insert([
+            'id' => 5,
+            'username' => 'users2',
+            'email' => 'users2@usersmail.com',
+            'password' => Hash::make('vendor'),
+            'admin' => 0,
+            'vendor' => 0,
+        ]);
+        DB::table('users')->insert([
+            'id' => 6,
+            'username' => 'users3',
+            'email' => 'users3@usersmail.com',
+            'password' => Hash::make('users3'),
+            'admin' => 0,
+            'vendor' => 0,
+        ]);
     }
 }
