@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="8.5in" height="11in" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 8500 11000"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .str1 {stroke:#332C2B;stroke-width:6.94488}
+    .str0 {stroke:black;stroke-width:6.94488}
+    .fil1 {fill:#FEFEFE}
+    .fil0 {fill:yellow}
+   ]]>
+  </style>
+ </defs>
+ <g id="Layer_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <polygon class="fil0 str0" points="4257,5319 4302,5456 4447,5455 4329,5540 4375,5676 4257,5591 4140,5676 4185,5540 4067,5455 4212,5456 "/>
+  <polygon class="fil1 str1" points="4374,5673 4370,5673 4303,5624 4303,5456 4447,5455 4329,5540 "/>
+ </g>
+</svg>
