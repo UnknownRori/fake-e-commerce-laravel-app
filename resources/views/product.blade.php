@@ -16,6 +16,26 @@
                         <p> Price :  $ {{ $product->price }}</p>
                     </article>
 
+                    <div>
+                        @for ($i = 0; $i < 5; $i++)
+                            @if ($star >= 1)
+                                <img class="ml-1" src="{{ asset("image/star-gold-background.svg") }}" alt="star full" style="width: 30px!important">
+                                @php ($star = $star - 1)
+                            @elseif ($star > 0.6)
+                                <img class="ml-1" src="{{ asset("image/star-quarter-last-gold-background.svg") }}" alt="star quarter last" style="width: 30px!important">
+                                @php ($star = $star - 0.75)
+                            @elseif ($star > 0.45)
+                                <img class="ml-1" src="{{ asset("image/star-half-gold-background.svg") }}" alt="star half" style="width: 30px!important">
+                                @php ($star = $star - 0.5)
+                            @elseif ($star > 0.25)
+                                <img class="ml-1" src="{{ asset("image/star-quarter-first-gold-background.svg") }}" alt="star quarter first" style="width: 30px!important">
+                                @php ($star = $star - 0.25)
+                            @else
+                                <img class="ml-1" src="{{ asset("image/star.svg") }}" alt="star" style="width: 30px!important">
+                            @endif
+                        @endfor
+                    </div>
+
                     <form action="" method="POST" class="mt-4">
                         <input title="Do not change this if you don't want to get screwed" type="number" name="id" value="{{ $product->id }}" hidden>
                         <div class="form-group">
@@ -37,11 +57,11 @@
                     <h4 class="mb-3">{{ $row->user->username }}</h4>
                         <div class="row" style="">
                         @for ($i = 0; $i < $row->star; $i++)
-                            <img class="ml-4" src="{{ asset("image/star-gold-background.svg") }}" alt="star" style="width: 20px!important">
+                            <img class="ml-1" src="{{ asset("image/star-gold-background.svg") }}" alt="star" style="width: 20px!important">
                         @endfor
                         @if ($row->star < 5)
                             @for ($i = $row->star; $i < 5; $i++)
-                                <img class="ml-4" src="{{ asset("image/star.svg") }}" alt="star" style="width: 20px!important">
+                                <img class="ml-1" src="{{ asset("image/star.svg") }}" alt="star" style="width: 20px!important">
                             @endfor
                         @endif
                         <p class="pt-3 ml-3 ">
