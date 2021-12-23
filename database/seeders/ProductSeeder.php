@@ -19,7 +19,7 @@ class ProductSeeder extends Seeder
             'id' => 1,
             'users_id' => 1,
             'productname' => 'No Phone Air',
-            'description' => "it's weightless",
+            'description' => "Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro quibusdam corrupti eos quasi voluptate ea provident quae corporis laudantium, eaque quas nesciunt ratione possimus nulla magnam dignissimos! Natus, saepe doloremque?",
             'price' => 40,
             'stock' => 5,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
