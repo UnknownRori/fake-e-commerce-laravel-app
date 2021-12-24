@@ -40,7 +40,12 @@ Route::get('/dashboard', function () {
 
 // Reviews Route
 
-Route::get('/product/deletereviews/{product_id}/{reviews_id}', [ReviewsController::class, 'Delete'])
+Route::post('/product/{product_id}/createreviews', [ReviewsController::class, "Create"])
+        ->name("CreateReviews")
+        ->whereNumber('product_id')
+        ->middleware('auth');
+
+Route::delete('/product/{product_id}/{reviews_id}/deletereviews', [ReviewsController::class, 'Delete'])
         ->name("ReviewsDelete")
         ->whereNumber(['product_id', 'reviews_id'])
         ->middleware('auth');
