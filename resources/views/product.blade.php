@@ -43,7 +43,7 @@
                     <form action="" method="POST" class="mt-4">
                         <input title="Do not change this if you don't want to get screwed" type="number" name="id" value="{{ $product->id }}" hidden>
                         <div class="form-group">
-                            <input type="number" name="amount"
+                            <input type="number" name="amount" title="stay on positive number or you screwed"
                             class="form-control {{ !Auth::check() || Auth::user()->id == $product->users_id ? "disabled" : ""}}"
                             placeholder="Amount" {{ !Auth::check() || Auth::user()->id == $product->users_id ? "disabled" : ""}}>
                         </div>
