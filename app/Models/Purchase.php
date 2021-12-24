@@ -9,6 +9,8 @@ class Purchase extends Model
 {
     use HasFactory;
 
+    protected $table = 'purchase';
+
     public function  User()
     {
         return $this->belongsTo(User::class, 'users_id');
