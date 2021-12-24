@@ -82,11 +82,15 @@
                                 <div class="dropdown-menu popout" aria-labelledby="dropdownMenuButton" style="margin-right: 2rem;">
                                     @if (Auth::user()->id == $row->users_id)
                                         <a class="dropdown-item" href="#">Edit</a>
-                                        <a class="dropdown-item" href="#">Delete</a>
-                                    @elseif (Auth::user()->admin)
-                                        <a class="dropdown-item" href="#">Delete</a>
                                     @endif
-                                    <a class="dropdown-item" href="#">Report</a>
+
+                                    @if (Auth::user()->id == $row->users_id || Auth::user()->admin )
+                                        <a class="dropdown-item" href="{{ route('ReviewsDelete', [$product->id, $row->id]) }}">Delete</a>
+                                    @endif
+
+                                    @if (Auth::user()->id != $row->users_id)
+                                        <a class="dropdown-item" href="#">Report</a>
+                                    @endif
                                 </div>
                                 @endauth
                             </div>
