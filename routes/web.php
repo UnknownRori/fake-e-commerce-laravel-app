@@ -44,6 +44,10 @@ Route::get('/product/deletereviews/{product_id}/{reviews_id}', [ReviewsControlle
         ->whereNumber(['product_id', 'reviews_id'])
         ->middleware('auth');
 
+// Vendor Route
+
+Route::post('/dashboard/joinvendor', [UsersController::class, 'JoinVendor'])->name("JoinVendor")->middleware('auth');
+
 // Subscribe Route
 
 Route::post('/subscribe/subs', [SubscribeController::class, 'Subscribe'])->name("Subscribe")->middleware('auth');

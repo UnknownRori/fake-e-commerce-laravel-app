@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Auth\SessionGuard;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
@@ -138,6 +139,21 @@ class UsersController extends Controller
             return redirect()->route('Login');
 
         }
+
+    }
+
+    public function JoinVendor () {
+
+        if(DB::table('users')
+            ->where('id', Auth::user()->id)
+            ->update(['vendor' => 1]))
+        {
+            session()->flash('success', 'Successfully joined to Fake E-Commerce Vendor!');
+            return redirect()->route('Dashboard');
+        }
+
+        session()->flash('fail', 'Failed joined to Fake E-Commerce Vendor!');
+        return redirect()->route('Dashboard');
 
     }
 }
