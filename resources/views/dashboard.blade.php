@@ -22,6 +22,8 @@
                 <div class="dropdown-menu popout">
                     <a href="" class="dropdown-item">Users Management</a>
                     <a href="" class="dropdown-item">Subscribe Management</a>
+                    <a href="" class="dropdown-item">Upload Image</a>
+                    <a href="" class="dropdown-item">Image Management</a>
                     <a href="" class="dropdown-item">Create Users</a>
                 </div>
             </li>
