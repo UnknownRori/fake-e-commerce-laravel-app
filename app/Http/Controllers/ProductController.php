@@ -24,7 +24,7 @@ class ProductController extends Controller
         $reviewskey = "product-reviews-" . strval($id);
         $starkey = "product-star-" . strval($id);
 
-        $product = Cache::remember($productkey, 180, function () use ($id) {
+        $product = Cache::remember($productkey, 5, function () use ($id) {
             return Product::find($id);
         });
 
@@ -32,7 +32,7 @@ class ProductController extends Controller
             return Reviews::where('product_id', $id)->paginate(2);
         });
 
-        $star = Cache::remember($starkey, 2, function () use ($id) {
+        $star = Cache::remember($starkey, 180, function () use ($id) {
             return Reviews::where('product_id', $id)->avg('star');
         });
 
