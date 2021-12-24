@@ -9,7 +9,35 @@ use Illuminate\Support\Facades\DB;
 
 class ReviewsController extends Controller
 {
-    //
+    public function Create (Request $request) {
+        $validate = $request->validate([
+            'product_id' => 'required|numeric',
+            'star' => 'required|digits_between:1,5',
+            'comment' => 'required|string'
+        ]);
+
+        $check = Reviews::all()->where('product_id', '=', $validate['product_id'])->where('users_id', '=', Auth::user()->id);
+
+        if($check->isEmpty()) {
+            $reviews = new Reviews();
+            $reviews->users_id = Auth::user()->id;
+            $reviews->product_id = $validate['product_id'];;
+            $reviews->star = $validate['star'];
+            $reviews->comment = $validate['comment'];
+
+            if ($reviews->save()) {
+                session()->flash('success', 'Successfully create review!');
+                return redirect()->back();
+            }
+
+            session()->flash('fail', 'Failed to create review!');
+            return redirect()->back();
+        }
+
+        session()->flash('fail', 'Cannot create review if there are old review!');
+        return redirect()->back();
+    }
+
     public function Delete (Request $request) {
 
         $review = Reviews::find($request->reviews_id);
