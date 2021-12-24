@@ -26,12 +26,12 @@
   height: 2rem;
 }
 
-#register, #login {
+#register, #login, .form-center {
   margin-top: 4rem !important;
   margin: auto;
 }
 @media screen and (min-width: 700px) {
-  #register, #login {
+  #register, #login, .form-center {
     width: 60%;
   }
 }

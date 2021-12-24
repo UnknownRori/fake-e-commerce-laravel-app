@@ -1,8 +1,54 @@
 <x-layout>
     <x-slot name="title">{{ $product->productname }}</x-slot>
 
+    <x-slot name="extension">
+        <script defer>
+            let state = 0;
+            let displayreview = () => {
+                if (state == 0) {
+                    $('#review').removeClass('hidden');
+                    state++;
+                } else {
+                    $('#review').addClass('hidden');
+                    state = 0;
+                }
+            }
+            let selectreview = (val) => {
+                const max = $(val).attr('id')
+                for(var i = 0; i <= max; i++) {
+                    $('#' + i.toString()).attr("src","{{ asset("image/star-gold-background.svg") }}");
+                }
+                while(i < 5) {
+                    $('#' + i.toString()).attr("src","{{ asset("image/star.svg") }}");
+                    i++;
+                }
+            }
+
+        </script>
+    </x-slot>
+
     <x-slot name="content">
         <div class="container">
+            <div id="review" class="fixed-top text-center form-center hidden m-2 m-auto bg-light" style="margin-top: 12rem !important; border-radius: 1rem">
+                <button type="button" class="close" onclick="displayreview()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <form action="" method="post">
+                    @csrf
+                    <h2 class="m-2">Review {{ $product->productname }}</h2>
+                    <div class="form-group m-2">
+                        @for ($i = 0; $i < 5; $i++)
+                            <img id="{{ $i }}" onclick="selectreview(this)" value="{{ $i }}" class="ml-1" src="{{ asset("image/star.svg") }}" alt="star" style="width: 30px!important">
+                        @endfor
+                    </div>
+                    <div class="form-group m-2">
+                        <textarea name="comment" placeholder="Comment" class="form-control" id="" rows="5"></textarea>
+                    </div>
+                    <div class="form-group text-right m-2">
+                        <input type="submit" value="Submit" class="btn btn-primary">
+                    </div>
+                </form>
+            </div>
             <div class="row">
                 <header class="col-6 text-center">
                     <img class="img-fluid" alt="{{ $product->productname }}"
@@ -13,7 +59,7 @@
                     <article>
                         <h3 class="text-center">{{ $product->productname }}</h3>
                         <p>{{ $product->description }}</p>
-                        <p> Stock : {{ $product->stock }}</p>
+                        <p id="stock"> Stock : {{ $product->stock }}</p>
                         <p> Price :  $ {{ $product->price }}</p>
                     </article>
 
@@ -37,6 +83,7 @@
                             @endif
                         @endfor
                         {{ $stardisplay }}
+                        <button onclick="displayreview()" class="btn btn-info m-2">Write Review</button>
                     </div>
 
                     @auth
