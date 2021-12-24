@@ -40,7 +40,8 @@
                     </div>
 
                     @auth
-                    <form action="" method="POST" class="mt-4">
+                    <form action="{{ route("Purchase", $product->id) }}" method="POST" class="mt-4">
+                        @csrf
                         <input title="Do not change this if you don't want to get screwed" type="number" name="id" value="{{ $product->id }}" hidden>
                         <div class="form-group">
                             <input type="number" name="amount" title="stay on positive number or you screwed"
