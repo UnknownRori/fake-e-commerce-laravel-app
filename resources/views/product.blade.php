@@ -39,19 +39,22 @@
                         {{ $stardisplay }}
                     </div>
 
+                    @auth
                     <form action="" method="POST" class="mt-4">
                         <input title="Do not change this if you don't want to get screwed" type="number" name="id" value="{{ $product->id }}" hidden>
                         <div class="form-group">
                             <input type="number" name="amount"
                             class="form-control {{ !Auth::check() || Auth::user()->id == $product->users_id ? "disabled" : ""}}"
-                            placeholder="Amount" {{ !Auth::check() || Auth::user()->id == $product->users_id ? 'disabled' : ''}}>
+                            placeholder="Amount" {{ !Auth::check() || Auth::user()->id == $product->users_id ? "disabled" : ""}}>
                         </div>
                         <div class="form-group text-right">
-                            <input type="submit" value="Add to Cart"
-                            class="btn btn-primary form-control {{ !Auth::check() || Auth::user()->id == $product->users_id ? "disabled" : ""}}"
-                            {{ !Auth::check() || Auth::user()->id == $product->users_id ? 'disabled' : ''}}>
+                            <input type="submit" value="Purchase"
+                                class="btn btn-primary form-control {{ !Auth::user()->credit_card || Auth::user()->id == $product->users_id ? "disabled" : ""}}"
+                                {{ !Auth::user()->credit_card || Auth::user()->id == $product->users_id ? 'disabled' : ''}}
+                                title="{{ !Auth::user()->credit_card ? "Please set credit card in user setting" : "" }}">
                         </div>
                     </form>
+                    @endauth
                 </div>
             </div>
             <div class="mt-5">
