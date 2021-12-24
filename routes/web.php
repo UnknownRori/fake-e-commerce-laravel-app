@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\SubscribeController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ReviewsController;
@@ -46,30 +47,52 @@ Route::get('/product/deletereviews/{product_id}/{reviews_id}', [ReviewsControlle
 
 // Vendor Route
 
-Route::post('/dashboard/joinvendor', [UsersController::class, 'JoinVendor'])->name("JoinVendor")->middleware('auth');
+Route::post('/dashboard/joinvendor', [UsersController::class, 'JoinVendor'])
+        ->name("JoinVendor")
+        ->middleware('auth');
 
 // Subscribe Route
 
-Route::post('/subscribe/subs', [SubscribeController::class, 'Subscribe'])->name("Subscribe")->middleware('auth');
+Route::post('/subscribe/subs', [SubscribeController::class, 'Subscribe'])
+        ->name("Subscribe")
+        ->middleware('auth');
 
 // Product Route
 
-Route::get('/product', [ProductController::class, 'ProductList'])->name("ProductList");
+Route::get('/product', [ProductController::class, 'ProductList'])
+        ->name("ProductList");
 
-Route::get('/product/{id}', [ProductController::class, "Product"])->name('Product')->whereNumber('id');
+Route::get('/product/{id}', [ProductController::class, "Product"])
+        ->name('Product')
+        ->whereNumber('id');
+
+// Purchase Route
+
+Route::post('/product/{id}/purchase', [PurchaseController::class, "Purchase"])
+        ->name("Purchase")
+        ->whereNumber('id')
+        ->middleware('auth');
 
 // Blog Route
 
-Route::get('/blog', [BlogController::class, 'BlogList'])->name("BlogList");
+Route::get('/blog', [BlogController::class, 'BlogList'])
+        ->name("BlogList");
 
-Route::get('/blog/{id}', [BlogController::class, 'Blog'])->name('Blog')->whereNumber('id');
+Route::get('/blog/{id}', [BlogController::class, 'Blog'])
+        ->name('Blog')
+        ->whereNumber('id');
 
 // Login Route
 
-Route::get('/auth/logout', [UsersController::class, 'Logout'])->name("Logout");
+Route::get('/auth/logout', [UsersController::class, 'Logout'])
+        ->name("Logout");
 
-Route::get('/auth/login', [UsersController::class, 'LoginView'])->name("Login");
-Route::get('/auth/register', [UsersController::class, 'RegisterView'])->name("Register");
+Route::get('/auth/login', [UsersController::class, 'LoginView'])
+        ->name("Login");
+Route::get('/auth/register', [UsersController::class, 'RegisterView'])
+        ->name("Register");
 
-Route::post('/auth/login/post', [UsersController::class, 'Login'])->name("PostLogin");
-Route::post('/auth/register/post', [UsersController::class, 'Register'])->name("PostRegister");
+Route::post('/auth/login/post', [UsersController::class, 'Login'])
+        ->name("PostLogin");
+Route::post('/auth/register/post', [UsersController::class, 'Register'])
+        ->name("PostRegister");
