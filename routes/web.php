@@ -38,7 +38,7 @@ Route::get('/dashboard', function () {
 
 // Subscribe Route
 
-Route::post('/subscribe/subs', [SubscribeController::class, 'Subscribe'])->name("Subscribe");
+Route::post('/subscribe/subs', [SubscribeController::class, 'Subscribe'])->name("Subscribe")->middleware('auth');
 
 // Product Route
 
