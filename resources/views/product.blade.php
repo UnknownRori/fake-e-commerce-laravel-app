@@ -56,21 +56,45 @@
             </div>
             <div class="mt-5">
                 @foreach ($reviews as $row)
-                    <h4 class="mb-3">{{ $row->user->username }}</h4>
-                        <div class="row" style="">
-                        @for ($i = 0; $i < $row->star; $i++)
-                            <img class="ml-1" src="{{ asset("image/star-gold-background.svg") }}" alt="star" style="width: 20px!important">
-                        @endfor
-                        @if ($row->star < 5)
-                            @for ($i = $row->star; $i < 5; $i++)
-                                <img class="ml-1" src="{{ asset("image/star.svg") }}" alt="star" style="width: 20px!important">
-                            @endfor
-                        @endif
-                        <p class="pt-3 ml-3 ">
-                            {{ $row->updated_at }}
-                        </p>
+                    <div class="row">
+                        <div class="col-8">
+                            <h4 class="mb-3">{{ $row->user->username }}</h4>
+                            <div class="row" style="">
+                                @for ($i = 0; $i < $row->star; $i++)
+                                    <img class="ml-1" src="{{ asset("image/star-gold-background.svg") }}" alt="star" style="width: 20px!important">
+                                @endfor
+                                @if ($row->star < 5)
+                                    @for ($i = $row->star; $i < 5; $i++)
+                                        <img class="ml-1" src="{{ asset("image/star.svg") }}" alt="star" style="width: 20px!important">
+                                    @endfor
+                                @endif
+                                <p class="pt-3 ml-3 ">
+                                    {{ $row->updated_at }}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="float-right dropdown">
+                                @auth
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Action
+                                </button>
+                                <div class="dropdown-menu popout" aria-labelledby="dropdownMenuButton" style="margin-right: 2rem;">
+                                    @if (Auth::user()->id == $row->users_id)
+                                        <a class="dropdown-item" href="#">Edit</a>
+                                        <a class="dropdown-item" href="#">Delete</a>
+                                    @elseif (Auth::user()->admin)
+                                        <a class="dropdown-item" href="#">Delete</a>
+                                    @endif
+                                    <a class="dropdown-item" href="#">Report</a>
+                                </div>
+                                @endauth
+                            </div>
+                        </div>
                     </div>
-                    <p class="mt-3">{{ $row->comment }}</p>
+                    <p class="mt-3">
+                        {{ $row->comment }}
+                    </p>
                     <hr>
                 @endforeach
 
