@@ -2088,9 +2088,7 @@ var hiddenobject = function hiddenobject() {
           clearInterval(show);
         }
       }, 80);
-    }
-
-    if (hScroll < 325) {
+    } else {
       var _state = 1;
       var hide = setInterval(function () {
         try {

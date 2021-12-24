@@ -28,9 +28,7 @@ let hiddenobject = () => {
                     clearInterval(show);
                 }
             }, 80);
-        }
-
-        if (hScroll < 325) {
+        } else {
             let state = 1;
             const hide = setInterval(() => {
                 try {
