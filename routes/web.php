@@ -4,6 +4,7 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SubscribeController;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\ReviewsController;
 use App\Models\Product;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
@@ -35,6 +36,13 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->name("Dashboard")->middleware('auth');
+
+// Reviews Route
+
+Route::get('/product/deletereviews/{product_id}/{reviews_id}', [ReviewsController::class, 'Delete'])
+        ->name("ReviewsDelete")
+        ->whereNumber(['product_id', 'reviews_id'])
+        ->middleware('auth');
 
 // Subscribe Route
 
