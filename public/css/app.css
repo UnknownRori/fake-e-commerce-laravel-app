@@ -9,10 +9,6 @@
   position: absolute !important;
 }
 
-#page-content {
-  margin: 2.5rem 0px 1rem 0px;
-}
-
 #msg {
   margin-top: 0;
   z-index: 0 !important;
@@ -61,7 +57,7 @@
 
 #page-content {
   padding-top: 4rem;
-  padding-bottom: 20px;
+  padding-bottom: 4rem;
 }
 
 .hidden {
