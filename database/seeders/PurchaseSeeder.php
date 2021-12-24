@@ -19,6 +19,7 @@ class PurchaseSeeder extends Seeder
             'id' => 1,
             'users_id' => 2,
             'product_id' => 2,
+            'amount' => 2,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
