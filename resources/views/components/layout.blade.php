@@ -12,7 +12,7 @@
     {{ isset($extension) ? $extension : "" }}
     <title>{{ $title }}</title>
 </head>
-<body>
+<body id="top">
     <x-navbar>
         <x-slot name="title">{{ $title }}</x-slot>
         @if (isset($navbar))

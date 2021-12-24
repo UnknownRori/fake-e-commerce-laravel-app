@@ -14,22 +14,24 @@
 }
 
 #msg{
-  margin-top: 0;
-  opacity: 0;
-  transition: 2s !important;
-  height: 0;
+    margin-top: 0;
+    z-index: 0 !important;
+    height: 0;
+    opacity: 0;
+    transition: 2s !important;
 }
 
 #msg.show {
-    z-index: -1;
+    z-index: 1 !important;
     margin-top: 52px;
+    padding-top: 2px;
     opacity: 1;
     transition: 2s !important;
-    height: 5%;
+    height: 2rem;
 }
 
 #register, #login {
-    margin-top: 12rem !important;
+    margin-top: 4rem !important;
     margin: auto;
 
     @media screen and (min-width: 700px) {
@@ -59,6 +61,7 @@
 }
 
 #page-content {
+    padding-top: 4rem;
     padding-bottom: 20px;
 }
 

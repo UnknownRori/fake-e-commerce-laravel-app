@@ -1,7 +1,9 @@
-<nav class="navbar navbar-expand-sm fixed-top bg-light navbar-light">
+<nav class="navbar navbar-expand-sm bg-light navbar-light fixed-top">
     <div class="container">
         <div class="float-left">
-            <img class="brand" style="width: 75px;" src="{{ asset("image/Apple.png") }}" alt="">
+            <a href="#top">
+                <img class="brand" style="width: 75px;" src="{{ asset("image/Apple.png") }}" alt="">
+            </a>
         </div>
 
         <button class="navbar-toggler float-left" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
