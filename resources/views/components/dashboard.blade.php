@@ -28,6 +28,7 @@
                 </div>
             </li>
         @endif
+        @if (Auth::user()->vendor)
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle {{ !Auth::user()->vendor ? "disabled" : "" }}" href="#" id="navbardrop" data-toggle="dropdown">
                     Manage Product
@@ -40,6 +41,7 @@
                     @endif
                 </div>
             </li>
+        @endif
     </x-slot>
 
     <x-slot name="content">
