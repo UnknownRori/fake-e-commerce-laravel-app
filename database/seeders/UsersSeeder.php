@@ -20,6 +20,7 @@ class UsersSeeder extends Seeder
             'username' => 'UnknownRori',
             'email' => 'UnknownRori@mail.com',
             'password' => Hash::make('UnknownRori'),
+            'credit_card' => Hash::make('12345'),
             'admin' => 1,
             'vendor' => 1,
         ]);
@@ -28,6 +29,7 @@ class UsersSeeder extends Seeder
             'username' => 'users',
             'email' => 'users@usersmail.com',
             'password' => Hash::make('users'),
+            'credit_card' => Hash::make('AB123'),
             'admin' => 0,
             'vendor' => 0,
         ]);
@@ -36,6 +38,7 @@ class UsersSeeder extends Seeder
             'username' => 'vendor',
             'email' => 'vendor@usersmail.com',
             'password' => Hash::make('vendor'),
+            'credit_card' => Hash::make('AC1234'),
             'admin' => 0,
             'vendor' => 1,
         ]);
@@ -44,6 +47,7 @@ class UsersSeeder extends Seeder
             'username' => 'users1',
             'email' => 'users1@usersmail.com',
             'password' => Hash::make('users1'),
+            'credit_card' => Hash::make('WQ1234'),
             'admin' => 0,
             'vendor' => 0,
         ]);
@@ -52,6 +56,7 @@ class UsersSeeder extends Seeder
             'username' => 'users2',
             'email' => 'users2@usersmail.com',
             'password' => Hash::make('vendor'),
+            'credit_card' => Hash::make('WW1234'),
             'admin' => 0,
             'vendor' => 0,
         ]);
@@ -60,6 +65,23 @@ class UsersSeeder extends Seeder
             'username' => 'users3',
             'email' => 'users3@usersmail.com',
             'password' => Hash::make('users3'),
+            'credit_card' => Hash::make('RR123'),
+            'admin' => 0,
+            'vendor' => 0,
+        ]);
+        DB::table('users')->insert([
+            'id' => 7,
+            'username' => 'users4',
+            'email' => 'users4@usersmail.com',
+            'password' => Hash::make('users4'),
+            'admin' => 0,
+            'vendor' => 0,
+        ]);
+        DB::table('users')->insert([
+            'id' => 8,
+            'username' => 'users5',
+            'email' => 'users5@usersmail.com',
+            'password' => Hash::make('users5'),
             'admin' => 0,
             'vendor' => 0,
         ]);
