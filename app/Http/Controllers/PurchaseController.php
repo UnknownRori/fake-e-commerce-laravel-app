@@ -17,22 +17,18 @@ class PurchaseController extends Controller
             'amount' => 'required|numeric|gt:0'
         ]);
 
-        $currentProduct = Product::find($valid['id']);
+        $product = Product::find($valid['id']);
 
-        if ($currentProduct->stock >= $valid['amount']){
+        if ($product->stock >= $valid['amount']){
 
             $purchase = new Purchase();
             $purchase->users_id = Auth::user()->id;
             $purchase->product_id = $valid['id'];
             $purchase->amount = $valid['amount'];
 
-            $stockupdate = $currentProduct->stock - $valid['amount'];
+            $product->stock = $product->stock - $valid['amount'];
 
-            $update = DB::table('product')
-                ->where('id', $valid['id'])
-                ->update(['stock' => $stockupdate]);
-
-            if($purchase->save() && $update) {
+            if($purchase->save() && $product->save()){
                 session()->flash('success', 'Transaction successfully!');
                 return redirect()->back();
             }
