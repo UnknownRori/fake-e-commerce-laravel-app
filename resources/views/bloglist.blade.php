@@ -12,22 +12,21 @@
 
             <div class="container">
                 <article>
-                    <table>
-                        @foreach ($blog as $row)
-                        <tr data-hidden="{{ $row->id }}" class="hidden">
-                            <td rowspan="2" class="img-container">
+                    @foreach ($blog as $row)
+                        <div class="row hidden" data-hidden="{{ $row->id }}">
+                            <div class="col-4">
                                 <a href="{{ route("Blog", $row->id) }}">
                                     <img class="img-fluid" src="{{ asset("image/blog/" . $row->title) . ".png" }}" alt="{{ $row->title }}">
                                 </a>
-                            </td>
-                            <td>
+                            </div>
+                            <div class="col-8">
                                 <div class="row">
                                     <div class="col-8">
-                                         <a href="{{ route("Product", $row->id) }}">
+                                        <a href="{{ route("Product", $row->id) }}">
                                             <h3 class="ml-1 text-black">{{ $row->title }}</h3>
                                         </a>
                                     </div>
-                                    <div class="col-2">
+                                    <div class="col-4">
                                         @if(Auth::user()->admin)
                                             <div class="float-right dropdown">
                                                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -51,17 +50,12 @@
                                         @endif
                                     </div>
                                 </div>
-                            </td>
-                        </tr>
-                        <tr data-hidden="{{ $row->id }}" class="hidden">
-                            <td>
                                 <p class="ml-1">
                                     {{ $row->content }}
                                 </p>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </table>
+                            </div>
+                        </div>
+                    @endforeach
                 </article>
                 <x-paginatebutton>
                     <x-slot name="prev">
