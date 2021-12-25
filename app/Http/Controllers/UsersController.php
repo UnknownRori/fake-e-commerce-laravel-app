@@ -143,10 +143,9 @@ class UsersController extends Controller
     }
 
     public function JoinVendor () {
-
-        if(DB::table('users')
-            ->where('id', Auth::user()->id)
-            ->update(['vendor' => 1]))
+        $user = User::find(Auth::user()->id);
+        $user->vendor = 1;
+        if($user->save())
         {
             session()->flash('success', 'Successfully joined to Fake E-Commerce Vendor!');
             return redirect()->route('Dashboard');
