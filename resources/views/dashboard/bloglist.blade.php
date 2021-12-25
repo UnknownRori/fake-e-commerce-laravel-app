@@ -5,6 +5,7 @@
         <table class="table table-hover">
             <tr>
                 <td>ID</td>
+                <td>Owner</td>
                 <td>Title</td>
                 <td>Content</td>
                 <td>Created at</td>
@@ -15,6 +16,9 @@
                 <tr>
                     <td>
                         {{ $row->id }}
+                    </td>
+                    <td>
+                        {{ $row->user->username }}
                     </td>
                     <td>
                         {{ $row->title }}
@@ -32,5 +36,13 @@
                 </tr>
             @endforeach
         </table>
+        <x-paginatebutton>
+            <x-slot name="prev">
+                {{ $blog->previousPageUrl() }}
+            </x-slot>
+            <x-slot name="next">
+                {{ $blog->nextPageUrl() }}
+            </x-slot>
+        </x-paginatebutton>
     </x-slot>
 </x-dashboard>
