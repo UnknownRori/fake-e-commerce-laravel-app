@@ -19,15 +19,19 @@
                     <td>
                         {{ $row->id }}
                     </td>
-                    <td class="img-container m-0 p-0">
-                        <img class="img-fluid" alt="{{ $row->productname }}"
-                        src="{{ asset("image/product/" . $row->productname . ".png") }}">
+                    <td class="img-container-small m-0 p-0">
+                        <a href="{{ route("Product", $row->id) }}" class="link">
+                            <img class="img-fluid" alt="{{ $row->productname }}"
+                            src="{{ asset("image/product/" . $row->productname . ".png") }}">
+                        </a>
                     </td>
                     <td>
                         {{ $row->user->username }}
                     </td>
                     <td>
-                        {{ $row->productname }}
+                        <a href="{{ route("Product", $row->id) }}" class="link">
+                            {{ $row->productname }}
+                        </a>
                     </td>
                     <td>
                         {{ $row->price }}

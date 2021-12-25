@@ -21,10 +21,10 @@
                         {{ $row->user->username }}
                     </td>
                     <td>
-                        {{ $row->title }}
+                        <a href="{{ route("Blog", $row->id) }}" class="link">{{ $row->title }}</a>
                     </td>
                     <td>
-                        {{ $row->content }}
+                        <a href="{{ route("Blog", $row->id) }}" class="link">{{ $row->content }}</a>
                     </td>
                     <td>
                         {{ $row->created_at }}

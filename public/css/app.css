@@ -49,6 +49,12 @@
   height: 300px;
 }
 
+.img-container-small {
+  width: 100px;
+  height: 100px;
+  transition: 1s;
+}
+
 .navbar-brand img {
   width: 75px;
   margin: 0;
