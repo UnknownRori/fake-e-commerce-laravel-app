@@ -14,7 +14,7 @@ let hiddenobject = () => {
 
         hScroll = $(this).scrollTop();
 
-        if (hScroll > 325) {
+        if (hScroll > 265) {
             let state = 1;
             const show = setInterval(() => {
                 try {

@@ -2073,7 +2073,7 @@ var hiddenobject = function hiddenobject() {
   $(window).scroll(function () {
     hScroll = $(this).scrollTop();
 
-    if (hScroll > 325) {
+    if (hScroll > 265) {
       var state = 1;
       var show = setInterval(function () {
         try {
