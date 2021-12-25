@@ -11,7 +11,7 @@
                     <a href="{{ route("OwnedBlog") }}" class="dropdown-item {{ $title == "List Owned Blog" ? "active" : "" }}">List owned Blog</a>
                     <a href="" class="dropdown-item {{ $title == "Create Blog" ? "active" : "" }}">Create Blog</a>
                     @if (Auth::user()->admin)
-                        <a href="" class="dropdown-item {{ $title == "List all Blog" ? "active" : "" }}">List all Blog</a>
+                        <a href="{{ route("AllBloglist") }}" class="dropdown-item {{ $title == "List all Blog" ? "active" : "" }}">List all Blog</a>
                     @endif
                 </div>
             </li>
@@ -37,7 +37,7 @@
                     <a href="{{ route("OwnedProduct") }}" class="dropdown-item {{ $title == "List owned Product" ? "active" : "" }}">List owned Product</a>
                     <a href="" class="dropdown-item {{ $title == "Create Product" ? "active" : "" }}">Create Product</a>
                     @if (Auth::user()->admin)
-                        <a href="" class="dropdown-item {{ $title == "List all Product" ? "active" : "" }}">List all Product</a>
+                        <a href="{{ route("AllProductList") }}" class="dropdown-item {{ $title == "List all Product" ? "active" : "" }}">List all Product</a>
                     @endif
                 </div>
             </li>
