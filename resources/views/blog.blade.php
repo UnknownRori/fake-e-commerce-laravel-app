@@ -4,7 +4,7 @@
     <x-slot name="content">
         <main>
             <header class="text-center">
-                <img class="img-fluid" src="{{ asset("./image/blog/" . $Blog->title . ".png") }}" alt="{{ $Blog->title }}">
+                <img class="img-fluid w-25" src="{{ asset("./image/blog/" . $Blog->title . ".png") }}" alt="{{ $Blog->title }}">
                 <h2>
                     {{ $Blog->title }}
                 </h2>
