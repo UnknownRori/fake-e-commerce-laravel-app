@@ -27,7 +27,7 @@
                                         </a>
                                     </div>
                                     <div class="col-4">
-                                        @if(Auth::user()->admin)
+                                        @auth
                                             <div class="float-right dropdown">
                                                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                     Action
@@ -47,7 +47,7 @@
                                                     @endif
                                                 </div>
                                             </div>
-                                        @endif
+                                        @endauth
                                     </div>
                                 </div>
                                 <p class="ml-1">
