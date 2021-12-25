@@ -16,7 +16,7 @@ class Product extends Model
         'stock'
     ];
 
-    public function Users () {
+    public function User () {
         return $this->belongsTo(User::class, 'users_id');
     }
 
