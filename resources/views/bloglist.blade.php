@@ -22,7 +22,7 @@
                             <div class="col-8">
                                 <div class="row">
                                     <div class="col-8">
-                                        <a href="{{ route("Product", $row->id) }}">
+                                        <a href="{{ route("Blog", $row->id) }}">
                                             <h3 class="ml-1 text-black">{{ $row->title }}</h3>
                                         </a>
                                     </div>
