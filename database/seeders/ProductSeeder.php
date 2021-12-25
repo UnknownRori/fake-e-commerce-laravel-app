@@ -15,6 +15,7 @@ class ProductSeeder extends Seeder
      */
     public function run()
     {
+        // UnknownRori
         DB::table('product')->insert([
             'id' => 1,
             'users_id' => 1,
@@ -82,6 +83,38 @@ class ProductSeeder extends Seeder
             'description' => "The No Phone",
             'price' => 20,
             'stock' => 50,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+
+        // Vendor
+        DB::table('product')->insert([
+            'id' => 8,
+            'users_id' => 3,
+            'productname' => 'No Phone Air',
+            'description' => "Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro quibusdam corrupti eos quasi voluptate ea provident quae corporis laudantium, eaque quas nesciunt ratione possimus nulla magnam dignissimos! Natus, saepe doloremque?",
+            'price' => 40,
+            'stock' => 5,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+        DB::table('product')->insert([
+            'id' => 9,
+            'users_id' => 3,
+            'productname' => 'No Phone Selfie',
+            'description' => "it's can do selfie thing",
+            'price' => 10,
+            'stock' => 400,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+        DB::table('product')->insert([
+            'id' => 10,
+            'users_id' => 3,
+            'productname' => 'No Phone',
+            'description' => "Is this phone?",
+            'price' => 100,
+            'stock' => 1,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);

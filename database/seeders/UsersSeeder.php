@@ -85,5 +85,13 @@ class UsersSeeder extends Seeder
             'admin' => 0,
             'vendor' => 0,
         ]);
+        DB::table('users')->insert([
+            'id' => 9,
+            'username' => 'admin',
+            'email' => 'admin@usersmail.com',
+            'password' => Hash::make('admin'),
+            'admin' => 1,
+            'vendor' => 0,
+        ]);
     }
 }
