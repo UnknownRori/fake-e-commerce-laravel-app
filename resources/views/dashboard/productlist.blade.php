@@ -1,5 +1,5 @@
 <x-dashboard>
-    <x-slot name="title">List Owned Blog</x-slot>
+    <x-slot name="title">List Owned Product</x-slot>
 
     <x-slot name="content">
         <table class="table table-hover">
