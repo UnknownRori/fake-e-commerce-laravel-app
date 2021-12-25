@@ -50,6 +50,11 @@ Route::delete('/product/{product_id}/{reviews_id}/deletereviews', [ReviewsContro
         ->whereNumber(['product_id', 'reviews_id'])
         ->middleware('auth');
 
+Route::post('/product/{product_id}/{reviews_id}/updatereviews', [ReviewsController::class, 'Update'])
+        ->name("UpdateReviews")
+        ->whereNumber(['product_id', 'reviews_id'])
+        ->middleware('auth');
+
 // Vendor Route
 
 Route::post('/dashboard/joinvendor', [UsersController::class, 'JoinVendor'])

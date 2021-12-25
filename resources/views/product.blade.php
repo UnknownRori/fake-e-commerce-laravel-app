@@ -40,21 +40,32 @@
                         <button type="button" class="close" onclick="displayreview()">
                             <span aria-hidden="true">&times;</span>
                         </button>
-                        <form action="{{ route("CreateReviews", $product->id) }}" method="post">
+                        <form action="{{ isset($user_reviews) ? route("UpdateReviews", [$product->id, $user_reviews->id]) : route("CreateReviews", $product->id) }}" method="post">
                             @csrf
-                            <h2 class="m-2">Review {{ $product->productname }}</h2>
+                            <h2 class="m-2">{{ isset($user_reviews) ? "Edit " : "" }}Review {{ $product->productname }}</h2>
                             <div class="form-group m-2">
                                 <input type="number" name="product_id" value="{{ $product->id }}" hidden>
-                                <input id="inputstar" type="number" name="star" value="0" hidden>
-                                @for ($i = 0; $i < 5; $i++)
-                                    <img id="{{ $i }}" onclick="selectreview(this)" value="{{ $i }}" class="ml-1" src="{{ asset("image/star.svg") }}" alt="star" style="width: 30px!important">
-                                @endfor
+                                <input id="inputstar" type="number" name="star" value="{{ isset($user_reviews) ? $user_reviews->star : "" }}" hidden>
+                                @if (isset($user_reviews))
+                                    @for ($i = 0; $i < $user_reviews->star; $i++)
+                                        <img id="{{ $i }}" class="ml-1" onclick="selectreview(this)" src="{{ asset("image/star-gold-background.svg") }}" alt="star" style="width: 20px!important">
+                                    @endfor
+                                    @if ($user_reviews->star < 5)
+                                        @for ($i = $user_reviews->star; $i < 5; $i++)
+                                            <img id="{{ $i }}" class="ml-1" onclick="selectreview(this)" src="{{ asset("image/star.svg") }}" alt="star" style="width: 20px!important">
+                                        @endfor
+                                    @endif
+                                @else
+                                    @for ($i = 0; $i < 5; $i++)
+                                        <img id="{{ $i }}" onclick="selectreview(this)" value="{{ $i }}" class="ml-1" src="{{ asset("image/star.svg") }}" alt="star" style="width: 30px!important">
+                                    @endfor
+                                @endif
                             </div>
                             <div class="form-group m-2">
-                                <textarea name="comment" placeholder="Comment" class="form-control" id="" rows="5"></textarea>
+                                <textarea name="comment" placeholder="Comment" class="form-control" id="" rows="5">{{ isset($user_reviews) ? $user_reviews->comment : "" }}</textarea>
                             </div>
                             <div class="form-group text-right m-2">
-                                <input type="submit" value="Submit" class="btn btn-primary">
+                                <input type="submit" value="{{ isset($user_reviews) ? "Edit" : "Submit" }}" class="btn btn-primary">
                             </div>
                         </form>
                     </div>
@@ -95,7 +106,7 @@
                         @endfor
                         {{ $stardisplay }}
                         @auth
-                            @if (Auth::user()->id != $product->users_id)
+                            @if (Auth::user()->id != $product->users_id && !$reviews->contains('users_id', Auth::user()->id))
                                 <button onclick="displayreview()" class="btn btn-info m-2">Write Review</button>
                             @endif
                         @endauth
@@ -147,7 +158,7 @@
                                 </button>
                                 <div class="dropdown-menu popout" aria-labelledby="dropdownMenuButton" style="margin-right: 2rem;">
                                     @if (Auth::user()->id == $row->users_id)
-                                        <a class="dropdown-item" href="#">Edit</a>
+                                        <button onclick="displayreview()" class="dropdown-item">Edit</button>
                                     @endif
 
                                     @if (Auth::user()->id == $row->users_id || Auth::user()->admin )

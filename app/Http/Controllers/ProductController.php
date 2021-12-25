@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Reviews;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 
 class ProductController extends Controller
@@ -23,6 +24,7 @@ class ProductController extends Controller
         $productkey = "product-" . strval($id);
         $reviewskey = "product-reviews-" . strval($id);
         $starkey = "product-star-" . strval($id);
+        $user_reviewskey = "product-reviewskey-" . strval($id);
 
         $product = Cache::remember($productkey, 5, function () use ($id) {
             return Product::find($id);
@@ -36,10 +38,15 @@ class ProductController extends Controller
             return Reviews::where('product_id', $id)->avg('star');
         });
 
+        $user_reviews = Cache::remember($user_reviewskey, 2, function () use ($id) {
+            return Reviews::all()->where('product_id', '=', $id)->where('users_id', '=', Auth::user()->id)->first();
+        });
+
         return view('product', [
             'product' => $product,
             'reviews' => $reviews,
-            'star' => $star
+            'star' => $star,
+            'user_reviews' => $user_reviews
         ]);
     }
 }

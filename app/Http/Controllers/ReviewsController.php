@@ -38,6 +38,10 @@ class ReviewsController extends Controller
         return redirect()->back();
     }
 
+    public function Update (Request $request) {
+        dd($request);
+    }
+
     public function Delete (Request $request) {
 
         $review = Reviews::find($request->reviews_id);
