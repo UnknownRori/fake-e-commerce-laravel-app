@@ -44,7 +44,6 @@
                             @csrf
                             <h2 class="m-2">{{ isset($user_reviews) ? "Edit " : "" }}Review {{ $product->productname }}</h2>
                             <div class="form-group m-2">
-                                <input type="number" name="product_id" value="{{ $product->id }}" hidden>
                                 <input id="inputstar" type="number" name="star" value="{{ isset($user_reviews) ? $user_reviews->star : "" }}" hidden>
                                 @if (isset($user_reviews))
                                     @for ($i = 0; $i < $user_reviews->star; $i++)

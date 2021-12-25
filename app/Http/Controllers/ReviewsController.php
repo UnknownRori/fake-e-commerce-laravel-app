@@ -39,7 +39,22 @@ class ReviewsController extends Controller
     }
 
     public function Update (Request $request) {
-        dd($request);
+        $validate = $request->validate([
+            'star' => 'required|digits_between:1,5',
+            'comment' => 'required|string'
+        ]);
+
+        $review = Reviews::find($request->reviews_id);
+        $review->star = $validate['star'];
+        $review->comment = $validate['comment'];
+
+        if ($review->save()) {
+            session()->flash('success', 'Review successfully edited!');
+            return redirect()->back();
+        }
+
+        session()->flash('fail', 'Review failed to edited!');
+        return redirect()->back();
     }
 
     public function Delete (Request $request) {
