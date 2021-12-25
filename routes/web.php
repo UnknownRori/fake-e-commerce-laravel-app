@@ -76,6 +76,10 @@ Route::get('/product/{id}', [ProductController::class, "Product"])
         ->name('Product')
         ->whereNumber('id');
 
+Route::get('/dashboard/listownedproduct', [ProductController::class, "OwnedProduct"])
+        ->name("OwnedProduct")
+        ->middleware('auth');
+
 // Purchase Route
 
 Route::post('/product/{id}/purchase', [PurchaseController::class, "Purchase"])
