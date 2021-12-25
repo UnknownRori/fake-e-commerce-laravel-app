@@ -9,6 +9,16 @@ use Illuminate\Support\Facades\Cache;
 
 class BlogController extends Controller
 {
+    public function AllBlogList () {
+        $blog = Cache::remember('owned-blog-list', 2, function () {
+            return Blog::paginate(4);
+        });
+
+        return view('dashboard.bloglist', [
+            'blog' => $blog
+        ]);
+    }
+
     public function ListOwnedBlog () {
         $blog = Cache::remember('owned-blog-list', 2, function () {
             return Blog::where('users_id', Auth::user()->id)->paginate(4);

@@ -10,6 +10,16 @@ use Illuminate\Support\Facades\Cache;
 
 class ProductController extends Controller
 {
+    public function AllProductList () {
+        $product = Cache::remember('owned-product-list', 2, function () {
+            return Product::paginate(4);
+        });
+
+        return view('dashboard.productlist', [
+            'product' => $product
+        ]);
+    }
+
     public function OwnedProduct () {
         $product = Cache::remember('owned-product-list', 2, function () {
             return Product::where('users_id', Auth::user()->id)->paginate(4);
