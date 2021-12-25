@@ -2,6 +2,7 @@ require('./bootstrap');
 
 $(() => {
     printcharbychar('company_introduction', "Fake E-Commerce Web Application", 100);
+    printcharbychar('blog_introduction', "Fake E-Commerce Blog", 100);
 
     hiddenobject();
 
