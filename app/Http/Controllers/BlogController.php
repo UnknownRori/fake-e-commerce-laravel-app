@@ -10,8 +10,8 @@ use Illuminate\Support\Facades\Cache;
 class BlogController extends Controller
 {
     public function ListOwnedBlog () {
-        $blog = Cache::remember('owned-blog-list', 180, function () {
-            return Blog::all()->where('users_id', Auth::user()->id);
+        $blog = Cache::remember('owned-blog-list', 2, function () {
+            return Blog::where('users_id', Auth::user()->id)->paginate(4);
         });
 
         return view('dashboard.bloglist', [
