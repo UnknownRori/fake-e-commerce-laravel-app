@@ -92,6 +92,10 @@ Route::get('/blog/{id}', [BlogController::class, 'Blog'])
         ->name('Blog')
         ->whereNumber('id');
 
+Route::get('/dashboard/listownedblog', [BlogController::class, 'ListOwnedBlog'])
+        ->name("OwnedBlog")
+        ->middleware('auth');
+
 // Login Route
 
 Route::get('/auth/logout', [UsersController::class, 'Logout'])
