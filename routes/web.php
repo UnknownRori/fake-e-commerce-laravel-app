@@ -80,6 +80,10 @@ Route::get('/dashboard/listownedproduct', [ProductController::class, "OwnedProdu
         ->name("OwnedProduct")
         ->middleware('auth');
 
+Route::get('/dashboard/listallproduct', [ProductController::class, "AllProductList"])
+        ->name("AllProductList")
+        ->middleware('auth');
+
 // Purchase Route
 
 Route::post('/product/{id}/purchase', [PurchaseController::class, "Purchase"])
@@ -99,6 +103,10 @@ Route::get('/blog/{id}', [BlogController::class, 'Blog'])
 Route::get('/dashboard/listownedblog', [BlogController::class, 'ListOwnedBlog'])
         ->name("OwnedBlog")
         ->middleware('auth');
+
+Route::get('/dashboard/listallblog', [BlogController::class, 'AllBlogList'])
+    ->name("AllBloglist")
+    ->middleware('auth');
 
 // Login Route
 
