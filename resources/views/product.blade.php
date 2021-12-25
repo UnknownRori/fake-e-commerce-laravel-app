@@ -161,7 +161,6 @@
                                     @endif
 
                                     @if (Auth::user()->id == $row->users_id || Auth::user()->admin )
-                                        {{-- <a class="dropdown-item" href="{{ route('ReviewsDelete', [$product->id, $row->id]) }}">Delete</a> --}}
                                         <form action="{{ route('ReviewsDelete', [$product->id, $row->id]) }}" method="post">
                                             @csrf
                                             @method('delete')
