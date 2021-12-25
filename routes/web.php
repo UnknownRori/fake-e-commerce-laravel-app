@@ -35,7 +35,7 @@ Route::get('/', function () {
 })->name("Home");
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('dashboard.dashboard');
 })->name("Dashboard")->middleware('auth');
 
 // Reviews Route

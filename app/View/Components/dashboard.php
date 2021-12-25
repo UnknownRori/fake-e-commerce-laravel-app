@@ -23,6 +23,6 @@ class dashboard extends Component
      */
     public function render()
     {
-        return view('components.dashboard');
+        return view('dashboard.components.dashboard');
     }
 }
