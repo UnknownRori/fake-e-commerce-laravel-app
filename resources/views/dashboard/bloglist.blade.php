@@ -39,7 +39,7 @@
                             </button>
                             <div class="dropdown-menu popout" aria-labelledby="dropdownMenuButton" style="margin-right: 2rem;">
                                 @if (Auth::user()->id == $row->users_id)
-                                    <a href="#" class="dropdown-item">Edit</a>
+                                    <a href="{{ route("EditBlog", $row->id) }}" class="dropdown-item">Edit</a>
                                 @endif
 
                                 @if (Auth::user()->id == $row->users_id || Auth::user()->admin )
