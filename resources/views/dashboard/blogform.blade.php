@@ -16,7 +16,7 @@
                 <textarea class="form-control" name="content" id="" cols="30" rows="10" placeholder="Blog Content">{{ isset($blog) ? $blog->content : "" }}</textarea>
             </div>
             <div class="form-group">
-                <input class="btn btn-info" type="submit" value="Create">
+                <input class="btn btn-info" type="submit" value="{{ isset($blog) ? "Edit" : "Create" }}">
             </div>
         </form>
     </x-slot>

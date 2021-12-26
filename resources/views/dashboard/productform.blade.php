@@ -3,7 +3,7 @@
 
     <x-slot name="content">
         <form class="bg-light" style="border: 0.1px solid gray; padding: 2rem; box-shadow: 2px 2px 2px 2px gray;"
-         action="{{ isset($product) ? route("CreateProduct") : route("CreateProduct") }}" method="post" enctype="multipart/form-data">
+         action="{{ isset($product) ? route("EditProduct", $product->id) : route("CreateProduct") }}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
                 <input class="form-control" type="text" name="productname" placeholder="Product Name"
@@ -24,7 +24,7 @@
                 <textarea class="form-control" name="description" id="" cols="30" rows="10" placeholder="Product Description">{{ isset($product) ? $product->description : "" }}</textarea>
             </div>
             <div class="form-group">
-                <input class="btn btn-info" type="submit" value="Create">
+                <input class="btn btn-info" type="submit" value="{{ isset($product) ? "Edit" : "Create" }}">
             </div>
         </form>
     </x-slot>
