@@ -102,6 +102,11 @@ Route::post('/product/{id}/editproduct', [ProductController::class, "Update"])
         ->middleware('auth')
         ->whereNumber('id');
 
+Route::delete('/product/{id}/deleteproduct', [ProductController::class, "Delete"])
+        ->name("DeleteProduct")
+        ->middleware('auth')
+        ->whereNumber('id');
+
 // Purchase Route
 
 Route::post('/product/{id}/purchase', [PurchaseController::class, "Create"])
@@ -141,6 +146,11 @@ Route::post('/dashboard/createblog', [BlogController::class, "Create"])
 
 Route::post('/blog/{id}/editblog', [BlogController::class, "Update"])
         ->name("PostEditBlog")
+        ->middleware('auth')
+        ->whereNumber('id');
+
+Route::delete('/blog/{id}/deleteblog', [BlogController::class, "Delete"])
+        ->name("DeleteBlog")
         ->middleware('auth')
         ->whereNumber('id');
 
