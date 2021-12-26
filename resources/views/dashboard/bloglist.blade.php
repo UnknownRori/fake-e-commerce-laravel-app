@@ -24,7 +24,7 @@
                         <a href="{{ route("Blog", $row->id) }}" class="link">{{ $row->title }}</a>
                     </td>
                     <td>
-                        <a href="{{ route("Blog", $row->id) }}" class="link">{{ $row->content }}</a>
+                        <a href="{{ route("Blog", $row->id) }}#content" class="link">{{ $row->content }}</a>
                     </td>
                     <td>
                         {{ $row->created_at }}
@@ -32,7 +32,30 @@
                     <td>
                         {{ $row->updated_at }}
                     </td>
-                    <td>Action</td>
+                    <td>
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Action
+                            </button>
+                            <div class="dropdown-menu popout" aria-labelledby="dropdownMenuButton" style="margin-right: 2rem;">
+                                @if (Auth::user()->id == $row->users_id)
+                                    <a href="#" class="dropdown-item">Edit</a>
+                                @endif
+
+                                @if (Auth::user()->id == $row->users_id || Auth::user()->admin )
+                                    <form action="#" method="post">
+                                        @csrf
+                                        @method('delete')
+                                        <input type="submit" value="Delete" class="dropdown-item">
+                                    </form>
+                                @endif
+
+                                @if (Auth::user()->id != $row->users_id)
+                                    <a class="dropdown-item" href="#">Report</a>
+                                @endif
+                            </div>
+                        </div>
+                    </td>
                 </tr>
             @endforeach
         </table>

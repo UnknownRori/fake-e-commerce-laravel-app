@@ -150,8 +150,8 @@
                             </div>
                         </div>
                         <div class="col-4">
+                            @auth
                             <div class="float-right dropdown">
-                                @auth
                                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Action
                                 </button>
@@ -172,8 +172,8 @@
                                         <a class="dropdown-item" href="#">Report</a>
                                     @endif
                                 </div>
-                                @endauth
                             </div>
+                            @endauth
                         </div>
                     </div>
                     <p class="mt-3">

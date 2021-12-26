@@ -10,7 +10,7 @@
                 </h2>
             </header>
             <article>
-                <p>
+                <p id="#content">
                     {{ $Blog->content }}
                 </p>
 
