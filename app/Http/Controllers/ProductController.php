@@ -7,6 +7,7 @@ use App\Models\Reviews;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -30,10 +31,36 @@ class ProductController extends Controller
 
         }
 
-        return view('dashboard.blogform');
+        return view('dashboard.productform');
     }
     public function Create (Request $request) {
-        dd($request);
+        $validate = $request->validate([
+            'productname' => 'required|string|unique:product,productname',
+            'price' => 'required|numeric|gt:0',
+            'stock' => 'required|numeric|gt:0',
+            'description' => 'required|string',
+            'photo' => 'required|image',
+        ]);
+
+        $product = new Product();
+        $product->users_id = Auth::user()->id;
+        $product->productname = $validate['productname'];
+        $product->price = $validate['price'];
+        $product->stock = $validate['stock'];
+        $product->description = $validate['description'];
+
+        if ($product->save()) {
+
+            if (ProductController::UploadPhoto($validate['photo'], $validate['productname'], null)) {
+                session()->flash('success', 'Blog successfully posted!');
+                return redirect()->back();
+            }
+            session()->flash('fail', 'Image cannot be saved! but Blog has been posted!');
+            return redirect()->back();
+        }
+
+        session()->flash('fail', 'Internal Server Error!');
+        return redirect()->back();
     }
 
     public function Update (Request $request) {
@@ -102,5 +129,30 @@ class ProductController extends Controller
             'star' => $star,
             'user_reviews' => $user_reviews
         ]);
+    }
+
+    private static function UploadPhoto($photo, $title, $oldphoto) {
+        $directory = "public/image/product";
+
+        if (!$oldphoto || $oldphoto == "") {
+            $path = Storage::putFileAs(
+                $directory,
+                $photo,
+                $title . '.png'
+            );
+            return $path;
+        } else {
+            if (!Storage::delete($directory . '/' . $oldphoto . '.png')) {
+                session()->flash('fail', 'Old image failed to deleted!');
+            }
+
+            $path = Storage::putFileAs(
+                $directory,
+                $photo,
+                $title . '.png'
+            );
+
+            return $path;
+        }
     }
 }
