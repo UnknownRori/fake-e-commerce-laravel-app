@@ -42,6 +42,7 @@
                     <div class="dropdown-menu popout">
                         <a href="{{ route("Dashboard") }}" class="dropdown-item {{ $title == "Dashboard" ? "active" : "" }}">Dashboard</a>
                         <a href="" class="dropdown-item">User Setting</a>
+                        <a href="" class="dropdown-item">Purchase History</a>
                         <a href="{{ route("Logout") }}" class="dropdown-item">Log out</a>
                     </div>
                 </li>
