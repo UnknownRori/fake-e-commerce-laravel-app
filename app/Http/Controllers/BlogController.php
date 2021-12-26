@@ -151,11 +151,10 @@ class BlogController extends Controller
         ]);
     }
 
-    protected static function UploadPhoto($photo, $title, $oldphoto) {
+    private static function UploadPhoto($photo, $title, $oldphoto) {
         $directory = "public/image/blog";
 
         if (!$oldphoto || $oldphoto == "") {
-            dd("acat");
             $path = Storage::putFileAs(
                 $directory,
                 $photo,
