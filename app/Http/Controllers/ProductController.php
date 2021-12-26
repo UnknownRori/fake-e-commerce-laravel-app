@@ -10,6 +10,40 @@ use Illuminate\Support\Facades\Cache;
 
 class ProductController extends Controller
 {
+    public function Form(Request $request) {
+        if ($request->id) {
+            $key = "product-" . strval($request->id);
+
+            $product = Cache::remember($key, 180, function () use ($request) {
+                return Product::find($request->id);
+            });
+
+            if($product->user->id == Auth::user()->id) {
+                return view('dashboard.productform', [
+                    'product' => $product
+                ]);
+            } else {
+                session()->flash('fail', 'Invalid Pervilege');
+                return redirect()->back();
+            }
+
+
+        }
+
+        return view('dashboard.blogform');
+    }
+    public function Create (Request $request) {
+        dd($request);
+    }
+
+    public function Update (Request $request) {
+        dd($request);
+    }
+
+    public function Delete (Request $request) {
+        dd($request);
+    }
+
     public function AllProductList () {
         $product = Cache::remember('owned-product-list', 2, function () {
             return Product::paginate(4);

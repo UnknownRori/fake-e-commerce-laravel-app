@@ -35,7 +35,7 @@
                 </a>
                 <div class="dropdown-menu popout">
                     <a href="{{ route("OwnedProduct") }}" class="dropdown-item {{ $title == "List Owned Product" ? "active" : "" }}">List owned Product</a>
-                    <a href="" class="dropdown-item {{ $title == "Create Product" ? "active" : "" }}">Create Product</a>
+                    <a href="{{ route("CreateProduct") }}" class="dropdown-item {{ $title == "Create Product" ? "active" : "" }}">Create Product</a>
                     @if (Auth::user()->admin)
                         <a href="{{ route("AllProductList") }}" class="dropdown-item {{ $title == "List all Product" ? "active" : "" }}">List all Product</a>
                     @endif

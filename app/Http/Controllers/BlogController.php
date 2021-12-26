@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Cache;
 
 class BlogController extends Controller
 {
-    public function BlogForm(Request $request) {
+    public function Form(Request $request) {
         if ($request->id) {
             $key = "blog-" . strval($request->id);
 

@@ -84,6 +84,24 @@ Route::get('/dashboard/listallproduct', [ProductController::class, "AllProductLi
         ->name("AllProductList")
         ->middleware('auth');
 
+Route::get('/dashboard/createproduct', [ProductController::class, "Form"])
+        ->name("CreateProduct")
+        ->middleware('auth');
+
+Route::get('/product/{id}/editproduct', [ProductController::class, "Form"])
+        ->name("EditProduct")
+        ->middleware('auth')
+        ->whereNumber('id');
+
+Route::post('/dashboard/createproduct', [ProductController::class, "Create"])
+        ->name("PostCreateProduct")
+        ->middleware('auth');
+
+Route::post('/product/{id}/editproduct', [ProductController::class, "Update"])
+        ->name("PostEditProduct")
+        ->middleware('auth')
+        ->whereNumber('id');
+
 // Purchase Route
 
 Route::post('/product/{id}/purchase', [PurchaseController::class, "Create"])
@@ -108,18 +126,23 @@ Route::get('/dashboard/listallblog', [BlogController::class, 'AllBlogList'])
         ->name("AllBloglist")
         ->middleware('auth');
 
-Route::get('/dashboard/createblog', [BlogController::class, "BlogForm"])
+Route::get('/dashboard/createblog', [BlogController::class, "Form"])
         ->name("CreateBlog")
         ->middleware('auth');
 
-Route::get('/blog/{id}/editblog', [BlogController::class, "BlogForm"])
+Route::get('/blog/{id}/editblog', [BlogController::class, "Form"])
         ->name("EditBlog")
         ->middleware('auth')
         ->whereNumber('id');
 
 Route::post('/dashboard/createblog', [BlogController::class, "Create"])
-        ->name("PostBlog")
+        ->name("PostCreateBlog")
         ->middleware('auth');
+
+Route::post('/blog/{id}/editblog', [BlogController::class, "Update"])
+        ->name("PostEditBlog")
+        ->middleware('auth')
+        ->whereNumber('id');
 
 // Login Route
 
