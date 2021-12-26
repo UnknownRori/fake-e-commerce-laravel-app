@@ -64,7 +64,33 @@ class ProductController extends Controller
     }
 
     public function Update (Request $request) {
-        dd($request);
+        $validate = $request->validate([
+            'productname' => 'required|string|unique:product,productname',
+            'price' => 'required|numeric|gt:0',
+            'stock' => 'required|numeric|gt:0',
+            'description' => 'required|string',
+            'photo' => 'required|image',
+        ]);
+
+        $product = Product::find($request->id);
+        $oldphoto = $product->productname;
+        $product->productname = $validate['productname'];
+        $product->price = $validate['price'];
+        $product->stock = $validate['stock'];
+        $product->description = $validate['description'];
+
+        if ($product->save()) {
+
+            if (ProductController::UploadPhoto($validate['photo'], $validate['productname'], $oldphoto)) {
+                session()->flash('success', 'Blog successfully edited!');
+                return redirect()->back();
+            }
+            session()->flash('fail', 'Image cannot be saved! but Blog has been edited!');
+            return redirect()->back();
+        }
+
+        session()->flash('fail', 'Internal Server Error!');
+        return redirect()->back();
     }
 
     public function Delete (Request $request) {
