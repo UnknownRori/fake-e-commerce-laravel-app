@@ -22,7 +22,7 @@
                     <td class="img-container-small m-0 p-0">
                         <a href="{{ route("Product", $row->id) }}" class="link">
                             <img class="img-fluid" alt="{{ $row->productname }}"
-                            src="{{ asset("image/product/" . $row->productname . ".png") }}">
+                            src="{{ Storage::url("/image/product/" . $row->productname . ".png") }}">
                         </a>
                     </td>
                     <td>

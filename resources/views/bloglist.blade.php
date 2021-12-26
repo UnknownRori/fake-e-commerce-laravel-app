@@ -16,7 +16,7 @@
                         <div class="row hidden" data-hidden="{{ $row->id }}">
                             <div class="col-4">
                                 <a href="{{ route("Blog", $row->id) }}">
-                                    <img class="img-fluid" src="{{ asset("image/blog/" . $row->title) . ".png" }}" alt="{{ $row->title }}">
+                                    <img class="img-fluid" src="{{ Storage::url('/image/blog/' . $row->title . '.png') }}" alt="{{ $row->title }}">
                                 </a>
                             </div>
                             <div class="col-8">

@@ -73,7 +73,8 @@
             <div class="row">
                 <header class="col-6 text-center">
                     <img class="img-fluid" alt="{{ $product->productname }}"
-                     src="{{ asset("image/product/" . $product->productname . ".png") }}">
+                     src="{{ Storage::url("/image/product/" . $product->productname . ".png") }}">
+
                 </header>
 
                 <div class="col-6">

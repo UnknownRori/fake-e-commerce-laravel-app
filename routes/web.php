@@ -117,6 +117,10 @@ Route::get('/blog/{id}/editblog', [BlogController::class, "BlogForm"])
         ->middleware('auth')
         ->whereNumber('id');
 
+Route::post('/dashboard/createblog', [BlogController::class, "Create"])
+        ->name("PostBlog")
+        ->middleware('auth');
+
 // Login Route
 
 Route::get('/auth/logout', [UsersController::class, 'Logout'])
