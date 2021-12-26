@@ -35,7 +35,10 @@
                                                 <div class="dropdown-menu popout" aria-labelledby="dropdownMenuButton" style="margin-right: 2rem;">
                                                     @if (Auth::user()->id == $row->users_id)
                                                         <a href="{{ route("EditBlog", $row->id) }}" class="dropdown-item">Edit</a>
-                                                        <form action="" method="post">
+                                                    @endif
+
+                                                    @if (Auth::user()->id == $row->users_id || Auth::user()->admin )
+                                                        <form action="{{ route('DeleteBlog', $row->id) }}" method="post">
                                                             @csrf
                                                             @method('delete')
                                                             <input type="submit" value="Delete" class="dropdown-item">
