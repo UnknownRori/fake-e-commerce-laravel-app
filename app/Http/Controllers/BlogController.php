@@ -9,6 +9,40 @@ use Illuminate\Support\Facades\Cache;
 
 class BlogController extends Controller
 {
+    public function BlogForm(Request $request) {
+        if ($request->id) {
+            $key = "blog-" . strval($request->id);
+
+            $blog = Cache::remember($key, 180, function () use ($request) {
+                return Blog::find($request->id);
+            });
+
+            if($blog->user->id == Auth::user()->id) {
+                return view('dashboard.blogform', [
+                    'blog' => $blog
+                ]);
+            } else {
+                session()->flash('fail', 'Invalid Pervilege');
+                return redirect()->back();
+            }
+
+
+        }
+
+        return view('dashboard.blogform');
+    }
+    public function Create (Request $request) {
+        dd($request);
+    }
+
+    public function Update (Request $request) {
+        dd($request);
+    }
+
+    public function Delete (Request $request) {
+        dd($request);
+    }
+
     public function AllBlogList () {
         $blog = Cache::remember('owned-blog-list', 2, function () {
             return Blog::paginate(4);
