@@ -11,7 +11,8 @@ use Illuminate\Support\Facades\Storage;
 
 class BlogController extends Controller
 {
-    public function Form(Request $request) {
+    public function Form(Request $request)
+    {
         if ($request->id) {
             $key = "blog-" . strval($request->id);
 
@@ -19,7 +20,7 @@ class BlogController extends Controller
                 return Blog::find($request->id);
             });
 
-            if($blog->user->id == Auth::user()->id) {
+            if ($blog->user->id == Auth::user()->id) {
                 return view('dashboard.blogform', [
                     'blog' => $blog
                 ]);
@@ -27,13 +28,12 @@ class BlogController extends Controller
                 session()->flash('fail', 'Invalid Pervilege');
                 return redirect()->back();
             }
-
-
         }
 
         return view('dashboard.blogform');
     }
-    public function Create (Request $request) {
+    public function Create(Request $request)
+    {
         $validate = $request->validate([
             'title' => 'required|string|unique:blog,title',
             'content' => 'required|string',
@@ -45,7 +45,7 @@ class BlogController extends Controller
         $blog->title = $validate['title'];
         $blog->content = $validate['content'];
 
-        if($blog->save()) {
+        if ($blog->save()) {
 
             if (BlogController::UploadPhoto($validate['photo'], $validate['title'], null)) {
                 session()->flash('success', 'Blog successfully posted!');
@@ -57,10 +57,10 @@ class BlogController extends Controller
 
         session()->flash('fail', 'Internal Server Error!');
         return redirect()->back();
-
     }
 
-    public function Update (Request $request) {
+    public function Update(Request $request)
+    {
         $validate = $request->validate([
             'title' => 'required|string|unique:blog,title',
             'content' => 'required|string',
@@ -86,17 +86,22 @@ class BlogController extends Controller
         return redirect()->back();
     }
 
-    public function Delete (Request $request) {
+    public function Delete(Request $request)
+    {
         $blog = Blog::find($request->id);
-        if($blog == null) {
+        if ($blog == null) {
             session()->flash('fail', 'Failed to delete blog!');
             return redirect()->back();
         }
 
         if (Auth::user()->id == $blog->users_id || Auth::user()->admin) {
+            if (Storage::delete('public/image/blog/' . $blog->title . '.png')) {
+                if (DB::table('blog')->where('id', $blog->id)->delete()) {
+                    session()->flash('success', 'Blog successfully deleted!');
+                    return redirect()->back();
+                }
 
-            if (DB::table('blog')->where('id', $blog->id)->delete()) {
-                session()->flash('success', 'Blog successfully deleted!');
+                session()->flash('success', 'Blog successfully deleted but image failed to deleted!');
                 return redirect()->back();
             }
 
@@ -106,10 +111,10 @@ class BlogController extends Controller
             session()->flash('fail', 'Invalid Pervilege!');
             return redirect()->route('Home');
         }
-
     }
 
-    public function AllBlogList () {
+    public function AllBlogList()
+    {
         $blog = Cache::remember('owned-blog-list', 2, function () {
             return Blog::paginate(4);
         });
@@ -119,7 +124,8 @@ class BlogController extends Controller
         ]);
     }
 
-    public function ListOwnedBlog () {
+    public function ListOwnedBlog()
+    {
         $blog = Cache::remember('owned-blog-list', 2, function () {
             return Blog::where('users_id', Auth::user()->id)->paginate(4);
         });
@@ -129,7 +135,8 @@ class BlogController extends Controller
         ]);
     }
 
-    public function BlogList () {
+    public function BlogList()
+    {
         $blog = Cache::remember('blog-list', 2, function () {
             return Blog::paginate(2);
         });
@@ -139,7 +146,8 @@ class BlogController extends Controller
         ]);
     }
 
-    public function Blog ($id) {
+    public function Blog($id)
+    {
         $key = "blog-" . strval($id);
 
         $Blog = Cache::remember($key, 180, function () use ($id) {
@@ -151,7 +159,8 @@ class BlogController extends Controller
         ]);
     }
 
-    private static function UploadPhoto($photo, $title, $oldphoto) {
+    private static function UploadPhoto($photo, $title, $oldphoto)
+    {
         $directory = "public/image/blog";
 
         if (!$oldphoto || $oldphoto == "") {
