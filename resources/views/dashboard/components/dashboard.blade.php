@@ -9,7 +9,7 @@
                 </a>
                 <div class="dropdown-menu popout">
                     <a href="{{ route("OwnedBlog") }}" class="dropdown-item {{ $title == "List Owned Blog" ? "active" : "" }}">List owned Blog</a>
-                    <a href="" class="dropdown-item {{ $title == "Create Blog" ? "active" : "" }}">Create Blog</a>
+                    <a href="{{ route("CreateBlog") }}" class="dropdown-item {{ $title == "Create Blog" ? "active" : "" }}">Create Blog</a>
                     @if (Auth::user()->admin)
                         <a href="{{ route("AllBloglist") }}" class="dropdown-item {{ $title == "List all Blog" ? "active" : "" }}">List all Blog</a>
                     @endif
