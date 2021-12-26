@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 class PurchaseController extends Controller
 {
     //
-    public function Purchase(Request $request) {
+    public function Create(Request $request) {
         $valid = $request->validate([
             'id' => 'required|numeric|gt:0',
             'amount' => 'required|numeric|gt:0'

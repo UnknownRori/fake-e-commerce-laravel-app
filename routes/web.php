@@ -63,7 +63,7 @@ Route::post('/dashboard/joinvendor', [UsersController::class, 'JoinVendor'])
 
 // Subscribe Route
 
-Route::post('/subscribe/subs', [SubscribeController::class, 'Subscribe'])
+Route::post('/subscribe/subs', [SubscribeController::class, 'Create'])
         ->name("Subscribe")
         ->middleware('auth');
 
@@ -86,7 +86,7 @@ Route::get('/dashboard/listallproduct', [ProductController::class, "AllProductLi
 
 // Purchase Route
 
-Route::post('/product/{id}/purchase', [PurchaseController::class, "Purchase"])
+Route::post('/product/{id}/purchase', [PurchaseController::class, "Create"])
         ->name("Purchase")
         ->whereNumber('id')
         ->middleware('auth');
@@ -105,8 +105,17 @@ Route::get('/dashboard/listownedblog', [BlogController::class, 'ListOwnedBlog'])
         ->middleware('auth');
 
 Route::get('/dashboard/listallblog', [BlogController::class, 'AllBlogList'])
-    ->name("AllBloglist")
-    ->middleware('auth');
+        ->name("AllBloglist")
+        ->middleware('auth');
+
+Route::get('/dashboard/createblog', [BlogController::class, "BlogForm"])
+        ->name("CreateBlog")
+        ->middleware('auth');
+
+Route::get('/blog/{id}/editblog', [BlogController::class, "BlogForm"])
+        ->name("EditBlog")
+        ->middleware('auth')
+        ->whereNumber('id');
 
 // Login Route
 

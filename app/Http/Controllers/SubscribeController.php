@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 class SubscribeController extends Controller
 {
 
-    public function Subscribe (Request $request)
+    public function Create (Request $request)
     {
 
         $validate = $request->validate([
