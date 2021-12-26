@@ -11,17 +11,16 @@ class ReviewsController extends Controller
 {
     public function Create (Request $request) {
         $validate = $request->validate([
-            'product_id' => 'required|numeric',
             'star' => 'required|digits_between:1,5',
             'comment' => 'required|string'
         ]);
 
-        $check = Reviews::all()->where('product_id', '=', $validate['product_id'])->where('users_id', '=', Auth::user()->id);
+        $check = Reviews::all()->where('product_id', '=', $request->product_id)->where('users_id', '=', Auth::user()->id);
 
         if($check->isEmpty()) {
             $reviews = new Reviews();
             $reviews->users_id = Auth::user()->id;
-            $reviews->product_id = $validate['product_id'];;
+            $reviews->product_id = $request->product_id;
             $reviews->star = $validate['star'];
             $reviews->comment = $validate['comment'];
 
