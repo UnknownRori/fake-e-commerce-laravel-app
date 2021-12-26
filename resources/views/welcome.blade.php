@@ -26,7 +26,7 @@
                 <section>
                     <div class="row">
                         @foreach ($product as $row)
-                            <div data-hidden="{{ $row->id }}" id="{{ $row->id }}" class="col-4 text-center hidden">
+                            <div data-hidden="{{ $loop->iteration }}" id="{{ $row->id }}" class="col-4 text-center hidden">
                                 <table>
                                     <tr>
                                         <td class="img-container">
