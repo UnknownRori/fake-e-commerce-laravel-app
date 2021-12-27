@@ -84,7 +84,10 @@ Route::post('/dashboard/joinvendor', [UsersController::class, 'JoinVendor'])
 // Subscribe Route
 
 Route::post('/subscribe/subs', [SubscribeController::class, 'Create'])
-    ->name("Subscribe")
+    ->name("Subscribe");
+
+Route::get('/subscribe', [SubscribeController::class, 'Index'])
+    ->name("SubscribeList")
     ->middleware('auth');
 
 // Product Route
