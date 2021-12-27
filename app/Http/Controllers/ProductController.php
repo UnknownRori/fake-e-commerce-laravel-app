@@ -7,11 +7,13 @@ use App\Models\Reviews;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
-    public function Form(Request $request) {
+    public function Form(Request $request)
+    {
         if ($request->id) {
             $key = "product-" . strval($request->id);
 
@@ -19,7 +21,7 @@ class ProductController extends Controller
                 return Product::find($request->id);
             });
 
-            if($product->user->id == Auth::user()->id) {
+            if ($product->user->id == Auth::user()->id) {
                 return view('dashboard.productform', [
                     'product' => $product
                 ]);
@@ -27,13 +29,12 @@ class ProductController extends Controller
                 session()->flash('fail', 'Invalid Pervilege');
                 return redirect()->back();
             }
-
-
         }
 
         return view('dashboard.productform');
     }
-    public function Create (Request $request) {
+    public function Create(Request $request)
+    {
         $validate = $request->validate([
             'productname' => 'required|string|unique:product,productname',
             'price' => 'required|numeric|gt:0',
@@ -52,10 +53,10 @@ class ProductController extends Controller
         if ($product->save()) {
 
             if (ProductController::UploadPhoto($validate['photo'], $validate['productname'], null)) {
-                session()->flash('success', 'Blog successfully posted!');
+                session()->flash('success', 'product successfully posted!');
                 return redirect()->back();
             }
-            session()->flash('fail', 'Image cannot be saved! but Blog has been posted!');
+            session()->flash('fail', 'Image cannot be saved! but product has successfully posted!');
             return redirect()->back();
         }
 
@@ -63,7 +64,8 @@ class ProductController extends Controller
         return redirect()->back();
     }
 
-    public function Update (Request $request) {
+    public function Update(Request $request)
+    {
         $validate = $request->validate([
             'productname' => 'required|string|unique:product,productname',
             'price' => 'required|numeric|gt:0',
@@ -82,10 +84,10 @@ class ProductController extends Controller
         if ($product->save()) {
 
             if (ProductController::UploadPhoto($validate['photo'], $validate['productname'], $oldphoto)) {
-                session()->flash('success', 'Blog successfully edited!');
+                session()->flash('success', 'Product successfully edited!');
                 return redirect()->back();
             }
-            session()->flash('fail', 'Image cannot be saved! but Blog has been edited!');
+            session()->flash('fail', 'Image cannot be saved! but Product has been edited!');
             return redirect()->back();
         }
 
@@ -93,11 +95,35 @@ class ProductController extends Controller
         return redirect()->back();
     }
 
-    public function Delete (Request $request) {
-        dd($request);
+    public function Delete(Request $request)
+    {
+        $product = Product::find($request->id);
+        if ($product == null) {
+            session()->flash('fail', 'Product not found!');
+            return redirect()->back();
+        }
+
+        if (Auth::user()->id == $product->users_id || Auth::user()->admin) {
+            if (Storage::delete('public/image/product/' . $product->productname . '.png')) {
+                if (DB::table('product')->where('id', $product->id)->delete()) {
+                    session()->flash('success', 'Product successfully deleted!');
+                    return redirect()->back();
+                }
+
+                session()->flash('success', 'Product successfully deleted but image failed to deleted!');
+                return redirect()->back();
+            }
+
+            session()->flash('fail', 'Failed to delete product!');
+            return redirect()->back();
+        } else {
+            session()->flash('fail', 'Invalid Pervilege!');
+            return redirect()->route('Home');
+        }
     }
 
-    public function AllProductList () {
+    public function AllProductList()
+    {
         $product = Cache::remember('owned-product-list', 2, function () {
             return Product::paginate(4);
         });
@@ -107,7 +133,8 @@ class ProductController extends Controller
         ]);
     }
 
-    public function OwnedProduct () {
+    public function OwnedProduct()
+    {
         $product = Cache::remember('owned-product-list', 2, function () {
             return Product::where('users_id', Auth::user()->id)->paginate(4);
         });
@@ -117,7 +144,8 @@ class ProductController extends Controller
         ]);
     }
 
-    public function ProductList () {
+    public function ProductList()
+    {
         $product = Cache::remember('product-list', 2, function () {
             return Product::paginate(6);
         });
@@ -127,7 +155,8 @@ class ProductController extends Controller
         ]);
     }
 
-    public function Product ($id) {
+    public function Product($id)
+    {
         $productkey = "product-" . strval($id);
         $reviewskey = "product-reviews-" . strval($id);
         $starkey = "product-star-" . strval($id);
@@ -157,7 +186,8 @@ class ProductController extends Controller
         ]);
     }
 
-    private static function UploadPhoto($photo, $title, $oldphoto) {
+    private static function UploadPhoto($photo, $title, $oldphoto)
+    {
         $directory = "public/image/product";
 
         if (!$oldphoto || $oldphoto == "") {
