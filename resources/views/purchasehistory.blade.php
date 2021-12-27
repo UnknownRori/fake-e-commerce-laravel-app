@@ -13,7 +13,11 @@
             @foreach ($purchase as $row)
                 <tr>
                     <td>{{ $row->id }}</td>
-                    <td>{{ $row->product->productname }}</td>
+                    <td>
+                        <a href="{{ route("Product", $row->product->id) }}" class="link">
+                            {{ $row->product->productname }}
+                        </a>
+                    </td>
                     <td>{{ $row->amount }}</td>
                     <td>
                         {{ $row->updated_at }}
