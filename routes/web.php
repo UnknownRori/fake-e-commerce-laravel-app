@@ -44,6 +44,16 @@ Route::get('/users/{users_id}', [UsersController::class, 'GetUser'])
     ->name("User")
     ->whereNumber('users_id');
 
+Route::get('/users/{users_id}setting', [UsersController::class, 'Setting'])
+    ->name("UserSetting")
+    ->whereNumber('users_id')
+    ->middleware('auth');
+
+Route::post('/users/{users_id}setting', [UsersController::class, 'UpdateSetting'])
+    ->name("UpdateSetting")
+    ->whereNumber('users_id')
+    ->middleware('auth');
+
 // Reviews Route
 
 Route::post('/product/{product_id}/createreviews', [ReviewsController::class, "Create"])
