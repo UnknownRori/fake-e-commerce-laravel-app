@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class UsersController extends Controller
 {
@@ -146,7 +147,7 @@ class UsersController extends Controller
     {
         $userkey = 'user-' . $request->users_id;
 
-        $user = Cache::remember($userkey, 30, function () use ($request) {
+        $user = Cache::remember($userkey, 20, function () use ($request) {
             return User::find($request->users_id);
         });
 
@@ -166,5 +167,76 @@ class UsersController extends Controller
         return view('user', [
             'user' => $user
         ]);
+    }
+
+    public function Setting()
+    {
+        $userkey = 'user-' . Auth::user()->id;
+
+        $user = Cache::remember($userkey, 20, function () {
+            return User::find(Auth::user()->id);
+        });
+
+        return view('settinguser', [
+            'user' => $user
+        ]);
+    }
+
+    public function UpdateSetting(Request $request)
+    {
+        $validate = $request->validate([
+            'username' => 'required|string|unique:users,username',
+            'email' => 'required|string|unique:users,email',
+            'photo' => 'required|image',
+            'password' => 'required|string',
+            'newpassword' => 'required|string',
+            'credit_card' => 'required|string'
+        ]);
+
+        $users = User::find(Auth::user()->id);
+        $oldphoto = $users->username;
+        $users->username = $validate['username'];
+        $users->email = $validate['email'];
+        $users->credit_card = Hash::make($validate['credit_card']);
+        if ($validate['newpassword'] != $validate['password']) {
+            $users->password = Hash::make($validate['newpassword']);
+        }
+
+        if ($users->save()) {
+            if (UsersController::UploadPhoto($validate['photo'], $users->username, $oldphoto)) {
+                session()->flash('success', 'User profile update successfully!');
+                return redirect()->back();
+            }
+            session()->flash('fail', 'User profile update successfully but failed to upload!');
+            return redirect()->back();
+        }
+        session()->flash('fail', 'User profile failed to update!');
+        return redirect()->back();
+    }
+
+    private static function UploadPhoto($photo, $title, $oldphoto)
+    {
+        $directory = "public/image/profile";
+
+        if (!$oldphoto || $oldphoto == "") {
+            $path = Storage::putFileAs(
+                $directory,
+                $photo,
+                $title . '.png'
+            );
+            return $path;
+        } else {
+            if (!Storage::delete($directory . '/' . $oldphoto . '.png')) {
+                session()->flash('fail', 'Old image failed to deleted!');
+            }
+
+            $path = Storage::putFileAs(
+                $directory,
+                $photo,
+                $title . '.png'
+            );
+
+            return $path;
+        }
     }
 }
