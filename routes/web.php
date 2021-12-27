@@ -38,6 +38,12 @@ Route::get('/dashboard', function () {
     return view('dashboard.dashboard');
 })->name("Dashboard")->middleware('auth');
 
+// User Route
+
+Route::get('/users/{users_id}', [UsersController::class, 'GetUser'])
+    ->name("User")
+    ->whereNumber('users_id');
+
 // Reviews Route
 
 Route::post('/product/{product_id}/createreviews', [ReviewsController::class, "Create"])
