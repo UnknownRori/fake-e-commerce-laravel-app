@@ -214,6 +214,32 @@ class UsersController extends Controller
         return redirect()->back();
     }
 
+    public function Delete(Request $request)
+    {
+        $users = User::find($request->users_id);
+        if ($users == null) {
+            session()->flash('fail', 'users not found!');
+            return redirect()->back();
+        }
+
+        if (Auth::user()->id == $users->id || Auth::user()->admin) {
+            if (Storage::delete('public/image/profile/' . $users->username . '.png')) {
+                session()->flash('success', 'Failed to delete photo!');
+                return redirect()->back();
+            }
+            if (DB::table('users')->where('id', $users->id)->delete()) {
+                session()->flash('success', 'users successfully deleted!');
+                return redirect()->back();
+            }
+
+            session()->flash('fail', 'Failed to delete users!');
+            return redirect()->back();
+        } else {
+            session()->flash('fail', 'Invalid Pervilege!');
+            return redirect()->route('Home');
+        }
+    }
+
     private static function UploadPhoto($photo, $title, $oldphoto)
     {
         $directory = "public/image/profile";
