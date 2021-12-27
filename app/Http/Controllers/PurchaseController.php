@@ -5,13 +5,25 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Purchase;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class PurchaseController extends Controller
 {
-    //
-    public function Create(Request $request) {
+    public function Index()
+    {
+        $key = 'purchase-history-' . Auth::user()->id;
+        $purchase = Cache::remember($key, 30, function () {
+            return Purchase::where('users_id', Auth::user()->id)->paginate(4);
+        });
+
+        return view('purchasehistory', [
+            'purchase' => $purchase
+        ]);
+    }
+
+    public function Create(Request $request)
+    {
         $valid = $request->validate([
             'id' => 'required|numeric|gt:0',
             'amount' => 'required|numeric|gt:0'
@@ -19,7 +31,7 @@ class PurchaseController extends Controller
 
         $product = Product::find($valid['id']);
 
-        if ($product->stock >= $valid['amount']){
+        if ($product->stock >= $valid['amount']) {
 
             $purchase = new Purchase();
             $purchase->users_id = Auth::user()->id;
@@ -28,7 +40,7 @@ class PurchaseController extends Controller
 
             $product->stock = $product->stock - $valid['amount'];
 
-            if($purchase->save() && $product->save()){
+            if ($purchase->save() && $product->save()) {
                 session()->flash('success', 'Transaction successfully!');
                 return redirect()->back();
             }
@@ -39,6 +51,5 @@ class PurchaseController extends Controller
 
         session()->flash('fail', 'Transaction failed!');
         return redirect()->back();
-
     }
 }
