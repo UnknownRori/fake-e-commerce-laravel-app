@@ -239,4 +239,15 @@ class UsersController extends Controller
             return $path;
         }
     }
+
+    public function Index()
+    {
+        $users = Cache::remember('user-list', 10, function () {
+            return User::paginate(6);
+        });
+
+        return view('dashboard.userslist', [
+            'users' => $users
+        ]);
+    }
 }
