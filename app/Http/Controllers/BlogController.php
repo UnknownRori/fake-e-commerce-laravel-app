@@ -90,7 +90,7 @@ class BlogController extends Controller
     {
         $blog = Blog::find($request->id);
         if ($blog == null) {
-            session()->flash('fail', 'Failed to delete blog!');
+            session()->flash('fail', 'Blog not found!');
             return redirect()->back();
         }
 
