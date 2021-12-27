@@ -54,6 +54,10 @@ Route::post('/users/{users_id}setting', [UsersController::class, 'UpdateSetting'
     ->whereNumber('users_id')
     ->middleware('auth');
 
+Route::get('/users', [UsersController::class, 'Index'])
+    ->name("UsersList")
+    ->middleware('auth');
+
 // Reviews Route
 
 Route::post('/product/{product_id}/createreviews', [ReviewsController::class, "Create"])
