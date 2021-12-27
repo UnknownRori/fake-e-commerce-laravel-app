@@ -80,4 +80,10 @@
 
 .profile {
     border-radius: 6rem;
+    transition: 2s;
+}
+
+.profile:hover {
+    transform: scale(4) translateY(10px);
+    position: relative;
 }
