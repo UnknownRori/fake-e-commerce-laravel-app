@@ -56,7 +56,7 @@
                                 @endif
 
                                 @if (Auth::user()->id == $row->users_id || Auth::user()->admin )
-                                    <form action="" method="post">
+                                    <form action="{{ route("DeleteProduct", $row->id) }}" method="post">
                                         @csrf
                                         @method('delete')
                                         <input type="submit" value="Delete" class="dropdown-item">
