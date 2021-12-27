@@ -16,9 +16,13 @@ class CreatePurchaseTable extends Migration
         Schema::create('purchase', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('users_id');
-            $table->foreign('users_id')->references('id')->on('users');
+            $table->foreign('users_id')->references('id')->on('users')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->unsignedBigInteger('product_id');
-            $table->foreign('product_id')->references('id')->on('product');
+            $table->foreign('product_id')->references('id')->on('product')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->bigInteger('amount');
             $table->timestamps();
         });

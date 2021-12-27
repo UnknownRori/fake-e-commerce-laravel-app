@@ -16,7 +16,9 @@ class CreateSubscribeTable extends Migration
         Schema::create('subscribe', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('users_id')->nullable();
-            $table->foreign('users_id')->references('id')->on('users');
+            $table->foreign('users_id')->references('id')->on('users')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->string('email');
             $table->timestamps();
         });

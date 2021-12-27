@@ -16,10 +16,14 @@ class CreateReviewsTable extends Migration
         Schema::create('reviews', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('users_id');
-            $table->foreign('users_id')->references('id')->on('users');
+            $table->foreign('users_id')->references('id')->on('users')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->unsignedBigInteger('product_id');
-            $table->foreign('product_id')->references('id')->on('product');
-            $table->enum('star', [1, 2, 3 , 4, 5]);
+            $table->foreign('product_id')->references('id')->on('product')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->enum('star', [1, 2, 3, 4, 5]);
             $table->string('comment');
             $table->timestamps();
         });
