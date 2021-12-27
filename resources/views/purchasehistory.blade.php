@@ -29,7 +29,7 @@
                             </button>
                             <div class="dropdown-menu popout" aria-labelledby="dropdownMenuButton" style="margin-right: 2rem;">
                                 @if (Auth::user()->id == $row->users_id || Auth::user()->admin )
-                                    <form action="#" method="post">
+                                    <form action="{{ route("DeletePurchase", $row->id) }}" method="post">
                                         @csrf
                                         @method('delete')
                                         <input type="submit" value="Delete" class="dropdown-item">
