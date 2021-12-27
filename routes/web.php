@@ -41,130 +41,134 @@ Route::get('/dashboard', function () {
 // Reviews Route
 
 Route::post('/product/{product_id}/createreviews', [ReviewsController::class, "Create"])
-        ->name("CreateReviews")
-        ->whereNumber('product_id')
-        ->middleware('auth');
+    ->name("CreateReviews")
+    ->whereNumber('product_id')
+    ->middleware('auth');
 
 Route::delete('/product/{product_id}/{reviews_id}/deletereviews', [ReviewsController::class, 'Delete'])
-        ->name("ReviewsDelete")
-        ->whereNumber(['product_id', 'reviews_id'])
-        ->middleware('auth');
+    ->name("ReviewsDelete")
+    ->whereNumber(['product_id', 'reviews_id'])
+    ->middleware('auth');
 
 Route::post('/product/{product_id}/{reviews_id}/updatereviews', [ReviewsController::class, 'Update'])
-        ->name("UpdateReviews")
-        ->whereNumber(['product_id', 'reviews_id'])
-        ->middleware('auth');
+    ->name("UpdateReviews")
+    ->whereNumber(['product_id', 'reviews_id'])
+    ->middleware('auth');
 
 // Vendor Route
 
 Route::post('/dashboard/joinvendor', [UsersController::class, 'JoinVendor'])
-        ->name("JoinVendor")
-        ->middleware('auth');
+    ->name("JoinVendor")
+    ->middleware('auth');
 
 // Subscribe Route
 
 Route::post('/subscribe/subs', [SubscribeController::class, 'Create'])
-        ->name("Subscribe")
-        ->middleware('auth');
+    ->name("Subscribe")
+    ->middleware('auth');
 
 // Product Route
 
 Route::get('/product', [ProductController::class, 'ProductList'])
-        ->name("ProductList");
+    ->name("ProductList");
 
 Route::get('/product/{id}', [ProductController::class, "Product"])
-        ->name('Product')
-        ->whereNumber('id');
+    ->name('Product')
+    ->whereNumber('id');
 
 Route::get('/dashboard/listownedproduct', [ProductController::class, "OwnedProduct"])
-        ->name("OwnedProduct")
-        ->middleware('auth');
+    ->name("OwnedProduct")
+    ->middleware('auth');
 
 Route::get('/dashboard/listallproduct', [ProductController::class, "AllProductList"])
-        ->name("AllProductList")
-        ->middleware('auth');
+    ->name("AllProductList")
+    ->middleware('auth');
 
 Route::get('/dashboard/createproduct', [ProductController::class, "Form"])
-        ->name("CreateProduct")
-        ->middleware('auth');
+    ->name("CreateProduct")
+    ->middleware('auth');
 
 Route::get('/product/{id}/editproduct', [ProductController::class, "Form"])
-        ->name("EditProduct")
-        ->middleware('auth')
-        ->whereNumber('id');
+    ->name("EditProduct")
+    ->middleware('auth')
+    ->whereNumber('id');
 
 Route::post('/dashboard/createproduct', [ProductController::class, "Create"])
-        ->name("PostCreateProduct")
-        ->middleware('auth');
+    ->name("PostCreateProduct")
+    ->middleware('auth');
 
 Route::post('/product/{id}/editproduct', [ProductController::class, "Update"])
-        ->name("PostEditProduct")
-        ->middleware('auth')
-        ->whereNumber('id');
+    ->name("PostEditProduct")
+    ->middleware('auth')
+    ->whereNumber('id');
 
 Route::delete('/product/{id}/deleteproduct', [ProductController::class, "Delete"])
-        ->name("DeleteProduct")
-        ->middleware('auth')
-        ->whereNumber('id');
+    ->name("DeleteProduct")
+    ->middleware('auth')
+    ->whereNumber('id');
 
 // Purchase Route
 
 Route::post('/product/{id}/purchase', [PurchaseController::class, "Create"])
-        ->name("Purchase")
-        ->whereNumber('id')
-        ->middleware('auth');
+    ->name("Purchase")
+    ->whereNumber('id')
+    ->middleware('auth');
+
+Route::get('/user/purchasehistory', [PurchaseController::class, "Index"])
+    ->name("PurchaseIndex")
+    ->middleware("auth");
 
 // Blog Route
 
 Route::get('/blog', [BlogController::class, 'BlogList'])
-        ->name("BlogList");
+    ->name("BlogList");
 
 Route::get('/blog/{id}', [BlogController::class, 'Blog'])
-        ->name('Blog')
-        ->whereNumber('id');
+    ->name('Blog')
+    ->whereNumber('id');
 
 Route::get('/dashboard/listownedblog', [BlogController::class, 'ListOwnedBlog'])
-        ->name("OwnedBlog")
-        ->middleware('auth');
+    ->name("OwnedBlog")
+    ->middleware('auth');
 
 Route::get('/dashboard/listallblog', [BlogController::class, 'AllBlogList'])
-        ->name("AllBloglist")
-        ->middleware('auth');
+    ->name("AllBloglist")
+    ->middleware('auth');
 
 Route::get('/dashboard/createblog', [BlogController::class, "Form"])
-        ->name("CreateBlog")
-        ->middleware('auth');
+    ->name("CreateBlog")
+    ->middleware('auth');
 
 Route::get('/blog/{id}/editblog', [BlogController::class, "Form"])
-        ->name("EditBlog")
-        ->middleware('auth')
-        ->whereNumber('id');
+    ->name("EditBlog")
+    ->middleware('auth')
+    ->whereNumber('id');
 
 Route::post('/dashboard/createblog', [BlogController::class, "Create"])
-        ->name("PostCreateBlog")
-        ->middleware('auth');
+    ->name("PostCreateBlog")
+    ->middleware('auth');
 
 Route::post('/blog/{id}/editblog', [BlogController::class, "Update"])
-        ->name("PostEditBlog")
-        ->middleware('auth')
-        ->whereNumber('id');
+    ->name("PostEditBlog")
+    ->middleware('auth')
+    ->whereNumber('id');
 
 Route::delete('/blog/{id}/deleteblog', [BlogController::class, "Delete"])
-        ->name("DeleteBlog")
-        ->middleware('auth')
-        ->whereNumber('id');
+    ->name("DeleteBlog")
+    ->middleware('auth')
+    ->whereNumber('id');
 
 // Login Route
 
 Route::get('/auth/logout', [UsersController::class, 'Logout'])
-        ->name("Logout");
+    ->name("Logout");
 
 Route::get('/auth/login', [UsersController::class, 'LoginView'])
-        ->name("Login");
+    ->name("Login");
 Route::get('/auth/register', [UsersController::class, 'RegisterView'])
-        ->name("Register");
+    ->name("Register");
 
 Route::post('/auth/login/post', [UsersController::class, 'Login'])
-        ->name("PostLogin");
+    ->name("PostLogin");
 Route::post('/auth/register/post', [UsersController::class, 'Register'])
-        ->name("PostRegister");
+    ->name("PostRegister");
