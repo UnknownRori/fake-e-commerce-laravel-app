@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -23,6 +24,8 @@ class UsersSeeder extends Seeder
             'credit_card' => Hash::make('12345'),
             'admin' => 1,
             'vendor' => 1,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
         DB::table('users')->insert([
             'id' => 2,
@@ -32,6 +35,8 @@ class UsersSeeder extends Seeder
             'credit_card' => Hash::make('AB123'),
             'admin' => 0,
             'vendor' => 0,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
         DB::table('users')->insert([
             'id' => 3,
@@ -41,6 +46,8 @@ class UsersSeeder extends Seeder
             'credit_card' => Hash::make('AC1234'),
             'admin' => 0,
             'vendor' => 1,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
         DB::table('users')->insert([
             'id' => 4,
@@ -50,6 +57,8 @@ class UsersSeeder extends Seeder
             'credit_card' => Hash::make('WQ1234'),
             'admin' => 0,
             'vendor' => 0,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
         DB::table('users')->insert([
             'id' => 5,
@@ -59,6 +68,8 @@ class UsersSeeder extends Seeder
             'credit_card' => Hash::make('WW1234'),
             'admin' => 0,
             'vendor' => 0,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
         DB::table('users')->insert([
             'id' => 6,
@@ -68,6 +79,8 @@ class UsersSeeder extends Seeder
             'credit_card' => Hash::make('RR123'),
             'admin' => 0,
             'vendor' => 0,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
         DB::table('users')->insert([
             'id' => 7,
@@ -76,6 +89,8 @@ class UsersSeeder extends Seeder
             'password' => Hash::make('users4'),
             'admin' => 0,
             'vendor' => 0,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
         DB::table('users')->insert([
             'id' => 8,
@@ -84,6 +99,8 @@ class UsersSeeder extends Seeder
             'password' => Hash::make('users5'),
             'admin' => 0,
             'vendor' => 0,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
         DB::table('users')->insert([
             'id' => 9,
@@ -92,6 +109,8 @@ class UsersSeeder extends Seeder
             'password' => Hash::make('admin'),
             'admin' => 1,
             'vendor' => 0,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
     }
 }
