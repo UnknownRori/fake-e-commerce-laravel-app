@@ -38,7 +38,7 @@
                 <li class="nav-item dropdown mr-5">
                     <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
                         {{ Auth::user()->username }}
-                        <img class="profile m-0 p-0" style="width: 2rem;" src="{{ Storage::url('/image/profile/' . Auth::user()->username . '.png') }}">
+                        <img class="profile m-0 p-0" style="width: 1.5rem;" src="{{ Storage::url('/image/profile/' . Auth::user()->username . '.png') }}">
                     </a>
                     <div class="dropdown-menu popout">
                         <a href="{{ route("Dashboard") }}" class="dropdown-item {{ $title == "Dashboard" ? "active" : "" }}">Dashboard</a>
