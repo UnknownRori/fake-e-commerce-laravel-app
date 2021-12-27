@@ -22,6 +22,11 @@ class PurchaseController extends Controller
         ]);
     }
 
+    public function Delete(Request $request)
+    {
+        dd($request);
+    }
+
     public function Create(Request $request)
     {
         $valid = $request->validate([

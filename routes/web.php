@@ -118,6 +118,10 @@ Route::get('/user/purchasehistory', [PurchaseController::class, "Index"])
     ->name("PurchaseIndex")
     ->middleware("auth");
 
+Route::delete('/purchase/{purchase_id}/deletepurchase', [PurchaseController::class, "Delete"])
+    ->name("DeletePurchase")
+    ->middleware("auth");
+
 // Blog Route
 
 Route::get('/blog', [BlogController::class, 'BlogList'])
