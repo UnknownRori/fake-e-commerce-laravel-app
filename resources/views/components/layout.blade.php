@@ -10,7 +10,7 @@
     <script defer src="{{ asset("js/bootstrap.bundle.js") }}"></script>
     <script defer src="{{ asset("js/app.js") }}"></script>
     {{ isset($extension) ? $extension : "" }}
-    <title>{{ $title }}</title>
+    <title>{{ $title }} - {{ env('APP_NAME') }}</title>
 </head>
 <body id="top">
     <x-navbar>
