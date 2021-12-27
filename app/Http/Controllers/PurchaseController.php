@@ -7,6 +7,7 @@ use App\Models\Purchase;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class PurchaseController extends Controller
 {
@@ -24,7 +25,25 @@ class PurchaseController extends Controller
 
     public function Delete(Request $request)
     {
-        dd($request);
+        $purchase = Purchase::find($request->purchase_id);
+
+        if ($purchase == null) {
+            session()->flash('fail', 'Purchase not found!');
+            return redirect()->back();
+        }
+
+        if (Auth::user()->id == $purchase->users_id) {
+            if (DB::table('purchase')->where('id', $purchase->id)->delete()) {
+                session()->flash('success', 'Purchase record successfully deleted!');
+                return redirect()->back();
+            }
+
+            session()->flash('success', 'Purchase record failed to delete!');
+            return redirect()->back();
+        } else {
+            session()->flash('fail', 'Invalid Pervilege');
+            return redirect()->back();
+        }
     }
 
     public function Create(Request $request)
