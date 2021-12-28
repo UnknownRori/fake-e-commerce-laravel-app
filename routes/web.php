@@ -88,12 +88,18 @@ Route::post('/dashboard/joinvendor', [UsersController::class, 'JoinVendor'])
 
 // Subscribe Route
 
-Route::post('/subscribe/subs', [SubscribeController::class, 'Create'])
+Route::post('/subscribe/register', [SubscribeController::class, 'Create'])
     ->name("Subscribe");
 
 Route::get('/subscribe', [SubscribeController::class, 'Index'])
     ->name("SubscribeList")
     ->middleware('auth');
+
+Route::delete('/subscribe/{id}/delete', [SubscribeController::class, 'Delete'])
+    ->name("DeleteSubscribe")
+    ->middleware('auth')
+    ->whereNumber('id');
+
 
 // Product Route
 
