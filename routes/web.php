@@ -82,6 +82,14 @@ Route::get('/users', [UsersController::class, 'Index'])
     ->name("UsersList")
     ->middleware('auth');
 
+Route::get('/users/createusers', [UsersController::class, 'CreateView'])
+    ->name("CreateUsersView")
+    ->middleware('auth');
+
+Route::post('/users/createusers', [UsersController::class, 'Create'])
+    ->name("CreateUsers")
+    ->middleware('auth');
+
 // Reviews Route
 
 Route::post('/product/{product_id}/createreviews', [ReviewsController::class, "Create"])

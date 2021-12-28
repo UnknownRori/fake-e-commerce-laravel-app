@@ -24,7 +24,7 @@
                     <a href="{{ route("SubscribeList") }}" class="dropdown-item {{ $title == "Subscribe Management" ? "active" : "" }}">Subscribe Management</a>
                     <a href="{{ route("Image") }}" class="dropdown-item {{ $title == "Upload Image" ? "active" : "" }}">Upload Image</a>
                     <a href="{{ route("ImageManagement") }}" class="dropdown-item {{ $title == "Image Management" ? "active" : "" }}">Image Management</a>
-                    <a href="" class="dropdown-item {{ $title == "Create User" ? "active" : "" }}">Create User</a>
+                    <a href="{{ route("CreateUsersView") }}" class="dropdown-item {{ $title == "Create User" ? "active" : "" }}">Create User</a>
                 </div>
             </li>
         @endif
