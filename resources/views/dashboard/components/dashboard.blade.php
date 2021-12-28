@@ -22,7 +22,7 @@
                 <div class="dropdown-menu popout">
                     <a href="{{ route("UsersList") }}" class="dropdown-item {{ $title == "Users Management" ? "active" : "" }}">Users Management</a>
                     <a href="{{ route("SubscribeList") }}" class="dropdown-item {{ $title == "Subscribe Management" ? "active" : "" }}">Subscribe Management</a>
-                    <a href="" class="dropdown-item {{ $title == "Upload Image" ? "active" : "" }}">Upload Image</a>
+                    <a href="{{ route("Image") }}" class="dropdown-item {{ $title == "Upload Image" ? "active" : "" }}">Upload Image</a>
                     <a href="{{ route("ImageManagement") }}" class="dropdown-item {{ $title == "Image Management" ? "active" : "" }}">Image Management</a>
                     <a href="" class="dropdown-item {{ $title == "Create User" ? "active" : "" }}">Create User</a>
                 </div>
