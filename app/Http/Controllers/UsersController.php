@@ -276,12 +276,49 @@ class UsersController extends Controller
 
     public function Index()
     {
-        $users = Cache::remember('user-list', 10, function () {
+        $users = Cache::remember('user-list', 2, function () {
             return User::paginate(6);
         });
 
         return view('dashboard.userslist', [
             'users' => $users
         ]);
+    }
+
+    public function CreateView()
+    {
+        if (Auth::user()->admin) {
+            return view('settinguser');
+        }
+    }
+
+    public function Create(Request $request)
+    {
+        $validate = $request->validate([
+            'username' => 'required|string|unique:users,username',
+            'email' => 'required|string|unique:users,email',
+            'photo' => 'required|image',
+            'password' => 'required|string',
+            'credit_card' => 'required|string'
+        ]);
+
+        $users = new User();
+        $users->username = $validate['username'];
+        $users->email = $validate['email'];
+        $users->password = Hash::make($validate['password']);
+        $users->credit_card = Hash::make($validate['credit_card']);
+        $users->admin = 0;
+        $users->vendor = 0;
+
+        if ($users->save()) {
+            if (UsersController::UploadPhoto($validate['photo'], $validate['username'], null)) {
+                session()->flash('success', 'User profile update successfully!');
+                return redirect()->back();
+            }
+            session()->flash('fail', 'User profile update successfully but failed to upload!');
+            return redirect()->back();
+        }
+        session()->flash('fail', 'User profile failed to update!');
+        return redirect()->back();
     }
 }
