@@ -95,13 +95,13 @@ class BlogController extends Controller
         }
 
         if (Auth::user()->id == $blog->users_id || Auth::user()->admin) {
-            if (Storage::delete('public/image/blog/' . $blog->title . '.png')) {
-                if (DB::table('blog')->where('id', $blog->id)->delete()) {
-                    session()->flash('success', 'Blog successfully deleted!');
-                    return redirect()->back();
-                }
+            if (!Storage::delete('public/image/blog/' . $blog->title . '.png')) {
+                session()->flash('fail', 'Image failed to delete!');
+                return redirect()->back();
+            }
 
-                session()->flash('success', 'Blog successfully deleted but image failed to deleted!');
+            if (DB::table('blog')->where('id', $blog->id)->delete()) {
+                session()->flash('success', 'Blog successfully deleted!');
                 return redirect()->back();
             }
 

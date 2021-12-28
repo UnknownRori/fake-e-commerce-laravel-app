@@ -104,13 +104,13 @@ class ProductController extends Controller
         }
 
         if (Auth::user()->id == $product->users_id || Auth::user()->admin) {
-            if (Storage::delete('public/image/product/' . $product->productname . '.png')) {
-                if (DB::table('product')->where('id', $product->id)->delete()) {
-                    session()->flash('success', 'Product successfully deleted!');
-                    return redirect()->back();
-                }
+            if (!Storage::delete('public/image/product/' . $product->productname . '.png')) {
+                session()->flash('success', 'Image failed to delete!');
+                return redirect()->back();
+            }
 
-                session()->flash('success', 'Product successfully deleted but image failed to deleted!');
+            if (DB::table('product')->where('id', $product->id)->delete()) {
+                session()->flash('success', 'Product successfully deleted!');
                 return redirect()->back();
             }
 
