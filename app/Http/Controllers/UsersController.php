@@ -223,6 +223,14 @@ class UsersController extends Controller
         }
 
         if (Auth::user()->id == $users->id || Auth::user()->admin) {
+
+            foreach ($users->product as $row) {
+                Storage::delete('public/image/product/' . $row->productname . '.png');
+            }
+            foreach ($users->blog as $row) {
+                Storage::delete('public/image/blog/' . $row->title . '.png');
+            }
+
             if (Storage::delete('public/image/profile/' . $users->username . '.png')) {
                 session()->flash('success', 'Failed to delete photo!');
                 return redirect()->back();
