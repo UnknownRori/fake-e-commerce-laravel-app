@@ -35,9 +35,10 @@
                             <div class="dropdown-menu popout" aria-labelledby="dropdownMenuButton" style="margin-right: 2rem;">
 
                                 @if (Auth::user()->admin )
-                                    <form action="#" method="post">
+                                    <form action="{{ route("DeleteImage") }}" method="post">
                                         @csrf
                                         @method('delete')
+                                        <input type="text" name="uri" value="{{ $row }}" hidden>
                                         <input type="submit" value="Delete" class="dropdown-item">
                                     </form>
                                 @endif
