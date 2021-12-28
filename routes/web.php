@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\ImageManagementController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\SubscribeController;
@@ -37,6 +38,12 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard.dashboard');
 })->name("Dashboard")->middleware('auth');
+
+// Image Management Route
+
+Route::get('dashboard/imagemanagement', [ImageManagementController::class, "Index"])
+    ->name("ImageManagement")
+    ->middleware('auth');
 
 // User Route
 
