@@ -1,9 +1,9 @@
-<x-layout>
-    <x-slot name="title">User Setting - {{ $user->username }}</x-slot>
+<x-dashboard>
+    <x-slot name="title">{{ isset($user) ? "User Setting - " . $user->username  : "Create user"}}</x-slot>
 
     <x-slot name="content">
         <form class="form-center bg-light" style="border: 0.1px solid gray; padding: 2rem; box-shadow: 2px 2px 2px 2px gray;"
-         action="{{ route("UpdateSetting", Auth::user()->id) }}" method="post" enctype="multipart/form-data">
+         action="{{ isset($user) ? route("UpdateSetting", Auth::user()->id) : route("CreateUsers")}}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
                 <input class="form-control @error('username') is-invalid @enderror" type="text" name="username" placeholder="Username"
@@ -31,12 +31,14 @@
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
             </div>
-            <div class="form-group">
-                <input class="form-control @error('newpassword') is-invalid @enderror" type="password" name="newpassword" placeholder="New Password" title="if this is same as old password it will treated as not change password">
-                @error('newpassword')
-                    <div class="alert alert-danger">{{ $message }}</div>
-                @enderror
-            </div>
+            @if (isset($user))
+                <div class="form-group">
+                    <input class="form-control @error('newpassword') is-invalid @enderror" type="password" name="newpassword" placeholder="New Password" title="if this is same as old password it will treated as not change password">
+                    @error('newpassword')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+            @endif
             <div class="form-group">
                 <input class="form-control @error('credit_card') is-invalid @enderror" type="password" name="credit_card" placeholder="Credit Card"
                 value="{{ isset($user) ? $user->credit_card : "" }}">
@@ -45,8 +47,8 @@
                 @enderror
             </div>
             <div class="form-group">
-                <input class="btn btn-info" type="submit" value="Edit">
+                <input class="btn btn-info" type="submit" value="{{ isset($user) ? "Edit" : "Create" }}">
             </div>
         </form>
     </x-slot>
-</x-layout>
+</x-dashboard>
