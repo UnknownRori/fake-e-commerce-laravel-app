@@ -12,8 +12,18 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
+    private static function VendorOnly()
+    {
+        if (!Auth::user()->vendor) {
+            session()->flash('fail', 'Invalid Pervilege');
+            return redirect()->back();
+        }
+    }
+
     public function Form(Request $request)
     {
+        ProductController::VendorOnly();
+
         if ($request->id) {
             $key = "product-" . strval($request->id);
 
@@ -35,6 +45,8 @@ class ProductController extends Controller
     }
     public function Create(Request $request)
     {
+        ProductController::VendorOnly();
+
         $validate = $request->validate([
             'productname' => 'required|string|unique:product,productname',
             'price' => 'required|numeric|gt:0',
@@ -66,6 +78,8 @@ class ProductController extends Controller
 
     public function Update(Request $request)
     {
+        ProductController::VendorOnly();
+
         $validate = $request->validate([
             'productname' => 'required|string|unique:product,productname',
             'price' => 'required|numeric|gt:0',
@@ -97,6 +111,8 @@ class ProductController extends Controller
 
     public function Delete(Request $request)
     {
+        ProductController::VendorOnly();
+
         $product = Product::find($request->id);
         if ($product == null) {
             session()->flash('fail', 'Product not found!');
@@ -124,6 +140,8 @@ class ProductController extends Controller
 
     public function AllProductList()
     {
+        ProductController::VendorOnly();
+
         $product = Cache::remember('owned-product-list', 2, function () {
             return Product::paginate(4);
         });
@@ -135,6 +153,8 @@ class ProductController extends Controller
 
     public function OwnedProduct()
     {
+        ProductController::VendorOnly();
+
         $product = Cache::remember('owned-product-list', 2, function () {
             return Product::where('users_id', Auth::user()->id)->paginate(4);
         });
