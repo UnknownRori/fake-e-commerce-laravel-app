@@ -45,6 +45,18 @@ Route::get('dashboard/imagemanagement', [ImageManagementController::class, "Inde
     ->name("ImageManagement")
     ->middleware('auth');
 
+Route::get('dashboard/imagemanagement/upload', [ImageManagementController::class, "View"])
+    ->name("Image")
+    ->middleware('auth');
+
+Route::post('dashboard/imagemanagement/upload', [ImageManagementController::class, "Create"])
+    ->name("UploadImage")
+    ->middleware('auth');
+
+Route::delete('dashboard/imagemanagement/delete', [ImageManagementController::class, "Delete"])
+    ->name("DeleteImage")
+    ->middleware('auth');
+
 // User Route
 
 Route::get('/users/{users_id}', [UsersController::class, 'GetUser'])
