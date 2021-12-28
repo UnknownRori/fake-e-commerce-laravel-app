@@ -11,8 +11,18 @@ use Illuminate\Support\Facades\Storage;
 
 class BlogController extends Controller
 {
+    private static function AdminOnly()
+    {
+        if (!Auth::user()->admin) {
+            session()->flash('fail', 'Invalid Pervilege');
+            return redirect()->back();
+        }
+    }
+
     public function Form(Request $request)
     {
+        BlogController::AdminOnly();
+
         if ($request->id) {
             $key = "blog-" . strval($request->id);
 
@@ -34,6 +44,8 @@ class BlogController extends Controller
     }
     public function Create(Request $request)
     {
+        BlogController::AdminOnly();
+
         $validate = $request->validate([
             'title' => 'required|string|unique:blog,title',
             'content' => 'required|string',
@@ -61,6 +73,8 @@ class BlogController extends Controller
 
     public function Update(Request $request)
     {
+        BlogController::AdminOnly();
+
         $validate = $request->validate([
             'title' => 'required|string|unique:blog,title',
             'content' => 'required|string',
@@ -88,6 +102,8 @@ class BlogController extends Controller
 
     public function Delete(Request $request)
     {
+        BlogController::AdminOnly();
+
         $blog = Blog::find($request->id);
         if ($blog == null) {
             session()->flash('fail', 'Blog not found!');
@@ -115,6 +131,8 @@ class BlogController extends Controller
 
     public function AllBlogList()
     {
+        BlogController::AdminOnly();
+
         $blog = Cache::remember('owned-blog-list', 2, function () {
             return Blog::paginate(4);
         });
@@ -126,6 +144,8 @@ class BlogController extends Controller
 
     public function ListOwnedBlog()
     {
+        BlogController::AdminOnly();
+
         $blog = Cache::remember('owned-blog-list', 2, function () {
             return Blog::where('users_id', Auth::user()->id)->paginate(4);
         });
