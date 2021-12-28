@@ -6,6 +6,7 @@ use App\Models\Subscribe;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 
 class SubscribeController extends Controller
 {
@@ -52,5 +53,18 @@ class SubscribeController extends Controller
         return view('dashboard.subscribelist', [
             'subscribe' => $Subscribe
         ]);
+    }
+
+    public function Delete(Request $request)
+    {
+        $Subscribe = Subscribe::find($request->id);
+        if (Auth::user()->admin) {
+            if (DB::table('subscribe')->where('id', $Subscribe->id)->delete()) {
+                session()->flash('success', 'Subscribe successfully removed!');
+                return redirect()->back();
+            }
+            session()->flash('success', 'Subscribe failed to removed!');
+            return redirect()->back();
+        }
     }
 }
