@@ -16,4 +16,18 @@ class ImageManagementController extends Controller
             'files' => $files
         ]);
     }
+
+    public function Delete(Request $request)
+    {
+        $validate = $request->validate([
+            'uri' => 'required|string'
+        ]);
+
+        if (Storage::delete($validate)) {
+            session()->flash('success', 'Image successfully deleted!');
+            return redirect()->back();
+        }
+        session()->flash('fail', 'Image failed to delete');
+        return redirect()->back();
+    }
 }
