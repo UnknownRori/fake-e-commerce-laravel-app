@@ -180,7 +180,6 @@ class ProductController extends Controller
         $productkey = "product-" . strval($id);
         $reviewskey = "product-reviews-" . strval($id);
         $starkey = "product-star-" . strval($id);
-        $user_reviewskey = "product-reviewskey-" . strval($id);
 
         $product = Cache::remember($productkey, 5, function () use ($id) {
             return Product::find($id);
@@ -194,15 +193,18 @@ class ProductController extends Controller
             return Reviews::where('product_id', $id)->avg('star');
         });
 
-        $user_reviews = Cache::remember($user_reviewskey, 2, function () use ($id) {
-            return Reviews::all()->where('product_id', '=', $id)->where('users_id', '=', Auth::user()->id)->first();
-        });
+        if (auth()->check()) {
+            $user_reviewskey = "product-reviewskey-" . strval($id);
+            $user_reviews = Cache::remember($user_reviewskey, 2, function () use ($id) {
+                return Reviews::all()->where('product_id', '=', $id)->where('users_id', '=', auth()->user()->id)->first();
+            });
+        }
 
         return view('product', [
             'product' => $product,
             'reviews' => $reviews,
             'star' => $star,
-            'user_reviews' => $user_reviews
+            'user_reviews' => isset($user_reviews) ? $user_reviews : null
         ]);
     }
 
