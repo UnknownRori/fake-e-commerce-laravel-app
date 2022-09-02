@@ -44,7 +44,10 @@
                         <a href="{{ route("Dashboard") }}" class="dropdown-item {{ $title == "Dashboard" ? "active" : "" }}">Dashboard</a>
                         <a href="{{ route("UserSetting", Auth::user()->id) }}" class="dropdown-item {{ $title == "User Setting - " . Auth::user()->username ? "active" : "" }}">User Setting</a>
                         <a href="{{ route("PurchaseIndex") }}" class="dropdown-item">Purchase History</a>
-                        <a href="{{ route("Logout") }}" class="dropdown-item">Log out</a>
+                        <form action="{{ route('Logout') }}" method="post">
+                            @csrf
+                            <input type="submit" value="Logout" class="dropdown-item">
+                        </form>
                     </div>
                 </li>
             @endif
