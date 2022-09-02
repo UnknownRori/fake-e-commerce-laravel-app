@@ -35,68 +35,55 @@ Route::get('/', function () {
     ]);
 })->name("Home");
 
-Route::get('/dashboard', function () {
-    return view('dashboard.dashboard');
-})->name("Dashboard")->middleware('auth');
-
 // Dashboard route
 
-Route::prefix('/dashboard')->group(function () {
+Route::prefix('/dashboard')->middleware('auth')->group(function () {
+
+    Route::get('/', function () {
+        return view('dashboard.dashboard');
+    })->name("Dashboard");
 
     Route::post('/createblog', [BlogController::class, "Create"])
-        ->name("PostCreateBlog")
-        ->middleware('auth');
+        ->name("PostCreateBlog");
 
     Route::get('/listownedblog', [BlogController::class, 'ListOwnedBlog'])
-        ->name("OwnedBlog")
-        ->middleware('auth');
+        ->name("OwnedBlog");
 
     Route::get('/listallblog', [BlogController::class, 'AllBlogList'])
-        ->name("AllBloglist")
-        ->middleware('auth');
+        ->name("AllBloglist");
 
     Route::get('/createblog', [BlogController::class, "Form"])
-        ->name("CreateBlog")
-        ->middleware('auth');
+        ->name("CreateBlog");
 
     Route::get('/listownedproduct', [ProductController::class, "OwnedProduct"])
-        ->name("OwnedProduct")
-        ->middleware('auth');
+        ->name("OwnedProduct");
 
     Route::get('/listallproduct', [ProductController::class, "AllProductList"])
-        ->name("AllProductList")
-        ->middleware('auth');
+        ->name("AllProductList");
 
     Route::get('/createproduct', [ProductController::class, "Form"])
-        ->name("CreateProduct")
-        ->middleware('auth');
+        ->name("CreateProduct");
 
     Route::post('/createproduct', [ProductController::class, "Create"])
-        ->name("PostCreateProduct")
-        ->middleware('auth');
+        ->name("PostCreateProduct");
 
     // Join Vendor
     Route::post('/joinvendor', [UsersController::class, 'JoinVendor'])
-        ->name("JoinVendor")
-        ->middleware('auth');
+        ->name("JoinVendor");
 
     // Image Management
-    Route::get('/imagemanagement', [ImageManagementController::class, "Index"])
-        ->name("ImageManagement")
-        ->middleware('auth');
-
     Route::prefix('/imagemanagement')->group(function () {
+        Route::get('/', [ImageManagementController::class, "Index"])
+            ->name("ImageManagement");
+
         Route::get('/upload', [ImageManagementController::class, "View"])
-            ->name("Image")
-            ->middleware('auth');
+            ->name("Image");
 
         Route::post('/upload', [ImageManagementController::class, "Create"])
-            ->name("UploadImage")
-            ->middleware('auth');
+            ->name("UploadImage");
 
         Route::delete('/delete', [ImageManagementController::class, "Delete"])
-            ->name("DeleteImage")
-            ->middleware('auth');
+            ->name("DeleteImage");
     });
 });
 
@@ -104,61 +91,40 @@ Route::prefix('/dashboard')->group(function () {
 // User Route
 
 Route::prefix('/user')->group(function () {
-    Route::get('/purchasehistory', [PurchaseController::class, "Index"])
-        ->name("PurchaseIndex")
-        ->middleware("auth");
-
     Route::get('/{users_id}', [UsersController::class, 'GetUser'])
         ->name("User")
         ->whereNumber('users_id');
 
-    Route::get('/{users_id}/setting', [UsersController::class, 'Setting'])
-        ->name("UserSetting")
-        ->whereNumber('users_id')
-        ->middleware('auth');
+    Route::middleware('auth')->group(function () {
+        Route::get('/purchasehistory', [PurchaseController::class, "Index"])
+            ->name("PurchaseIndex");
 
-    Route::post('/{users_id}/setting', [UsersController::class, 'UpdateSetting'])
-        ->name("UpdateSetting")
-        ->whereNumber('users_id')
-        ->middleware('auth');
+        Route::get('/{users_id}/setting', [UsersController::class, 'Setting'])
+            ->name("UserSetting")
+            ->whereNumber('users_id');
 
-    Route::delete('/{users_id}/delete', [UsersController::class, 'Delete'])
-        ->name("UserDelete")
-        ->whereNumber('users_id')
-        ->middleware('auth');
+        Route::post('/{users_id}/setting', [UsersController::class, 'UpdateSetting'])
+            ->name("UpdateSetting")
+            ->whereNumber('users_id');
 
-    Route::get('/', [UsersController::class, 'Index'])
-        ->name("UsersList")
-        ->middleware('auth');
+        Route::delete('/{users_id}/delete', [UsersController::class, 'Delete'])
+            ->name("UserDelete")
+            ->whereNumber('users_id');
 
-    Route::get('/createusers', [UsersController::class, 'CreateView'])
-        ->name("CreateUsersView")
-        ->middleware('auth');
+        Route::get('/', [UsersController::class, 'Index'])
+            ->name("UsersList");
 
-    Route::post('/createusers', [UsersController::class, 'Create'])
-        ->name("CreateUsers")
-        ->middleware('auth');
+        Route::get('/createusers', [UsersController::class, 'CreateView'])
+            ->name("CreateUsersView");
+
+        Route::post('/createusers', [UsersController::class, 'Create'])
+            ->name("CreateUsers");
+    });
 });
 
 // Reviews Route
 
 Route::prefix('/product')->group(function () {
-
-    Route::post('/{id}/editproduct', [ProductController::class, "Update"])
-        ->name("PostEditProduct")
-        ->middleware('auth')
-        ->whereNumber('id');
-
-    Route::delete('/{id}/deleteproduct', [ProductController::class, "Delete"])
-        ->name("DeleteProduct")
-        ->middleware('auth')
-        ->whereNumber('id');
-
-    Route::post('/{id}/purchase', [PurchaseController::class, "Create"])
-        ->name("Purchase")
-        ->whereNumber('id')
-        ->middleware('auth');
-
     Route::get('/', [ProductController::class, 'ProductList'])
         ->name("ProductList");
 
@@ -166,12 +132,26 @@ Route::prefix('/product')->group(function () {
         ->name('Product')
         ->whereNumber('id');
 
-    Route::get('/{id}/editproduct', [ProductController::class, "Form"])
-        ->name("EditProduct")
-        ->middleware('auth')
-        ->whereNumber('id');
 
     Route::middleware('auth')->group(function () {
+        Route::post('/{id}/editproduct', [ProductController::class, "Update"])
+            ->name("PostEditProduct")
+            ->whereNumber('id');
+
+        Route::delete('/{id}/deleteproduct', [ProductController::class, "Delete"])
+            ->name("DeleteProduct")
+            ->whereNumber('id');
+
+        Route::post('/{id}/purchase', [PurchaseController::class, "Create"])
+            ->name("Purchase")
+            ->whereNumber('id');
+
+        Route::get('/{id}/editproduct', [ProductController::class, "Form"])
+            ->name("EditProduct")
+            ->whereNumber('id');
+
+        // Reviews
+
         Route::post('/{product_id}/createreviews', [ReviewsController::class, "Create"])
             ->name("CreateReviews")
             ->whereNumber('product_id');
@@ -205,12 +185,9 @@ Route::prefix('subscribe')->group(function () {
 
 // Purchase Route
 
-
 Route::delete('/purchase/{purchase_id}/deletepurchase', [PurchaseController::class, "Delete"])
     ->name("DeletePurchase")
     ->middleware("auth");
-
-// User Route
 
 // Blog Route
 
@@ -222,26 +199,25 @@ Route::prefix('blog')->group(function () {
         ->name('Blog')
         ->whereNumber('id');
 
-    Route::get('/{id}/editblog', [BlogController::class, "Form"])
-        ->name("EditBlog")
-        ->middleware('auth')
-        ->whereNumber('id');
+    Route::middleware('auth')->group(function () {
+        Route::get('/{id}/editblog', [BlogController::class, "Form"])
+            ->name("EditBlog")
+            ->whereNumber('id');
 
-    Route::post('/{id}/editblog', [BlogController::class, "Update"])
-        ->name("PostEditBlog")
-        ->middleware('auth')
-        ->whereNumber('id');
+        Route::post('/{id}/editblog', [BlogController::class, "Update"])
+            ->name("PostEditBlog")
+            ->whereNumber('id');
 
-    Route::delete('/{id}/deleteblog', [BlogController::class, "Delete"])
-        ->name("DeleteBlog")
-        ->middleware('auth')
-        ->whereNumber('id');
+        Route::delete('/{id}/deleteblog', [BlogController::class, "Delete"])
+            ->name("DeleteBlog")
+            ->whereNumber('id');
+    });
 });
 
 // Login Route
 
 Route::prefix('/auth')->group(function () {
-    Route::get('/logout', [UsersController::class, 'Logout'])
+    Route::post('/logout', [UsersController::class, 'Logout'])
         ->name("Logout");
 
     Route::get('/login', [UsersController::class, 'LoginView'])
@@ -249,8 +225,8 @@ Route::prefix('/auth')->group(function () {
     Route::get('/register', [UsersController::class, 'RegisterView'])
         ->name("Register");
 
-    Route::post('/login/post', [UsersController::class, 'Login'])
+    Route::post('/login', [UsersController::class, 'Login'])
         ->name("PostLogin");
-    Route::post('/register/post', [UsersController::class, 'Register'])
+    Route::post('/register', [UsersController::class, 'Register'])
         ->name("PostRegister");
 });
