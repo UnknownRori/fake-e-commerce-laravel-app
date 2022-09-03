@@ -43,18 +43,6 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
         return view('dashboard.dashboard');
     })->name("Dashboard");
 
-    Route::post('/createblog', [BlogController::class, "Create"])
-        ->name("PostCreateBlog");
-
-    Route::get('/listownedblog', [BlogController::class, 'ListOwnedBlog'])
-        ->name("OwnedBlog");
-
-    Route::get('/listallblog', [BlogController::class, 'AllBlogList'])
-        ->name("AllBloglist");
-
-    Route::get('/createblog', [BlogController::class, "Form"])
-        ->name("CreateBlog");
-
     Route::get('/listownedproduct', [ProductController::class, "OwnedProduct"])
         ->name("OwnedProduct");
 
@@ -84,6 +72,20 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
 
         Route::delete('/delete', [ImageManagementController::class, "Delete"])
             ->name("DeleteImage");
+    });
+
+    Route::middleware('admin')->group(function () {
+        Route::post('/createblog', [BlogController::class, "Create"])
+            ->name("PostCreateBlog");
+
+        Route::get('/listownedblog', [BlogController::class, 'ListOwnedBlog'])
+            ->name("OwnedBlog");
+
+        Route::get('/listallblog', [BlogController::class, 'AllBlogList'])
+            ->name("AllBloglist");
+
+        Route::get('/createblog', [BlogController::class, "Form"])
+            ->name("CreateBlog");
     });
 });
 
