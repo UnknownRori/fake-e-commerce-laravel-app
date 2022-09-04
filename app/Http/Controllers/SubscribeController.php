@@ -10,14 +10,6 @@ use Illuminate\Support\Facades\DB;
 
 class SubscribeController extends Controller
 {
-    private static function AdminOnly()
-    {
-        if (!Auth::user()->admin) {
-            session()->flash('fail', 'Invalid Pervilege');
-            return redirect()->back();
-        }
-    }
-
     public function Create(Request $request)
     {
 
@@ -53,8 +45,6 @@ class SubscribeController extends Controller
 
     public function Index()
     {
-        SubscribeController::AdminOnly();
-
         $Subscribe = Cache::remember('subscribe-list', 3, function () {
             return Subscribe::paginate(6);
         });
@@ -66,8 +56,6 @@ class SubscribeController extends Controller
 
     public function Delete(Request $request)
     {
-        SubscribeController::AdminOnly();
-
         $Subscribe = Subscribe::find($request->id);
         if (Auth::user()->admin) {
             if (DB::table('subscribe')->where('id', $Subscribe->id)->delete()) {
