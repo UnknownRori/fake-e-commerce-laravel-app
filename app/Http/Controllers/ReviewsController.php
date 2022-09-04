@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use App\Models\Reviews;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -33,29 +34,27 @@ class ReviewsController extends Controller
         return redirect()->back()->with('fail', 'Cannot create review if there are old review!');
     }
 
-    public function Update($reviews, Request $request)
+    public function Update(Product $product, Reviews $reviews, Request $request)
     {
         $validate = $request->validate([
             'star' => 'required|digits_between:1,5',
             'comment' => 'required|string'
         ]);
 
-        $review = Reviews::findOrFail($reviews);
-        $review->star = $validate['star'];
-        $review->comment = $validate['comment'];
+        $reviews->star = $validate['star'];
+        $reviews->comment = $validate['comment'];
 
-        if ($review->save())
+        if ($reviews->save())
             return redirect()->back()->with('success', 'Review successfully edited!');
 
         return redirect()->back()->with('fail', 'Review failed to edited!');
     }
 
-    public function Delete($reviews)
+    public function Delete(Product $product, Reviews $reviews)
     {
-        $review = Reviews::findOrFail($reviews);
-        if (Auth::user()->id == $review->users_id || Auth::user()->admin) {
+        if (Auth::user()->id == $reviews->users_id || Auth::user()->admin) {
 
-            if ($review->delete())
+            if ($reviews->delete())
                 return redirect()->back()->with('success', 'Review successfully deleted!');
 
             return redirect()->back()->with('fail', 'Failed to delete review!');
