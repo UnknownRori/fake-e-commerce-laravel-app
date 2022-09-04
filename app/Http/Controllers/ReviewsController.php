@@ -33,13 +33,14 @@ class ReviewsController extends Controller
         return redirect()->back()->with('fail', 'Cannot create review if there are old review!');
     }
 
-    public function Update(Reviews $review, Request $request)
+    public function Update($reviews, Request $request)
     {
         $validate = $request->validate([
             'star' => 'required|digits_between:1,5',
             'comment' => 'required|string'
         ]);
 
+        $review = Reviews::findOrFail($reviews);
         $review->star = $validate['star'];
         $review->comment = $validate['comment'];
 
@@ -49,8 +50,9 @@ class ReviewsController extends Controller
         return redirect()->back()->with('fail', 'Review failed to edited!');
     }
 
-    public function Delete(Reviews $review)
+    public function Delete($reviews)
     {
+        $review = Reviews::findOrFail($reviews);
         if (Auth::user()->id == $review->users_id || Auth::user()->admin) {
 
             if ($review->delete())

@@ -155,10 +155,10 @@ Route::prefix('/product')->group(function () {
         Route::post('/{product:id}/createreviews', [ReviewsController::class, "Create"])
             ->name("CreateReviews");
 
-        Route::delete('/{product:id}/{reviews:id}/deletereviews', [ReviewsController::class, 'Delete'])
+        Route::delete('/{product}/{reviews}/deletereviews', [ReviewsController::class, 'Delete'])
             ->name("ReviewsDelete");
 
-        Route::post('/{product:id}/{reviews:id}/updatereviews', [ReviewsController::class, 'Update'])
+        Route::post('/{product}/{reviews}/updatereviews', [ReviewsController::class, 'Update'])
             ->name("UpdateReviews");
     });
 });
