@@ -152,17 +152,14 @@ Route::prefix('/product')->group(function () {
 
         // Reviews
 
-        Route::post('/{product_id}/createreviews', [ReviewsController::class, "Create"])
-            ->name("CreateReviews")
-            ->whereNumber('product_id');
+        Route::post('/{product:id}/createreviews', [ReviewsController::class, "Create"])
+            ->name("CreateReviews");
 
-        Route::delete('/{product_id}/{reviews_id}/deletereviews', [ReviewsController::class, 'Delete'])
-            ->name("ReviewsDelete")
-            ->whereNumber(['product_id', 'reviews_id']);
+        Route::delete('/{product:id}/{reviews:id}/deletereviews', [ReviewsController::class, 'Delete'])
+            ->name("ReviewsDelete");
 
-        Route::post('/{product_id}/{reviews_id}/updatereviews', [ReviewsController::class, 'Update'])
-            ->name("UpdateReviews")
-            ->whereNumber(['product_id', 'reviews_id']);
+        Route::post('/{product:id}/{reviews:id}/updatereviews', [ReviewsController::class, 'Update'])
+            ->name("UpdateReviews");
     });
 });
 

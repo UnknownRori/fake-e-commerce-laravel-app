@@ -9,77 +9,57 @@ use Illuminate\Support\Facades\DB;
 
 class ReviewsController extends Controller
 {
-    public function Create (Request $request) {
+    public function Create(Request $request)
+    {
         $validate = $request->validate([
             'star' => 'required|digits_between:1,5',
             'comment' => 'required|string'
         ]);
 
-        $check = Reviews::all()->where('product_id', '=', $request->product_id)->where('users_id', '=', Auth::user()->id);
+        $check = Reviews::where('product_id', '=', $request->product_id)->where('users_id', '=', Auth::user()->id);
 
-        if($check->isEmpty()) {
+        if ($check->isEmpty()) {
             $reviews = new Reviews();
             $reviews->users_id = Auth::user()->id;
             $reviews->product_id = $request->product_id;
             $reviews->star = $validate['star'];
             $reviews->comment = $validate['comment'];
 
-            if ($reviews->save()) {
-                session()->flash('success', 'Successfully create review!');
-                return redirect()->back();
-            }
+            if ($reviews->save())
+                return redirect()->back()->with('success', 'Successfully create review!');
 
-            session()->flash('fail', 'Failed to create review!');
-            return redirect()->back();
+            return redirect()->back()->with('fail', 'Failed to create review!');
         }
 
-        session()->flash('fail', 'Cannot create review if there are old review!');
-        return redirect()->back();
+        return redirect()->back()->with('fail', 'Cannot create review if there are old review!');
     }
 
-    public function Update (Request $request) {
+    public function Update(Reviews $review, Request $request)
+    {
         $validate = $request->validate([
             'star' => 'required|digits_between:1,5',
             'comment' => 'required|string'
         ]);
 
-        $review = Reviews::find($request->reviews_id);
         $review->star = $validate['star'];
         $review->comment = $validate['comment'];
 
-        if ($review->save()) {
-            session()->flash('success', 'Review successfully edited!');
-            return redirect()->back();
-        }
+        if ($review->save())
+            return redirect()->back()->with('success', 'Review successfully edited!');
 
-        session()->flash('fail', 'Review failed to edited!');
-        return redirect()->back();
+        return redirect()->back()->with('fail', 'Review failed to edited!');
     }
 
-    public function Delete (Request $request) {
-
-        $review = Reviews::find($request->reviews_id);
-
-        if ($review == null) {
-            session()->flash('fail', 'Failed to delete review!');
-            return redirect()->back();
-        }
-
+    public function Delete(Reviews $review)
+    {
         if (Auth::user()->id == $review->users_id || Auth::user()->admin) {
 
-            if (DB::table('reviews')->where('id', $review->id)->delete()) {
+            if (DB::table('reviews')->where('id', $review->id)->delete())
+                return redirect()->back()->with('success', 'Review successfully deleted!');
 
-                session()->flash('success', 'Review successfully deleted!');
-                return redirect()->back();
-
-            }
-
-            session()->flash('fail', 'Failed to delete review!');
-            return redirect()->back();
-
-        } else {
-            session()->flash('fail', 'Invalid Pervilege!');
-            return redirect()->route('Home');
+            return redirect()->back()->with('fail', 'Failed to delete review!');
         }
+
+        return redirect()->route('Home')->with('fail', 'Invalid Pervilege!');
     }
 }
