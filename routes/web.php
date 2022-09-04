@@ -169,14 +169,13 @@ Route::prefix('/product')->group(function () {
 // Subscribe Route
 
 Route::prefix('subscribe')->group(function () {
-    Route::middleware(['auth', 'auth'])->group(function () {
+    Route::middleware(['auth', 'admin'])->group(function () {
         Route::get('/', [SubscribeController::class, 'Index'])
             ->name("SubscribeList")
             ->middleware('admin');
 
-        Route::delete('/{id}/delete', [SubscribeController::class, 'Delete'])
-            ->name("DeleteSubscribe")
-            ->whereNumber('id');
+        Route::delete('/{subscribe:id}/delete', [SubscribeController::class, 'Delete'])
+            ->name("DeleteSubscribe");
     });
 
     Route::post('/register', [SubscribeController::class, 'Create'])

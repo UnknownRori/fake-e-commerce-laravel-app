@@ -54,16 +54,11 @@ class SubscribeController extends Controller
         ]);
     }
 
-    public function Delete(Request $request)
+    public function Delete(Subscribe $subscribe)
     {
-        $Subscribe = Subscribe::find($request->id);
-        if (Auth::user()->admin) {
-            if (DB::table('subscribe')->where('id', $Subscribe->id)->delete()) {
-                session()->flash('success', 'Subscribe successfully removed!');
-                return redirect()->back();
-            }
-            session()->flash('success', 'Subscribe failed to removed!');
-            return redirect()->back();
-        }
+        if ($subscribe->delete())
+            return redirect()->back()->with('success', 'Subscribe successfully removed!');
+
+        return redirect()->back()->with('success', 'Subscribe failed to removed!');
     }
 }
