@@ -15,7 +15,7 @@ class ReviewsController extends Controller
             'comment' => 'required|string'
         ]);
 
-        $check = Reviews::where('product_id', '=', $request->product_id)->where('users_id', '=', Auth::user()->id);
+        $check = Reviews::where('product_id', '=', $request->product_id)->where('users_id', '=', Auth::user()->id)->get();
 
         if ($check->isEmpty()) {
             $reviews = new Reviews();
