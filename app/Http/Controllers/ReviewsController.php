@@ -54,7 +54,7 @@ class ReviewsController extends Controller
     {
         if (Auth::user()->id == $review->users_id || Auth::user()->admin) {
 
-            if (DB::table('reviews')->where('id', $review->id)->delete())
+            if ($review->delete())
                 return redirect()->back()->with('success', 'Review successfully deleted!');
 
             return redirect()->back()->with('fail', 'Failed to delete review!');
