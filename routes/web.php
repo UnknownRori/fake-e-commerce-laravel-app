@@ -93,9 +93,8 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
 // User Route
 
 Route::prefix('/user')->group(function () {
-    Route::get('/{users_id}', [UsersController::class, 'GetUser'])
-        ->name("User")
-        ->whereNumber('users_id');
+    Route::get('/{user:id}', [UsersController::class, 'GetUser'])
+        ->name("User");
 
     Route::middleware('auth')->group(function () {
         Route::get('/purchasehistory', [PurchaseController::class, "Index"])
@@ -109,9 +108,8 @@ Route::prefix('/user')->group(function () {
             ->name("UpdateSetting")
             ->whereNumber('users_id');
 
-        Route::delete('/{users_id}/delete', [UsersController::class, 'Delete'])
-            ->name("UserDelete")
-            ->whereNumber('users_id');
+        Route::delete('/{user:id}/delete', [UsersController::class, 'Delete'])
+            ->name("UserDelete");
 
         Route::get('/', [UsersController::class, 'Index'])
             ->name("UsersList");
@@ -220,15 +218,20 @@ Route::prefix('blog')->group(function () {
 
 Route::prefix('/auth')->group(function () {
     Route::post('/logout', [UsersController::class, 'Logout'])
-        ->name("Logout");
+        ->name("Logout")
+        ->middleware('auth');
 
-    Route::get('/login', [UsersController::class, 'LoginView'])
-        ->name("Login");
-    Route::get('/register', [UsersController::class, 'RegisterView'])
-        ->name("Register");
+    Route::middleware('guest')->group(function () {
+        Route::get('/login', [UsersController::class, 'LoginView'])
+            ->name("Login");
 
-    Route::post('/login', [UsersController::class, 'Login'])
-        ->name("PostLogin");
-    Route::post('/register', [UsersController::class, 'Register'])
-        ->name("PostRegister");
+        Route::get('/register', [UsersController::class, 'RegisterView'])
+            ->name("Register");
+
+        Route::post('/login', [UsersController::class, 'Login'])
+            ->name("PostLogin");
+
+        Route::post('/register', [UsersController::class, 'Register'])
+            ->name("PostRegister");
+    });
 });
