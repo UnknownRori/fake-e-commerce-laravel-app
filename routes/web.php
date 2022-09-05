@@ -93,9 +93,6 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
 // User Route
 
 Route::prefix('/user')->group(function () {
-    Route::get('/{user:id}', [UsersController::class, 'GetUser'])
-        ->name("User");
-
     Route::middleware('auth')->group(function () {
         Route::get('/purchasehistory', [PurchaseController::class, "Index"])
             ->name("PurchaseIndex");
@@ -120,6 +117,9 @@ Route::prefix('/user')->group(function () {
         Route::post('/createusers', [UsersController::class, 'Create'])
             ->name("CreateUsers");
     });
+
+    Route::get('/{user:id}', [UsersController::class, 'GetUser'])
+        ->name("User");
 });
 
 // Reviews Route
@@ -138,11 +138,10 @@ Route::prefix('/product')->group(function () {
             ->name("PostEditProduct")
             ->whereNumber('id');
 
-        Route::delete('/{id}/deleteproduct', [ProductController::class, "Delete"])
-            ->name("DeleteProduct")
-            ->whereNumber('id');
+        Route::delete('/{product}/deleteproduct', [ProductController::class, "Delete"])
+            ->name("DeleteProduct");
 
-        Route::post('/{id}/purchase', [PurchaseController::class, "Create"])
+        Route::post('/{product}/purchase', [PurchaseController::class, "Create"])
             ->name("Purchase")
             ->whereNumber('id');
 
