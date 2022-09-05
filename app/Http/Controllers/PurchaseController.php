@@ -7,7 +7,6 @@ use App\Models\Purchase;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class PurchaseController extends Controller
 {
@@ -23,57 +22,39 @@ class PurchaseController extends Controller
         ]);
     }
 
-    public function Delete(Request $request)
+    public function Delete(Purchase $purchase)
     {
-        $purchase = Purchase::find($request->purchase_id);
+        if (Auth::user()->id == $purchase->users_id || auth()->user()->id) {
+            if ($purchase->delete())
+                return redirect()->back()->with('success', 'Purchase record successfully deleted!');
 
-        if ($purchase == null) {
-            session()->flash('fail', 'Purchase not found!');
-            return redirect()->back();
+            return redirect()->back()->with('success', 'Purchase record failed to delete!');
         }
 
-        if (Auth::user()->id == $purchase->users_id) {
-            if (DB::table('purchase')->where('id', $purchase->id)->delete()) {
-                session()->flash('success', 'Purchase record successfully deleted!');
-                return redirect()->back();
-            }
-
-            session()->flash('success', 'Purchase record failed to delete!');
-            return redirect()->back();
-        } else {
-            session()->flash('fail', 'Invalid Pervilege');
-            return redirect()->back();
-        }
+        return redirect()->back()->with('fail', 'Invalid Pervilege');
     }
 
-    public function Create(Request $request)
+    public function Create(Product $product, Request $request)
     {
         $valid = $request->validate([
-            'id' => 'required|numeric|gt:0',
             'amount' => 'required|numeric|gt:0'
         ]);
-
-        $product = Product::find($valid['id']);
 
         if ($product->stock >= $valid['amount']) {
 
             $purchase = new Purchase();
             $purchase->users_id = Auth::user()->id;
-            $purchase->product_id = $valid['id'];
+            $purchase->product_id = $product->id;
             $purchase->amount = $valid['amount'];
 
             $product->stock = $product->stock - $valid['amount'];
 
-            if ($purchase->save() && $product->save()) {
-                session()->flash('success', 'Transaction successfully!');
-                return redirect()->back();
-            }
-        } else {
-            session()->flash('fail', 'Cannot purchase above available stock!');
-            return redirect()->back();
+            if ($purchase->save() && $product->save())
+                return redirect()->back()->with('success', 'Transaction successfully!');
+
+            return redirect()->back()->with('fail', 'Transaction failed!');
         }
 
-        session()->flash('fail', 'Transaction failed!');
-        return redirect()->back();
+        return redirect()->back()->with('fail', 'Cannot purchase above available stock!');
     }
 }
