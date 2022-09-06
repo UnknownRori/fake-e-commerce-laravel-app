@@ -60,7 +60,7 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
         ->name("JoinVendor");
 
     // Image Management
-    Route::prefix('/imagemanagement')->group(function () {
+    Route::prefix('/imagemanagement')->middleware('admin')->group(function () {
         Route::get('/', [ImageManagementController::class, "Index"])
             ->name("ImageManagement");
 
